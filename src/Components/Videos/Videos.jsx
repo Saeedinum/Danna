@@ -15,16 +15,16 @@ export default function DetailsArticles() {
 					Watch Our Children Wellbeing
 				</h1>
 				<br />
-				<div class='card border-0' style={{border: "none"}}>
-					<img src={imgVideo1} class='card-img' alt='...' />
+				<div className='card border-0' style={{border: "none"}}>
+					<img src={imgVideo1} className='card-img' alt='...' />
 					<div
-						class='card-img-overlay p-5'
+						className='card-img-overlay p-5'
 						style={{
 							color: "rgba(62, 99, 176, 1)",
 						}}
 					>
-						<h5 class='card-title fs-1 fw-bold'>Prenatal Care</h5>
-						<p class='card-text fw-bold'>Knowing that you are doing all you can to ...</p>
+						<h5 className='card-title fs-1 fw-bold'>Prenatal Care</h5>
+						<p className='card-text fw-bold'>Knowing that you are doing all you can to ...</p>
 						<div
 							className='d-flex rounded-bottom ps-2  gap-2 text-white position-absolute bottom-0 start-0'
 							style={{
@@ -36,11 +36,11 @@ export default function DetailsArticles() {
 						</div>
 					</div>
 				</div>
-				<div class='row row-cols-1 row-cols-md-3 g-4 mt-4'>
-					<div class='col'>
+				<div className='row row-cols-1 row-cols-md-3 g-4 mt-4'>
+					<div className='col'>
 						<Link to={`/openvideos`}>
-							<div class='card border-0 shadow'>
-								<img src={cardimg} class='card-img-top' alt='...' />
+							<div className='card border-0 shadow'>
+								<img src={cardimg} className='card-img-top' alt='...' />
 								<div
 									className='rounded-bottom rounded-top ps-2 text-white position-absolute top-0 end-0'
 									style={{
@@ -49,17 +49,17 @@ export default function DetailsArticles() {
 								>
 									<i className='bi bi-play-circle-fill fs-4 pe-2 ' style={{}}></i>
 								</div>
-								<div class='card-body'>
-									<h5 class='card-title'>Breastfeeding or artificial feeding</h5>
-									<p class='card-text'>The baby may not be hungry because he has ...</p>
+								<div className='card-body'>
+									<h5 className='card-title'>Breastfeeding or artificial feeding</h5>
+									<p className='card-text'>The baby may not be hungry because he has ...</p>
 								</div>
 							</div>
 						</Link>
 					</div>
-					<div class='col'>
+					<div className='col'>
 						<Link to={`/openvideos`}>
-							<div class='card border-0 shadow'>
-								<img src={cardimg} class='card-img-top' alt='...' />
+							<div className='card border-0 shadow'>
+								<img src={cardimg} className='card-img-top' alt='...' />
 								<div
 									className='rounded-bottom rounded-top ps-2 text-white position-absolute top-0 end-0'
 									style={{
@@ -68,17 +68,17 @@ export default function DetailsArticles() {
 								>
 									<i className='bi bi-play-circle-fill fs-4 pe-2 ' style={{}}></i>
 								</div>
-								<div class='card-body'>
-									<h5 class='card-title'>Breastfeeding or artificial feeding</h5>
-									<p class='card-text'>The baby may not be hungry because he has ...</p>
+								<div className='card-body'>
+									<h5 className='card-title'>Breastfeeding or artificial feeding</h5>
+									<p className='card-text'>The baby may not be hungry because he has ...</p>
 								</div>
 							</div>
 						</Link>
 					</div>
-					<div class='col'>
+					<div className='col'>
 						<Link to={`/openvideos`}>
-							<div class='card border-0 shadow'>
-								<img src={cardimg} class='card-img-top' alt='...' />
+							<div className='card border-0 shadow'>
+								<img src={cardimg} className='card-img-top' alt='...' />
 								<div
 									className='rounded-bottom rounded-top ps-2 text-white position-absolute top-0 end-0'
 									style={{
@@ -87,17 +87,17 @@ export default function DetailsArticles() {
 								>
 									<i className='bi bi-play-circle-fill fs-4 pe-2 ' style={{}}></i>
 								</div>
-								<div class='card-body'>
-									<h5 class='card-title'>Breastfeeding or artificial feeding</h5>
-									<p class='card-text'>The baby may not be hungry because he has ...</p>
+								<div className='card-body'>
+									<h5 className='card-title'>Breastfeeding or artificial feeding</h5>
+									<p className='card-text'>The baby may not be hungry because he has ...</p>
 								</div>
 							</div>
 						</Link>
 					</div>
-					<div class='col'>
+					<div className='col'>
 						<Link to={`/openvideos`}>
-							<div class='card border-0 shadow'>
-								<img src={cardimg} class='card-img-top' alt='...' />
+							<div className='card border-0 shadow'>
+								<img src={cardimg} className='card-img-top' alt='...' />
 								<div
 									className='rounded-bottom rounded-top ps-2 text-white position-absolute top-0 end-0'
 									style={{
@@ -106,9 +106,9 @@ export default function DetailsArticles() {
 								>
 									<i className='bi bi-play-circle-fill fs-4 pe-2 ' style={{}}></i>
 								</div>
-								<div class='card-body'>
-									<h5 class='card-title'>Breastfeeding or artificial feeding</h5>
-									<p class='card-text'>The baby may not be hungry because he has ...</p>
+								<div className='card-body'>
+									<h5 className='card-title'>Breastfeeding or artificial feeding</h5>
+									<p className='card-text'>The baby may not be hungry because he has ...</p>
 								</div>
 							</div>
 						</Link>

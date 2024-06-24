@@ -12,16 +12,16 @@ export default class ArticleDetails extends Component {
 						Medical Articles
 					</h1>
 					<div className='page_articles'>
-						<div class='row'>
-							<div class='col-sm-8'>
-								<div class='card mb-3 card_article border-0'>
-									<img src={Rectangle1} class='card-img-top' alt='...' />
-									<div class='card-body card_txt'>
-										<h5 class='card-title text-center fs-3'>
+						<div className='row'>
+							<div className='col-sm-8'>
+								<div className='card mb-3 card_article border-0'>
+									<img src={Rectangle1} className='card-img-top' alt='...' />
+									<div className='card-body card_txt'>
+										<h5 className='card-title text-center fs-3'>
 											Are you tired of raising children?Here's
 											<br /> what's easy for you
 										</h5>
-										<p class='card-text text-center '>
+										<p className='card-text text-center '>
 											The modern mother is under great pressure to do everything! We tend to value the image of parents who do everything in their
 											power to provide a perfect life for their children Are you tired of raising children?Here's what's easy for you The modern
 											mother is under great pressure to do everything! We tend to value the image of parents who do everything in their power to
@@ -30,8 +30,8 @@ export default class ArticleDetails extends Component {
 									</div>
 								</div>
 								<div className='card benfit shadow rounded-3 border-0 mt-4 p-4' style={{background: "rgba(249, 249, 249, 1)"}}>
-									<div class='row'>
-										<div class='col-sm-8'>
+									<div className='row'>
+										<div className='col-sm-8'>
 											<h4>Contents of the article</h4>
 											<ol style={{color: "rgba(50, 170, 144, 1)"}}>
 												<li>The infant's immune system.</li>
@@ -41,7 +41,7 @@ export default class ArticleDetails extends Component {
 												<li>Treating cold symptoms in infants.</li>
 											</ol>
 										</div>
-										<div class='col-sm-4'>
+										<div className='col-sm-4'>
 											<img src={image} alt='' />
 										</div>
 									</div>
@@ -71,14 +71,14 @@ export default class ArticleDetails extends Component {
 									</ol>
 								</div>
 							</div>
-							<div class='col-sm-4'>
-								<div class='card border-0 card_child shadow p-4 text-center' style={{background: "#D9D9D9"}}>
+							<div className='col-sm-4'>
+								<div className='card border-0 card_child shadow p-4 text-center' style={{background: "#D9D9D9"}}>
 									<div className='justify-content-center'>
-										<img src={Ellipse} class='card-img-top w-50' alt='...' />
+										<img src={Ellipse} className='card-img-top w-50' alt='...' />
 									</div>
-									<div class='card-body card_txt'>
-										<h5 class='card-title'>Are you tired of raising children?</h5>
-										<p class='card-text'>
+									<div className='card-body card_txt'>
+										<h5 className='card-title'>Are you tired of raising children?</h5>
+										<p className='card-text'>
 											The modern mother is under great pressure to do everything! We tend to value the image of parents who do everything in their
 											power to provide a perfect life for their
 											<br /> children
@@ -88,15 +88,15 @@ export default class ArticleDetails extends Component {
 								<div className='card mt-5 popular shadow rounded-3 border-0 h-25' style={{background: "rgba(221, 221, 221, 0.16)"}}>
 									<h4 className='text-center fw-bold'>Most Popular</h4>
 									<div className='baby_card mt-1'>
-										<div class='card mb-3 shadow border-top border-3 border-warning rounded-3 border-0 bg-white p-2' style={{borderTop: ""}}>
-											<div class='row'>
+										<div className='card mb-3 shadow border-top border-3 border-warning rounded-3 border-0 bg-white p-2' style={{borderTop: ""}}>
+											<div className='row'>
 												<div className='d-flex'>
-													<div class='col-md-4' style={{width: "40%"}}>
+													<div className='col-md-4' style={{width: "40%"}}>
 														<img src={baby} alt='...' />
 													</div>
-													<div class='col-md-8'>
-														<div class='card-body'>
-															<h5 class='card-title text-primary'>
+													<div className='col-md-8'>
+														<div className='card-body'>
+															<h5 className='card-title text-primary'>
 																Causes of cold
 																<br /> extremities in <br />
 																infants
@@ -106,15 +106,15 @@ export default class ArticleDetails extends Component {
 												</div>
 											</div>
 										</div>
-										<div class='card mb-3 shadow border-top border-3 border-warning rounded-3 border-0 bg-white p-2' style={{borderTop: ""}}>
-											<div class='row'>
+										<div className='card mb-3 shadow border-top border-3 border-warning rounded-3 border-0 bg-white p-2' style={{borderTop: ""}}>
+											<div className='row'>
 												<div className='d-flex'>
-													<div class='col-md-4' style={{width: "40%"}}>
+													<div className='col-md-4' style={{width: "40%"}}>
 														<img src={baby} alt='...' />
 													</div>
-													<div class='col-md-8'>
-														<div class='card-body'>
-															<h5 class='card-title text-primary'>
+													<div className='col-md-8'>
+														<div className='card-body'>
+															<h5 className='card-title text-primary'>
 																Causes of cold
 																<br /> extremities in <br />
 																infants
@@ -124,15 +124,15 @@ export default class ArticleDetails extends Component {
 												</div>
 											</div>
 										</div>
-										<div class='card mb-3 shadow border-top border-3 border-warning rounded-3 border-0 bg-white p-2' style={{borderTop: ""}}>
-											<div class='row'>
+										<div className='card mb-3 shadow border-top border-3 border-warning rounded-3 border-0 bg-white p-2' style={{borderTop: ""}}>
+											<div className='row'>
 												<div className='d-flex'>
-													<div class='col-md-4' style={{width: "40%"}}>
+													<div className='col-md-4' style={{width: "40%"}}>
 														<img src={baby} alt='...' />
 													</div>
-													<div class='col-md-8'>
-														<div class='card-body'>
-															<h5 class='card-title text-primary'>
+													<div className='col-md-8'>
+														<div className='card-body'>
+															<h5 className='card-title text-primary'>
 																Causes of cold
 																<br /> extremities in <br />
 																infants

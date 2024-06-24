@@ -12,15 +12,15 @@ export default function paymentProduct() {
 								First Name *
 							</label>{" "}
 							<br />
-							<input type='text' class='form-control' placeholder='FirstName' aria-label='Username' aria-describedby='basic-addon1' />
+							<input type='text' className='form-control' placeholder='FirstName' aria-label='Username' aria-describedby='basic-addon1' />
 						</div>
 						<div className='mt-3'>
 							<label htmlFor=''>Last Name *</label> <br />
-							<input type='text' class='form-control' placeholder='LastName' aria-label='Username' aria-describedby='basic-addon1' />
+							<input type='text' className='form-control' placeholder='LastName' aria-label='Username' aria-describedby='basic-addon1' />
 						</div>
 						<div className='mt-3'>
 							<label htmlFor=''>Country / Rregion *</label> <br />
-							<select class='form-select' aria-label='Default select example'>
+							<select className='form-select' aria-label='Default select example'>
 								<option selected> Egypt </option>
 								<option value='1'>Amercane</option>
 								<option value='2'>Asia</option>
@@ -29,15 +29,15 @@ export default function paymentProduct() {
 						</div>
 						<div className='mt-3'>
 							<label htmlFor=''>Street Address *</label> <br />
-							<input type='text' class='form-control' placeholder='Ebrahim Salam Street' aria-label='Username' aria-describedby='basic-addon1' />
+							<input type='text' className='form-control' placeholder='Ebrahim Salam Street' aria-label='Username' aria-describedby='basic-addon1' />
 						</div>
 						<div className='mt-3'>
 							<label htmlFor=''>Town / City *</label> <br />
-							<input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' />
+							<input type='text' className='form-control' aria-label='Username' aria-describedby='basic-addon1' />
 						</div>
 						<div className='mt-3'>
 							<label htmlFor=''>State *</label> <br />
-							<select class='form-select' aria-label='Default select example'>
+							<select className='form-select' aria-label='Default select example'>
 								<option selected> Select The State </option>
 								<option value='1'>Marreid</option>
 								<option value='2'>single</option>
@@ -45,21 +45,21 @@ export default function paymentProduct() {
 						</div>
 						<div className='mt-3'>
 							<label htmlFor=''>Phone *</label> <br />
-							<input type='tel' class='form-control' aria-label='Username' aria-describedby='basic-addon1' />
+							<input type='tel' className='form-control' aria-label='Username' aria-describedby='basic-addon1' />
 						</div>
 						<div className='mt-3'>
 							<label htmlFor=''>Email Address *</label> <br />
-							<input type='email' class='form-control' aria-label='Username' aria-describedby='basic-addon1' />
+							<input type='email' className='form-control' aria-label='Username' aria-describedby='basic-addon1' />
 						</div>
 						<div className='mt-3'>
 							<label htmlFor=''>Postcode Zip</label> <br />
-							<input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' />
+							<input type='text' className='form-control' aria-label='Username' aria-describedby='basic-addon1' />
 						</div>{" "}
 						<br />
 						<h4>ADDITIONAL INFORMATION</h4>
 						<div className='mt-3'>
 							<label htmlFor=''>Order notes(Optional)</label> <br />
-							<input type='textarea' class='form-control' aria-label='Username' aria-describedby='basic-addon1' />
+							<input type='textarea' className='form-control' aria-label='Username' aria-describedby='basic-addon1' />
 							<button className='btn w-25 mt-3' style={{backgroundColor: "rgba(50, 170, 144, 1)", color: "white"}}>
 								PLACE ORDER
 							</button>

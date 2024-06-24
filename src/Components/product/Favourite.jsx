@@ -9,26 +9,26 @@ export default function Favourite() {
 				<h1>Your Favourite</h1>
 				<Link to={`/productpage`}>
 					<div className='mt-2'>
-						<i class='bi bi-arrow-90deg-right rounded-3 text-white p-2' style={{backgroundColor: "#32AA90"}}></i>
+						<i className='bi bi-arrow-90deg-right rounded-3 text-white p-2' style={{backgroundColor: "#32AA90"}}></i>
 					</div>
 				</Link>
 			</div>
 			<div className='mt-5'>
-				<div class='row gy-4'>
-					<div class='col-lg-3 col-md-6 col-sm-12'>
-						<div class='card p-4 rounded-4 text-center'>
-							<div class='position-absolute top-0 end-0 p-3'>
-								<i class='bi bi-x-lg'></i>
+				<div className='row gy-4'>
+					<div className='col-lg-3 col-md-6 col-sm-12'>
+						<div className='card p-4 rounded-4 text-center'>
+							<div className='position-absolute top-0 end-0 p-3'>
+								<i className='bi bi-x-lg'></i>
 							</div>
 							<div className='text-center'>
-								<img src={toy} class='card-img-top w-50' alt='...' />
+								<img src={toy} className='card-img-top w-50' alt='...' />
 							</div>
-							<div class='card-body'>
-								<p class='card-text'>Toys</p>
-								<h5 class='card-title fw-bold'>Girls Milk Bottles</h5>
+							<div className='card-body'>
+								<p className='card-text'>Toys</p>
+								<h5 className='card-title fw-bold'>Girls Milk Bottles</h5>
 								<div className='d-flex justify-content-center gap-3'>
 									<del>$280.00</del>
-									<p class='card-text'>$80.00</p>
+									<p className='card-text'>$80.00</p>
 								</div>
 							</div>
 							<Link to={`/Cart`}>
@@ -38,20 +38,20 @@ export default function Favourite() {
 							</Link>
 						</div>
 					</div>
-					<div class='col-lg-3 col-md-6 col-sm-12'>
-						<div class='card p-4 rounded-4 text-center'>
-							<div class='position-absolute top-0 end-0 p-3'>
-								<i class='bi bi-x-lg'></i>
+					<div className='col-lg-3 col-md-6 col-sm-12'>
+						<div className='card p-4 rounded-4 text-center'>
+							<div className='position-absolute top-0 end-0 p-3'>
+								<i className='bi bi-x-lg'></i>
 							</div>
 							<div className='text-center'>
-								<img src={toy} class='card-img-top w-50' alt='...' />
+								<img src={toy} className='card-img-top w-50' alt='...' />
 							</div>
-							<div class='card-body'>
-								<p class='card-text'>Toys</p>
-								<h5 class='card-title fw-bold'>Girls Milk Bottles</h5>
+							<div className='card-body'>
+								<p className='card-text'>Toys</p>
+								<h5 className='card-title fw-bold'>Girls Milk Bottles</h5>
 								<div className='d-flex justify-content-center gap-3'>
 									<del>$280.00</del>
-									<p class='card-text'>$80.00</p>
+									<p className='card-text'>$80.00</p>
 								</div>
 							</div>
 							<Link to={`/Cart`}>
@@ -61,20 +61,20 @@ export default function Favourite() {
 							</Link>
 						</div>
 					</div>
-					<div class='col-lg-3 col-md-6 col-sm-12'>
-						<div class='card p-4 rounded-4 text-center'>
-							<div class='position-absolute top-0 end-0 p-3'>
-								<i class='bi bi-x-lg'></i>
+					<div className='col-lg-3 col-md-6 col-sm-12'>
+						<div className='card p-4 rounded-4 text-center'>
+							<div className='position-absolute top-0 end-0 p-3'>
+								<i className='bi bi-x-lg'></i>
 							</div>
 							<div className='text-center'>
-								<img src={toy} class='card-img-top w-50' alt='...' />
+								<img src={toy} className='card-img-top w-50' alt='...' />
 							</div>
-							<div class='card-body'>
-								<p class='card-text'>Toys</p>
-								<h5 class='card-title fw-bold'>Girls Milk Bottles</h5>
+							<div className='card-body'>
+								<p className='card-text'>Toys</p>
+								<h5 className='card-title fw-bold'>Girls Milk Bottles</h5>
 								<div className='d-flex justify-content-center gap-3'>
 									<del>$280.00</del>
-									<p class='card-text'>$80.00</p>
+									<p className='card-text'>$80.00</p>
 								</div>
 							</div>
 							<Link to={`/Cart`}>
@@ -84,20 +84,20 @@ export default function Favourite() {
 							</Link>
 						</div>
 					</div>
-					<div class='col-lg-3 col-md-6 col-sm-12'>
-						<div class='card p-4 rounded-4 text-center'>
-							<div class='position-absolute top-0 end-0 p-3'>
-								<i class='bi bi-x-lg'></i>
+					<div className='col-lg-3 col-md-6 col-sm-12'>
+						<div className='card p-4 rounded-4 text-center'>
+							<div className='position-absolute top-0 end-0 p-3'>
+								<i className='bi bi-x-lg'></i>
 							</div>
 							<div className='text-center'>
-								<img src={toy} class='card-img-top w-50' alt='...' />
+								<img src={toy} className='card-img-top w-50' alt='...' />
 							</div>
-							<div class='card-body'>
-								<p class='card-text'>Toys</p>
-								<h5 class='card-title fw-bold'>Girls Milk Bottles</h5>
+							<div className='card-body'>
+								<p className='card-text'>Toys</p>
+								<h5 className='card-title fw-bold'>Girls Milk Bottles</h5>
 								<div className='d-flex justify-content-center gap-3'>
 									<del>$280.00</del>
-									<p class='card-text'>$80.00</p>
+									<p className='card-text'>$80.00</p>
 								</div>
 							</div>
 							<Link to={`/Cart`}>
@@ -107,20 +107,20 @@ export default function Favourite() {
 							</Link>
 						</div>
 					</div>
-					<div class='col-lg-3 col-md-6 col-sm-12'>
-						<div class='card p-4 rounded-4 text-center'>
-							<div class='position-absolute top-0 end-0 p-3'>
-								<i class='bi bi-x-lg'></i>
+					<div className='col-lg-3 col-md-6 col-sm-12'>
+						<div className='card p-4 rounded-4 text-center'>
+							<div className='position-absolute top-0 end-0 p-3'>
+								<i className='bi bi-x-lg'></i>
 							</div>
 							<div className='text-center'>
-								<img src={toy} class='card-img-top w-50' alt='...' />
+								<img src={toy} className='card-img-top w-50' alt='...' />
 							</div>
-							<div class='card-body'>
-								<p class='card-text'>Toys</p>
-								<h5 class='card-title fw-bold'>Girls Milk Bottles</h5>
+							<div className='card-body'>
+								<p className='card-text'>Toys</p>
+								<h5 className='card-title fw-bold'>Girls Milk Bottles</h5>
 								<div className='d-flex justify-content-center gap-3'>
 									<del>$280.00</del>
-									<p class='card-text'>$80.00</p>
+									<p className='card-text'>$80.00</p>
 								</div>
 							</div>
 							<Link to={`/Cart`}>

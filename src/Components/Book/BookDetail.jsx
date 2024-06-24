@@ -17,21 +17,21 @@ export default function Book() {
 							<p className='text-muted'>Dental,baby</p>
 							<div className='d-flex'>
 								<div>
-									<i class='bi bi-star-fill' style={{color: "rgba(255, 199, 0, 1)"}}></i>
-									<i class='bi bi-star-fill' style={{color: "rgba(255, 199, 0, 1)"}}></i>
-									<i class='bi bi-star-fill' style={{color: "rgba(255, 199, 0, 1)"}}></i>
-									<i class='bi bi-star-fill' style={{color: "rgba(255, 199, 0, 1)"}}></i>
+									<i className='bi bi-star-fill' style={{color: "rgba(255, 199, 0, 1)"}}></i>
+									<i className='bi bi-star-fill' style={{color: "rgba(255, 199, 0, 1)"}}></i>
+									<i className='bi bi-star-fill' style={{color: "rgba(255, 199, 0, 1)"}}></i>
+									<i className='bi bi-star-fill' style={{color: "rgba(255, 199, 0, 1)"}}></i>
 								</div>
 								<p className='fw-bold'>6.4</p>
 							</div>
 						</div>
 						<div className='d-flex gap-3'>
 							<div className='d-flex gap-2'>
-								<i class='bi bi-geo-alt-fill' style={{color: "rgba(25, 118, 210, 1)"}}></i>
+								<i className='bi bi-geo-alt-fill' style={{color: "rgba(25, 118, 210, 1)"}}></i>
 								<p className='text-muted'>Medimentor can helo</p>
 							</div>
 							<div className='d-flex gap-2'>
-								<i class='bi bi-clock' style={{color: "rgba(25, 118, 210, 1)"}}></i>
+								<i className='bi bi-clock' style={{color: "rgba(25, 118, 210, 1)"}}></i>
 								<p className='text-muted'>Dental,baby</p>
 							</div>
 						</div>
@@ -41,7 +41,7 @@ export default function Book() {
 						<div>
 							<div className='d-flex mt-5 border-bottom justify-content-between'>
 								<div className='d-flex gap-2'>
-									<i class='bi bi-geo-alt-fill' style={{color: "rgba(25, 118, 210, 1)"}}></i>
+									<i className='bi bi-geo-alt-fill' style={{color: "rgba(25, 118, 210, 1)"}}></i>
 									<p className='text-muted'>Location Of Hospital</p>
 								</div>
 								<p style={{color: "rgba(50, 170, 144, 1)"}}>
@@ -71,28 +71,28 @@ export default function Book() {
 							<img src={img2} className='w-75' alt='' />
 						</div>
 						<div className='p-5'>
-							<label for='' class='form-label' style={{color: "rgba(52, 64, 84, 1)"}}>
+							<label for='' className='form-label' style={{color: "rgba(52, 64, 84, 1)"}}>
 								Write Name Of Child
 							</label>
-							<div class='input-group mb-3'>
-								<input type='text' class='form-control' placeholder='Name Chaild' />
+							<div className='input-group mb-3'>
+								<input type='text' className='form-control' placeholder='Name Chaild' />
 							</div>
-							<label for='' class='form-label' style={{color: "rgba(52, 64, 84, 1)"}}>
+							<label for='' className='form-label' style={{color: "rgba(52, 64, 84, 1)"}}>
 								Reason Of Reservation
 							</label>
-							<div class='input-group mb-3'>
-								<input type='text' class='form-control' placeholder='Jaundice' />
+							<div className='input-group mb-3'>
+								<input type='text' className='form-control' placeholder='Jaundice' />
 							</div>
-							<label for='' class='form-label' style={{color: "rgba(52, 64, 84, 1)"}}>
+							<label for='' className='form-label' style={{color: "rgba(52, 64, 84, 1)"}}>
 								Phone Number
 							</label>
-							<div class='input-group mb-3'>
-								<input type='tel' class='form-control' placeholder='+1 (555) 000-0000' />
+							<div className='input-group mb-3'>
+								<input type='tel' className='form-control' placeholder='+1 (555) 000-0000' />
 							</div>
 							<div className='card p-4 mt-5 border-0 shadow-sm rounded-4' style={{backgroundColor: "rgba(238, 238, 236, 0.44)"}}>
 								<div className='d-flex justify-content-between'>
 									<div className='d-flex gap-2'>
-										<i class='bi bi-check-circle-fill' style={{color: "rgba(2, 2, 70, 1)"}}></i>
+										<i className='bi bi-check-circle-fill' style={{color: "rgba(2, 2, 70, 1)"}}></i>
 										<p style={{color: "rgba(52, 64, 84, 1)"}}>Pay with Credit Card</p>
 									</div>
 									<div className='d-flex gap-2'>
@@ -103,42 +103,42 @@ export default function Book() {
 								</div>
 								<div className='row mt-4'>
 									<div className='col-md-8'>
-										<label for='' class='form-label' style={{color: "rgba(52, 64, 84, 1)"}}>
+										<label for='' className='form-label' style={{color: "rgba(52, 64, 84, 1)"}}>
 											Name on card
 										</label>
-										<div class='input-group mb-3'>
-											<input type='text' class='form-control' placeholder='Olivia Rhye' />
+										<div className='input-group mb-3'>
+											<input type='text' className='form-control' placeholder='Olivia Rhye' />
 										</div>
 									</div>
 									<div className='col-md-4'>
-										<label for='' class='form-label' style={{color: "rgba(52, 64, 84, 1)"}}>
+										<label for='' className='form-label' style={{color: "rgba(52, 64, 84, 1)"}}>
 											Expiry
 										</label>
-										<div class='input-group mb-3'>
-											<input type='text' class='form-control' placeholder='06/ 2024' />
+										<div className='input-group mb-3'>
+											<input type='text' className='form-control' placeholder='06/ 2024' />
 										</div>
 									</div>
 								</div>
 								<div className='row mt-2'>
 									<div className='col-md-8'>
-										<label for='' class='form-label' style={{color: "rgba(52, 64, 84, 1)"}}>
+										<label for='' className='form-label' style={{color: "rgba(52, 64, 84, 1)"}}>
 											Card number
 										</label>
-										<div class='input-group mb-3'>
-											<input type='text' class='form-control' placeholder='1234 1234 1234 1234' />
+										<div className='input-group mb-3'>
+											<input type='text' className='form-control' placeholder='1234 1234 1234 1234' />
 										</div>
 									</div>
 									<div className='col-md-4'>
-										<label for='' class='form-label text-muted'>
+										<label for='' className='form-label text-muted'>
 											Cash
 										</label>
-										<div class='input-group mb-3'>
-											<input type='text' class='form-control' placeholder='$ 30.12' />
+										<div className='input-group mb-3'>
+											<input type='text' className='form-control' placeholder='$ 30.12' />
 										</div>
 									</div>
 								</div>
 								<div className='d-flex gap-2'>
-									<input class='form-check-input' type='checkbox' value='' aria-label='Checkbox for following text input' />
+									<input className='form-check-input' type='checkbox' value='' aria-label='Checkbox for following text input' />
 									<p className='fw-bold' style={{color: "rgba(2, 2, 70, 1)"}}>
 										Please check to ACK our{" "}
 										<Link className='text-decoration-underline' style={{color: "rgba(2, 2, 70, 1)"}}>

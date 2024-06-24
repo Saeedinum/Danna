@@ -27,8 +27,8 @@ export default function AboutUs() {
 			>
 				<div className='sec1'>
 					<div className='container'>
-						<div class='row'>
-							<div class='col-sm-8 mt-3'>
+						<div className='row'>
+							<div className='col-sm-8 mt-3'>
 								<div className='card mt-5' style={{border: "none"}}>
 									<h1 className='card-title text-muted fw-bold'>
 										Our Responsibility To Keep
@@ -54,16 +54,16 @@ export default function AboutUs() {
 									</div>
 								</div>
 							</div>
-							<div class='col-sm-4'>
+							<div className='col-sm-4'>
 								<img src={imgheader} alt='' className='imgheader' />
 							</div>
 						</div>
 					</div>
 				</div>
 				<div className='sec2 mt-5'>
-					<div class='container'>
-						<div class='row'>
-							<div class='col-12'>
+					<div className='container'>
+						<div className='row'>
+							<div className='col-12'>
 								<div className='text-center text-muted'>
 									<h1 className='fw-bold'>Why Choose us</h1>
 									<p>
@@ -76,40 +76,40 @@ export default function AboutUs() {
 								</div>
 							</div>
 							<div className='col-12'>
-								<div class='row'>
-									<div class='col-sm'>
-										<div class='card border-0'>
-											<img src={circle1} class='card-img' alt='...' />
-											<div class='card-img-overlay'>
+								<div className='row'>
+									<div className='col-sm'>
+										<div className='card border-0'>
+											<img src={circle1} className='card-img' alt='...' />
+											<div className='card-img-overlay'>
 												<ul className='justify-content-center text-center position-absolute top-50 start-50 translate-middle'>
 													<li className='fs-1 ' style={{color: "rgba(50, 170, 144, 1)"}}>
-														<i class='bi bi-telephone-x'></i>
+														<i className='bi bi-telephone-x'></i>
 													</li>
 													<li className=' fs-4'>Emergency</li>
 												</ul>
 											</div>
 										</div>
 									</div>
-									<div class='col-sm'>
-										<div class='card border-0'>
-											<img src={circle2} class='card-img' alt='...' />
-											<div class='card-img-overlay'>
+									<div className='col-sm'>
+										<div className='card border-0'>
+											<img src={circle2} className='card-img' alt='...' />
+											<div className='card-img-overlay'>
 												<ul className='justify-content-center text-center position-absolute top-50 start-50 translate-middle'>
 													<li className='fs-1' style={{color: "rgba(50, 170, 144, 1)"}}>
-														<i class='bi bi-calendar3'></i>
+														<i className='bi bi-calendar3'></i>
 													</li>
 													<li className='fs-4'>Emergency</li>
 												</ul>
 											</div>
 										</div>
 									</div>
-									<div class='col-sm'>
-										<div class='card border-0'>
-											<img src={circle3} class='card-img' alt='...' />
-											<div class='card-img-overlay'>
+									<div className='col-sm'>
+										<div className='card border-0'>
+											<img src={circle3} className='card-img' alt='...' />
+											<div className='card-img-overlay'>
 												<ul className='justify-content-center text-center position-absolute top-50 start-50 translate-middle'>
 													<li className='fs-1' style={{color: "rgba(50, 170, 144, 1)"}}>
-														<i class='bi bi-stars'></i>
+														<i className='bi bi-stars'></i>
 													</li>
 													<li className='fs-4'>Emergency</li>
 												</ul>
@@ -129,8 +129,8 @@ export default function AboutUs() {
 				>
 					<div className='container'>
 						<img src={cloud} alt='' className='mt-5' style={{width: "7%"}} />
-						<div class='row gy-3'>
-							<div class='col-md-6 col-sm-12'>
+						<div className='row gy-3'>
+							<div className='col-md-6 col-sm-12'>
 								<div className='card' style={{border: "none", textAlign: "center", background: "#f8f8f8"}}>
 									<div className='d-flex justify-content-center align-items-center'>
 										<h3 className='card-title fw-bold'>About Us</h3>
@@ -161,7 +161,7 @@ export default function AboutUs() {
 									</div>
 								</div>
 							</div>
-							<div class='col-md-6 col-sm-12'>
+							<div className='col-md-6 col-sm-12'>
 								<img src={docts} alt='' />
 							</div>
 						</div>
@@ -176,7 +176,7 @@ export default function AboutUs() {
 				/>
 				<div className='sec4 mt-5'>
 					<div className='container'>
-						<div class='col-12'>
+						<div className='col-12'>
 							<div className='text_section4_AboutUs'>
 								<h2
 									className='text-center fw-bold'
@@ -195,69 +195,69 @@ export default function AboutUs() {
 							</div>
 							<div></div>
 						</div>
-						<div class='col-12'>
-							<div class='row'>
-								<div class='col col-md-5 col-lg-3 col-sm-6'>
-									<div class='card border-0'>
-										<img src={doctorimg1} class='card-img-top' alt='...' />
-										<div class='card-body'>
+						<div className='col-12'>
+							<div className='row'>
+								<div className='col col-md-5 col-lg-3 col-sm-6'>
+									<div className='card border-0'>
+										<img src={doctorimg1} className='card-img-top' alt='...' />
+										<div className='card-body'>
 											<h5
-												class='card-title text-center fw-bold'
+												className='card-title text-center fw-bold'
 												style={{
 													color: "rgba(50, 170, 144, 1)",
 												}}
 											>
 												dr. Harman White
 											</h5>
-											<p class='card-text text-muted text-center fs-5'>CEO & Director</p>
+											<p className='card-text text-muted text-center fs-5'>CEO & Director</p>
 										</div>
 									</div>
 								</div>
-								<div class='col col-md-5 col-lg-3  col-sm-6 '>
-									<div class='card border-0'>
-										<img src={doctorimg2} class='card-img-top' alt='...' />
-										<div class='card-body'>
+								<div className='col col-md-5 col-lg-3  col-sm-6 '>
+									<div className='card border-0'>
+										<img src={doctorimg2} className='card-img-top' alt='...' />
+										<div className='card-body'>
 											<h5
-												class='card-title text-center fw-bold'
+												className='card-title text-center fw-bold'
 												style={{
 													color: "rgba(50, 170, 144, 1)",
 												}}
 											>
 												dr. Harman White
 											</h5>
-											<p class='card-text text-muted text-center fs-5'>CEO & Director</p>
+											<p className='card-text text-muted text-center fs-5'>CEO & Director</p>
 										</div>
 									</div>
 								</div>
-								<div class='col col-md-5 col-lg-3 col-sm-6 '>
-									<div class='card border-0'>
-										<img src={doctorimg3} class='card-img-top' alt='...' />
-										<div class='card-body'>
+								<div className='col col-md-5 col-lg-3 col-sm-6 '>
+									<div className='card border-0'>
+										<img src={doctorimg3} className='card-img-top' alt='...' />
+										<div className='card-body'>
 											<h5
-												class='card-title text-center fw-bold'
+												className='card-title text-center fw-bold'
 												style={{
 													color: "rgba(50, 170, 144, 1)",
 												}}
 											>
 												dr. Harman White
 											</h5>
-											<p class='card-text text-muted text-center fs-5'>CEO & Director</p>
+											<p className='card-text text-muted text-center fs-5'>CEO & Director</p>
 										</div>
 									</div>
 								</div>
-								<div class='col col-md-5 col-lg-3 col-sm-6 '>
-									<div class='card border-0'>
-										<img src={doctorimg4} class='card-img-top' alt='...' />
-										<div class='card-body'>
+								<div className='col col-md-5 col-lg-3 col-sm-6 '>
+									<div className='card border-0'>
+										<img src={doctorimg4} className='card-img-top' alt='...' />
+										<div className='card-body'>
 											<h5
-												class='card-title text-center fw-bold'
+												className='card-title text-center fw-bold'
 												style={{
 													color: "rgba(50, 170, 144, 1)",
 												}}
 											>
 												dr. Harman White
 											</h5>
-											<p class='card-text text-muted text-center fs-5'>CEO & Director</p>
+											<p className='card-text text-muted text-center fs-5'>CEO & Director</p>
 										</div>
 									</div>
 								</div>
@@ -289,15 +289,15 @@ export default function AboutUs() {
 							<br />
 							<br />
 						</div>
-						<div class='row gy-4'>
-							<div class='col-md-6 col-sm-12'>
+						<div className='row gy-4'>
+							<div className='col-md-6 col-sm-12'>
 								<div>
 									<img src={doccircle} alt='' />
 								</div>
 							</div>
-							<div class='col-md-6 col-sm-12'>
-								<div class='row gy-3'>
-									<div class='col-md-6 col-sm-12'>
+							<div className='col-md-6 col-sm-12'>
+								<div className='row gy-3'>
+									<div className='col-md-6 col-sm-12'>
 										<div
 											className='card p-1 shadow border-0 text-center w-100 '
 											style={{
@@ -317,7 +317,7 @@ export default function AboutUs() {
 											</div>
 										</div>
 									</div>
-									<div class='col-md-6 col-sm-12'>
+									<div className='col-md-6 col-sm-12'>
 										<div className='card p-1 shadow border-0 text-center w-100 ' style={{borderRadius: "0 7% 7% 0"}}>
 											<div className='justify-content-center'>
 												<img src={brain} alt='' style={{width: "15%"}} />
@@ -332,7 +332,7 @@ export default function AboutUs() {
 											</div>
 										</div>
 									</div>
-									<div class='col-md-6 col-sm-12'>
+									<div className='col-md-6 col-sm-12'>
 										<div className='card p-1 shadow border-0 text-center w-100 ' style={{borderRadius: "7% 0 0 7%"}}>
 											<div className='justify-content-center'>
 												<img src={brain} alt='' style={{width: "15%"}} />
@@ -347,7 +347,7 @@ export default function AboutUs() {
 											</div>
 										</div>
 									</div>
-									<div class='col-md-6 col-sm-12'>
+									<div className='col-md-6 col-sm-12'>
 										<div className='card p-1 shadow border-0 text-center w-100 ' style={{borderRadius: "0 7% 7% 0"}}>
 											<div className='justify-content-center'>
 												<img src={brain} alt='' style={{width: "15%"}} />

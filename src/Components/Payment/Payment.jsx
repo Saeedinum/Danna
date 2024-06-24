@@ -36,12 +36,12 @@ export default function Payment() {
 							<div className='card-text mt-3'>
 								<small className='text-muted'>Credit Card Number</small>
 								<br />
-								<input type='text' class='form-control' placeholder='+223-2222-4444-22' />
+								<input type='text' className='form-control' placeholder='+223-2222-4444-22' />
 							</div>
 							<div className='card-text mt-3'>
 								<small className='text-muted'>Card Holder</small>
 								<br />
-								<input type='text' class='form-control' placeholder='Mohamed Mohamed' />
+								<input type='text' className='form-control' placeholder='Mohamed Mohamed' />
 							</div>
 							<div className='card-text mt-4'>
 								<small className='text-muted'>Select Date</small>
@@ -57,7 +57,7 @@ export default function Payment() {
 							<div className='card-text mt-3'>
 								<small className='text-muted'>Code CVV</small>
 								<br />
-								<input type='text' class='form-control' placeholder='XXXXXXX' />
+								<input type='text' className='form-control' placeholder='XXXXXXX' />
 							</div>
 							<div className='mt-5 text-center'>
 								<button

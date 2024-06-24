@@ -1,6 +1,6 @@
 import React from "react";
 import "../Styles/Home.css";
-import homing1 from "../images/section1.png";
+// import homing1 from "../images/section1.png";
 import homing2 from "../images/Component 21.png";
 import Rectangle1 from "../images/Rectangle 14.png";
 import dricon from "../images/Component 39.png";
@@ -52,84 +52,84 @@ export default function Home() {
 			{/* section2 */}
 			<div className='section2'>
 				<div className='container'>
-					<div class='row'>
-						<div class='col mt-5'>
-							<div class='row'>
-								<div class='col'>
+					<div className='row'>
+						<div className='col mt-5'>
+							<div className='row'>
+								<div className='col'>
 									<Link to={`/doctors`}>
-										<div class='card sec-card'>
-											<div class='card-body mt-3' style={{textAlign: "center"}}>
-												<img src={dricon} alt='' srcset='' />
-												<h5 class='card-title mt-2'>Doctors</h5>
+										<div className='card sec-card'>
+											<div className='card-body mt-3' style={{textAlign: "center"}}>
+												<img src={dricon} alt='' srcSet='' />
+												<h5 className='card-title mt-2'>Doctors</h5>
 											</div>
 										</div>
 									</Link>
 								</div>
-								<div class='col'>
+								<div className='col'>
 									<Link to={`/chatbot`}>
-										<div class='card sec-card'>
-											<div class='card-body mt-2' style={{textAlign: "center"}}>
-												<img src={chaticon} alt='' srcset='' />
-												<h5 class='card-title mt-3'>Chatbot</h5>
+										<div className='card sec-card'>
+											<div className='card-body mt-2' style={{textAlign: "center"}}>
+												<img src={chaticon} alt='' srcSet='' />
+												<h5 className='card-title mt-3'>Chatbot</h5>
 											</div>
 										</div>
 									</Link>
 								</div>
-								<div class='col'>
+								<div className='col'>
 									<Link to={`/videos`}>
-										<div class='card sec-card'>
-											<div class='card-body mt-3' style={{textAlign: "center"}}>
-												<img src={videosicon} alt='' srcset='' />
-												<h5 class='card-title mt-2'>Videos</h5>
+										<div className='card sec-card'>
+											<div className='card-body mt-3' style={{textAlign: "center"}}>
+												<img src={videosicon} alt='' srcSet='' />
+												<h5 className='card-title mt-2'>Videos</h5>
 											</div>
 										</div>
 									</Link>
 								</div>
 							</div>
 							<br />
-							<div class='row'>
-								<div class='col'>
+							<div className='row'>
+								<div className='col'>
 									<Link to={`/productpage`}>
-										<div class='card sec-card'>
-											<div class='card-body mt-3' style={{textAlign: "center"}}>
-												<img src={prodicon} alt='' srcset='' />
-												<h5 class='card-title mt-2'>Products</h5>
+										<div className='card sec-card'>
+											<div className='card-body mt-3' style={{textAlign: "center"}}>
+												<img src={prodicon} alt='' srcSet='' />
+												<h5 className='card-title mt-2'>Products</h5>
 											</div>
 										</div>
 									</Link>
 								</div>
-								<div class='col'>
+								<div className='col'>
 									<Link to={`/Questions`}>
-										<div class='card sec-card'>
-											<div class='card-body mt-3' style={{textAlign: "center"}}>
-												<img src={quesicon} alt='' srcset='' />
-												<h5 class='card-title mt-2'>Questiocs</h5>
+										<div className='card sec-card'>
+											<div className='card-body mt-3' style={{textAlign: "center"}}>
+												<img src={quesicon} alt='' srcSet='' />
+												<h5 className='card-title mt-2'>Questiocs</h5>
 											</div>
 										</div>
 									</Link>
 								</div>
-								<div class='col'>
+								<div className='col'>
 									<Link to={`/art`}>
-										<div class='card sec-card'>
-											<div class='card-body mt-3' style={{textAlign: "center"}}>
-												<img src={articon} alt='' srcset='' />
-												<h5 class='card-title mt-2'>Articles</h5>
+										<div className='card sec-card'>
+											<div className='card-body mt-3' style={{textAlign: "center"}}>
+												<img src={articon} alt='' srcSet='' />
+												<h5 className='card-title mt-2'>Articles</h5>
 											</div>
 										</div>
 									</Link>
 								</div>
 							</div>
 						</div>
-						<div class='col'>
+						<div className='col'>
 							<div className='dots dots-up'></div>
-							<div class='card mt-5 medical-card'>
-								<img src={Rectangle1} class='card-img-top' alt='...' />
-								<div class='card-body'>
-									<p class='card-text mt-3'>
+							<div className='card mt-5 medical-card'>
+								<img src={Rectangle1} className='card-img-top' alt='...' />
+								<div className='card-body'>
+									<p className='card-text mt-3'>
 										Therefore, moments will make a difference with your child. From the Danna application, you can book the nearest incubation to you
 									</p>
 									<Link to={`/Book`}>
-										<a href='#' class='btn mt-3'>
+										<a href='#' className='btn mt-3'>
 											BOOK YOUR INCUBATION
 										</a>
 									</Link>
@@ -153,22 +153,22 @@ export default function Home() {
 						</div>
 						<br />
 						<br />
-						<div class='row'>
+						<div className='row'>
 							<Carousel>
 								<Carousel.Item>
-									<div class='col'>
-										<div class='card mb-3'>
-											<div class='row g-0'>
-												<div class='md-4 d-flex'>
-													<img src={doctor} class='img-doctor' alt='...' />
+									<div className='col'>
+										<div className='card mb-3'>
+											<div className='row g-0'>
+												<div className='md-4 d-flex'>
+													<img src={doctor} className='img-doctor' alt='...' />
 													<div className='content-img'>
 														<p className='name-img'>Omar Samer</p>
 														<p className='date-img'>25-11-2023</p>
 													</div>
 												</div>
-												<div class='col-md-8'>
-													<div class='card-body card-txt'>
-														<p class='card-text'>What services are provided to children in primary health care centers?</p>
+												<div className='col-md-8'>
+													<div className='card-body card-txt'>
+														<p className='card-text'>What services are provided to children in primary health care centers?</p>
 														<a href='#'>
 															<button className='btn-answer'>Dr Answered</button>
 														</a>
@@ -179,19 +179,19 @@ export default function Home() {
 									</div>
 								</Carousel.Item>
 								<Carousel.Item>
-									<div class='col'>
-										<div class='card mb-3'>
-											<div class='row g-0'>
-												<div class='md-4 d-flex'>
-													<img src={doctor} class='img-doctor' alt='...' />
+									<div className='col'>
+										<div className='card mb-3'>
+											<div className='row g-0'>
+												<div className='md-4 d-flex'>
+													<img src={doctor} className='img-doctor' alt='...' />
 													<div className='content-img'>
 														<p className='name-img'>Omar Samer</p>
 														<p className='date-img'>25-11-2023</p>
 													</div>
 												</div>
-												<div class='col-md-8'>
-													<div class='card-body card-txt'>
-														<p class='card-text'>What services are provided to children in primary health care centers?</p>
+												<div className='col-md-8'>
+													<div className='card-body card-txt'>
+														<p className='card-text'>What services are provided to children in primary health care centers?</p>
 														<a href='#'>
 															<button className='btn-answer'>Dr Answered</button>
 														</a>
@@ -202,19 +202,19 @@ export default function Home() {
 									</div>
 								</Carousel.Item>
 								<Carousel.Item>
-									<div class='col'>
-										<div class='card mb-3'>
-											<div class='row g-0'>
-												<div class='md-4 d-flex'>
-													<img src={doctor} class='img-doctor' alt='...' />
+									<div className='col'>
+										<div className='card mb-3'>
+											<div className='row g-0'>
+												<div className='md-4 d-flex'>
+													<img src={doctor} className='img-doctor' alt='...' />
 													<div className='content-img'>
 														<p className='name-img'>Omar Samer</p>
 														<p className='date-img'>25-11-2023</p>
 													</div>
 												</div>
-												<div class='col-md-8'>
-													<div class='card-body card-txt'>
-														<p class='card-text'>What services are provided to children in primary health care centers?</p>
+												<div className='col-md-8'>
+													<div className='card-body card-txt'>
+														<p className='card-text'>What services are provided to children in primary health care centers?</p>
 														<a href='#'>
 															<button className='btn-answer'>Dr Answered</button>
 														</a>
@@ -225,19 +225,19 @@ export default function Home() {
 									</div>
 								</Carousel.Item>
 								<Carousel.Item>
-									<div class='col'>
-										<div class='card mb-3'>
-											<div class='row g-0'>
-												<div class='md-4 d-flex'>
-													<img src={doctor} class='img-doctor' alt='...' />
+									<div className='col'>
+										<div className='card mb-3'>
+											<div className='row g-0'>
+												<div className='md-4 d-flex'>
+													<img src={doctor} className='img-doctor' alt='...' />
 													<div className='content-img'>
 														<p className='name-img'>Omar Samer</p>
 														<p className='date-img'>25-11-2023</p>
 													</div>
 												</div>
-												<div class='col-md-8'>
-													<div class='card-body card-txt'>
-														<p class='card-text'>What services are provided to children in primary health care centers?</p>
+												<div className='col-md-8'>
+													<div className='card-body card-txt'>
+														<p className='card-text'>What services are provided to children in primary health care centers?</p>
 														<a href='#'>
 															<button className='btn-answer'>Doctor Answered</button>
 														</a>
@@ -248,19 +248,19 @@ export default function Home() {
 									</div>
 								</Carousel.Item>
 								<Carousel.Item>
-									<div class='col'>
-										<div class='card mb-3'>
-											<div class='row g-0'>
-												<div class='md-4 d-flex'>
-													<img src={doctor} class='img-doctor' alt='...' />
+									<div className='col'>
+										<div className='card mb-3'>
+											<div className='row g-0'>
+												<div className='md-4 d-flex'>
+													<img src={doctor} className='img-doctor' alt='...' />
 													<div className='content-img'>
 														<p className='name-img'>Omar Samer</p>
 														<p className='date-img'>25-11-2023</p>
 													</div>
 												</div>
-												<div class='col-md-8'>
-													<div class='card-body card-txt'>
-														<p class='card-text'>What services are provided to children in primary health care centers?</p>
+												<div className='col-md-8'>
+													<div className='card-body card-txt'>
+														<p className='card-text'>What services are provided to children in primary health care centers?</p>
 														<a href='#'>
 															<button className='btn-answer'>Doctor Answered</button>
 														</a>
@@ -271,19 +271,19 @@ export default function Home() {
 									</div>
 								</Carousel.Item>
 								<Carousel.Item>
-									<div class='col'>
-										<div class='card mb-3'>
-											<div class='row g-0'>
-												<div class='md-4 d-flex'>
-													<img src={doctor} class='img-doctor' alt='...' />
+									<div className='col'>
+										<div className='card mb-3'>
+											<div className='row g-0'>
+												<div className='md-4 d-flex'>
+													<img src={doctor} className='img-doctor' alt='...' />
 													<div className='content-img'>
 														<p className='name-img'>Omar Samer</p>
 														<p className='date-img'>25-11-2023</p>
 													</div>
 												</div>
-												<div class='col-md-8'>
-													<div class='card-body card-txt'>
-														<p class='card-text'>What services are provided to children in primary health care centers?</p>
+												<div className='col-md-8'>
+													<div className='card-body card-txt'>
+														<p className='card-text'>What services are provided to children in primary health care centers?</p>
 														<a href='#'>
 															<button className='btn-answer'>Doctor Answered</button>
 														</a>
@@ -316,40 +316,40 @@ export default function Home() {
 					</div>
 					<br />
 					<div className='grid'>
-						<div class='row mt-5'>
-							<div class='col'>
-								<div class='card' style={{background: "#EDBA64"}}>
+						<div className='row mt-5'>
+							<div className='col'>
+								<div className='card' style={{background: "#EDBA64"}}>
 									<div className='image'>
 										<img src={icons} style={{width: "20%"}} alt='' className='icon-baby' />
 										<img src={unsplash} style={{width: "45%"}} alt='' className='img-baby' />
 									</div>
-									<div class='card-body'>
-										<h5 class='card-title mt-3'>Book incubation</h5>
-										<p class='card-text'>Flexibility and Adaptability : Acknowledge that the plan may evolve during the incubation process</p>
+									<div className='card-body'>
+										<h5 className='card-title mt-3'>Book incubation</h5>
+										<p className='card-text'>Flexibility and Adaptability : Acknowledge that the plan may evolve during the incubation process</p>
 									</div>
 								</div>
 							</div>
-							<div class='col'>
-								<div class='card' style={{background: "#D49778"}}>
+							<div className='col'>
+								<div className='card' style={{background: "#D49778"}}>
 									<div className='image'>
 										<img src={icons} style={{width: "20%"}} alt='' className='icon-baby' />
 										<img src={unsplash} style={{width: "45%"}} alt='' className='img-baby' />
 									</div>
-									<div class='card-body'>
-										<h5 class='card-title mt-3'>Book incubation</h5>
-										<p class='card-text'>Flexibility and Adaptability : Acknowledge that the plan may evolve during the incubation process</p>
+									<div className='card-body'>
+										<h5 className='card-title mt-3'>Book incubation</h5>
+										<p className='card-text'>Flexibility and Adaptability : Acknowledge that the plan may evolve during the incubation process</p>
 									</div>
 								</div>
 							</div>
-							<div class='col'>
-								<div class='card' style={{background: "#83BBF6"}}>
+							<div className='col'>
+								<div className='card' style={{background: "#83BBF6"}}>
 									<div className='image'>
 										<img src={icons} style={{width: "20%"}} alt='' className='icon-baby' />
 										<img src={unsplash} style={{width: "45%"}} alt='' className='img-baby' />
 									</div>
-									<div class='card-body'>
-										<h5 class='card-title mt-3'>Book incubation</h5>
-										<p class='card-text'>Flexibility and Adaptability : Acknowledge that the plan may evolve during the incubation process</p>
+									<div className='card-body'>
+										<h5 className='card-title mt-3'>Book incubation</h5>
+										<p className='card-text'>Flexibility and Adaptability : Acknowledge that the plan may evolve during the incubation process</p>
 									</div>
 								</div>
 							</div>
@@ -363,31 +363,31 @@ export default function Home() {
 			{/* Section 5 */}
 			<div className='homepagesection5'>
 				<div className='stiker stiker-up'></div>
-				<div class='card text-white' style={{width: "100%", border: "none"}}>
-					<img src={doctorbook} class='card-img' alt='...' />
-					<div class='card-img-overlay container'>
-						<h4 class='card-title'>Request a medical consultation now</h4>
-						<h1 class='card-text'>Book your child's incubation now</h1>
-						<p class='card-text'>
+				<div className='card text-white' style={{width: "100%", border: "none"}}>
+					<img src={doctorbook} className='card-img' alt='...' />
+					<div className='card-img-overlay container'>
+						<h4 className='card-title'>Request a medical consultation now</h4>
+						<h1 className='card-text'>Book your child's incubation now</h1>
+						<p className='card-text'>
 							Therefore, moments will make a difference with your child.
 							<br /> From the Danna application, you can book the nearest
 							<br /> nursery to you
 						</p>
 						<div className='chatvideo'>
-							<div class='row icon-chat'>
+							<div className='row icon-chat'>
 								{/* -------col1 */}
-								<div class='col'>
-									<div class='mb-3'>
-										<div class='row g-0'>
-											<div class='col-md-4'>
-												<img src={imgvideo} class='img-fluid rounded-start' alt='...' />
+								<div className='col'>
+									<div className='mb-3'>
+										<div className='row g-0'>
+											<div className='col-md-4'>
+												<img src={imgvideo} className='img-fluid rounded-start' alt='...' />
 											</div>
-											<div class='col-md-8'>
-												<div class='card-body'>
-													<h5 class='card-title'>video call</h5>
+											<div className='col-md-8'>
+												<div className='card-body'>
+													<h5 className='card-title'>video call</h5>
 
-													<p class='card-text'>
-														<small class='text-muted'>Talk to a doctor via video</small>
+													<p className='card-text'>
+														<small className='text-muted'>Talk to a doctor via video</small>
 													</p>
 												</div>
 											</div>
@@ -395,19 +395,19 @@ export default function Home() {
 									</div>
 								</div>
 								{/* -------col2 */}
-								<div class='col' style={{marginRight: "55%"}}>
-									<div class='mb-3'>
-										<div class='row g-0'>
-											<div class='col-md-4'>
-												<img src={imgchat} class='img-fluid rounded-start' alt='...' />
+								<div className='col' style={{marginRight: "55%"}}>
+									<div className='mb-3'>
+										<div className='row g-0'>
+											<div className='col-md-4'>
+												<img src={imgchat} className='img-fluid rounded-start' alt='...' />
 											</div>
-											<div class='col-md-8'>
+											<div className='col-md-8'>
 												<Link to={`/chatbot`}>
-													<div class='card-body'>
-														<h5 class='card-title'>Chatbot</h5>
+													<div className='card-body'>
+														<h5 className='card-title'>Chatbot</h5>
 
-														<p class='card-text'>
-															<small class='text-muted'>Talk to Chatbot</small>
+														<p className='card-text'>
+															<small className='text-muted'>Talk to Chatbot</small>
 														</p>
 													</div>
 												</Link>
@@ -433,76 +433,76 @@ export default function Home() {
 						</div>
 						<br />
 						<div className='videosbody'>
-							<div class='container'>
-								<div class='row row-cols-2 mt-2'>
-									<div class='col'>
-										<div class='card mb-3'>
-											<div class='row g-0'>
-												<div class='col-md-4'>
+							<div className='container'>
+								<div className='row row-cols-2 mt-2'>
+									<div className='col'>
+										<div className='card mb-3'>
+											<div className='row g-0'>
+												<div className='col-md-4'>
 													<img src={babyvedio1} alt='...' />
 												</div>
-												<div class='col-md-8'>
-													<div class='card-body'>
-														<h5 class='card-title'>Growth</h5>
-														<p class='card-text'>Changing diapers frequently is an</p>
+												<div className='col-md-8'>
+													<div className='card-body'>
+														<h5 className='card-title'>Growth</h5>
+														<p className='card-text'>Changing diapers frequently is an</p>
 														<p className='btnvideo'>
-															<small class='text-muted'>PLAY NOW</small>
+															<small className='text-muted'>PLAY NOW</small>
 														</p>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class='col'>
-										<div class='card mb-3'>
-											<div class='row g-0'>
-												<div class='col-md-4'>
-													<img src={babyvedio1} class='img-fluid rounded-start' alt='...' />
+									<div className='col'>
+										<div className='card mb-3'>
+											<div className='row g-0'>
+												<div className='col-md-4'>
+													<img src={babyvedio1} className='img-fluid rounded-start' alt='...' />
 												</div>
-												<div class='col-md-8'>
-													<div class='card-body'>
-														<h5 class='card-title'>Growth</h5>
-														<p class='card-text'>Changing diapers frequently is an</p>
+												<div className='col-md-8'>
+													<div className='card-body'>
+														<h5 className='card-title'>Growth</h5>
+														<p className='card-text'>Changing diapers frequently is an</p>
 														<p className='btnvideo'>
-															<small class='text-muted'>PLAY NOW</small>
+															<small className='text-muted'>PLAY NOW</small>
 														</p>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class='col'>
+									<div className='col'>
 										{" "}
-										<div class='card mb-3'>
-											<div class='row g-0'>
-												<div class='col-md-4'>
-													<img src={babyvedio1} class='img-fluid rounded-start' alt='...' />
+										<div className='card mb-3'>
+											<div className='row g-0'>
+												<div className='col-md-4'>
+													<img src={babyvedio1} className='img-fluid rounded-start' alt='...' />
 												</div>
-												<div class='col-md-8'>
-													<div class='card-body'>
-														<h5 class='card-title'>Growth</h5>
-														<p class='card-text'>Changing diapers frequently is an</p>
+												<div className='col-md-8'>
+													<div className='card-body'>
+														<h5 className='card-title'>Growth</h5>
+														<p className='card-text'>Changing diapers frequently is an</p>
 														<p className='btnvideo'>
-															<small class='text-muted'>PLAY NOW</small>
+															<small className='text-muted'>PLAY NOW</small>
 														</p>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class='col'>
+									<div className='col'>
 										{" "}
-										<div class='card mb-3'>
-											<div class='row g-0'>
-												<div class='col-md-4'>
-													<img src={babyvedio1} class='img-fluid rounded-start' alt='...' />
+										<div className='card mb-3'>
+											<div className='row g-0'>
+												<div className='col-md-4'>
+													<img src={babyvedio1} className='img-fluid rounded-start' alt='...' />
 												</div>
-												<div class='col-md-8'>
-													<div class='card-body'>
-														<h5 class='card-title'>Growth</h5>
-														<p class='card-text'>Changing diapers frequently is an</p>
+												<div className='col-md-8'>
+													<div className='card-body'>
+														<h5 className='card-title'>Growth</h5>
+														<p className='card-text'>Changing diapers frequently is an</p>
 														<p className='btnvideo'>
-															<small class='text-muted'>PLAY NOW</small>
+															<small className='text-muted'>PLAY NOW</small>
 														</p>
 													</div>
 												</div>
@@ -522,9 +522,9 @@ export default function Home() {
 			<br />
 			<br />
 			<div className='homepagesection7 mt-5'>
-				<div class='card' style={{width: "100%", border: "none"}}>
-					<img src={doctorbook2} class='card-img' alt='...' />
-					<div class='card-img-overlay container'>
+				<div className='card' style={{width: "100%", border: "none"}}>
+					<img src={doctorbook2} className='card-img' alt='...' />
+					<div className='card-img-overlay container'>
 						<h4 className='card-title'>Are You a Doctor ?</h4>
 						<h1 className='card-text'>
 							Join now the largest child-medical community
