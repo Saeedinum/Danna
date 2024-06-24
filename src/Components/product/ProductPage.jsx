@@ -1,13 +1,51 @@
-import React from "react";
+import {useState, useContext, useEffect} from "react";
+import {Link} from "react-router-dom";
+import axios from "axios";
+
 import categ1 from "../../images/toy.png";
-import Carousel from "react-bootstrap/Carousel";
-import CardGroup from "react-bootstrap/CardGroup";
 import categ2 from "../../images/toy2.png";
 import seller from "../../images/seller.png";
 import toy from "../../images/toycateg.png";
-import {Link} from "react-router-dom";
+
+import Carousel from "react-bootstrap/Carousel";
+import CardGroup from "react-bootstrap/CardGroup";
 
 export default function ProductPage() {
+	const [categories, setCategories] = useState({
+		result: [],
+		error: "",
+		loading: "",
+	});
+
+	const [products, setProducts] = useState({
+		result: [],
+		error: "",
+		loading: "",
+	});
+
+	useEffect(() => {
+		axios
+			.get("https://danna-pi.vercel.app/api/v1/categories")
+			.then((response) => {
+				setCategories(response.data);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}, []);
+
+	const fetchProductsByCategory = (categoryId) => {
+		console.log(categoryId);
+		axios
+			.get(`https://danna-pi.vercel.app/api/v1/products?category=${categoryId}`)
+			.then((response) => {
+				setProducts(response.data);
+			})
+			.catch((error) => {
+				console.error("There was an error fetching the products!", error);
+			});
+	};
+
 	return (
 		<div
 			className='productpage'
@@ -20,158 +58,18 @@ export default function ProductPage() {
 					<Carousel>
 						<Carousel.Item>
 							<CardGroup>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-							</CardGroup>
-						</Carousel.Item>
-						<Carousel.Item>
-							<CardGroup>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-							</CardGroup>
-						</Carousel.Item>
-						<Carousel.Item>
-							<CardGroup>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
-								<div class='card p-2 text-center border-0'>
-									<img src={categ1} style={{width: "60%"}} class='card-img-top rounded-circle ms-4' alt='...' />
-									<div class='card-body'>
-										<h5 class='card-title'>Card title</h5>
-									</div>
-								</div>
+								{categories.result.length > 0 ? (
+									categories.result.map((categori) => (
+										<div className='card p-2 text-center border-0' key={categori._id} onClick={() => fetchProductsByCategory(categori._id)}>
+											<img src={categori.image.url} style={{width: "100px"}} className='card-img-top rounded-circle ms-4' alt={categori.title} />
+											<div className='card-body'>
+												<h5 className='card-title'>{categori.title}</h5>
+											</div>
+										</div>
+									))
+								) : (
+									<p>Loading categories...</p>
+								)}
 							</CardGroup>
 						</Carousel.Item>
 					</Carousel>
@@ -188,16 +86,16 @@ export default function ProductPage() {
 					<div className='mt-5'>
 						<Carousel>
 							<Carousel.Item>
-								<div class='row gy-4 d-flex justify-content-center'>
-									<div class='col-sm-4'>
-										<div class='card h-100'>
-											<img src={categ2} class='card-img-top' alt='...' />
-											<div class='card-body text-center'>
-												<p class='card-text'>Toys</p>
-												<h5 class='card-title'>Girls Milk Bottles</h5>
-												<p class='card-text'>$80.00</p>
+								<div className='row gy-4 d-flex justify-content-center'>
+									<div className='col-sm-4'>
+										<div className='card h-100'>
+											<img src={categ2} className='card-img-top' alt='...' />
+											<div className='card-body text-center'>
+												<p className='card-text'>Toys</p>
+												<h5 className='card-title'>Girls Milk Bottles</h5>
+												<p className='card-text'>$80.00</p>
 												<button
-													class='btn w-100 text-white'
+													className='btn w-100 text-white'
 													style={{
 														backgroundColor: "rgba(50, 170, 144, 1)",
 													}}
@@ -207,7 +105,7 @@ export default function ProductPage() {
 											</div>
 										</div>
 									</div>
-									<div class='col-sm-6'>
+									<div className='col-sm-6'>
 										<div className='card border h-100'>
 											<img src={seller} className='h-100' alt='' />
 										</div>
@@ -215,16 +113,16 @@ export default function ProductPage() {
 								</div>
 							</Carousel.Item>
 							<Carousel.Item>
-								<div class='row gy-4 d-flex justify-content-center'>
-									<div class='col-sm-4'>
-										<div class='card h-100'>
-											<img src={categ2} class='card-img-top' alt='...' />
-											<div class='card-body text-center'>
-												<p class='card-text'>Toys</p>
-												<h5 class='card-title'>Girls Milk Bottles</h5>
-												<p class='card-text'>$80.00</p>
+								<div className='row gy-4 d-flex justify-content-center'>
+									<div className='col-sm-4'>
+										<div className='card h-100'>
+											<img src={categ2} className='card-img-top' alt='...' />
+											<div className='card-body text-center'>
+												<p className='card-text'>Toys</p>
+												<h5 className='card-title'>Girls Milk Bottles</h5>
+												<p className='card-text'>$80.00</p>
 												<button
-													class='btn w-100 text-white'
+													className='btn w-100 text-white'
 													style={{
 														backgroundColor: "rgba(50, 170, 144, 1)",
 													}}
@@ -234,7 +132,7 @@ export default function ProductPage() {
 											</div>
 										</div>
 									</div>
-									<div class='col-sm-6'>
+									<div className='col-sm-6'>
 										<div className='card border h-100'>
 											<img src={seller} className='h-100' alt='' />
 										</div>
@@ -242,16 +140,16 @@ export default function ProductPage() {
 								</div>
 							</Carousel.Item>
 							<Carousel.Item>
-								<div class='row gy-4 d-flex justify-content-center'>
-									<div class='col-sm-4'>
-										<div class='card h-100'>
-											<img src={categ2} class='card-img-top' alt='...' />
-											<div class='card-body text-center'>
-												<p class='card-text'>Toys</p>
-												<h5 class='card-title'>Girls Milk Bottles</h5>
-												<p class='card-text'>$80.00</p>
+								<div className='row gy-4 d-flex justify-content-center'>
+									<div className='col-sm-4'>
+										<div className='card h-100'>
+											<img src={categ2} className='card-img-top' alt='...' />
+											<div className='card-body text-center'>
+												<p className='card-text'>Toys</p>
+												<h5 className='card-title'>Girls Milk Bottles</h5>
+												<p className='card-text'>$80.00</p>
 												<button
-													class='btn w-100 text-white'
+													className='btn w-100 text-white'
 													style={{
 														backgroundColor: "rgba(50, 170, 144, 1)",
 													}}
@@ -261,7 +159,7 @@ export default function ProductPage() {
 											</div>
 										</div>
 									</div>
-									<div class='col-sm-6'>
+									<div className='col-sm-6'>
 										<div className='card border h-100'>
 											<img src={seller} className='h-100' alt='' />
 										</div>
@@ -283,162 +181,44 @@ export default function ProductPage() {
 						</p>
 					</div>
 					<div className='mt-5'>
-						<div class='row gy-4'>
-							<div class='col-lg-3 col-md-6 col-sm-12'>
-								<div class='card p-4 rounded-4 text-center'>
-									<div class='position-absolute top-0 end-0 p-3'>
-										<i class='bi bi-heart-fill text-danger fs-5'></i>
-									</div>
-									<div className='text-center'>
-										<img src={toy} class='card-img-top w-50' alt='...' />
-									</div>
-									<Link to={`/productDesply`}>
-										<div class='card-body'>
-											<p class='card-text text-dark'>Toys</p>
-											<h5 class='card-title fw-bold text-dark'>Girls Milk Bottles</h5>
-											<div className='d-flex justify-content-center gap-3'>
-												<del
-													style={{
-														color: "rgba(0, 0, 0, 0.64)",
-													}}
-												>
-													$280.00
-												</del>
-												<p class='card-text text-dark'>$80.00</p>
+						<div className='row gy-4'>
+							{products ? (
+								products.result.map((product) => (
+									<div key={product._id} className='col-lg-3 col-md-6 col-sm-12'>
+										<div className='card p-4 rounded-4 text-center'>
+											<div className='position-absolute top-0 end-0 p-3'>
+												<i className='bi bi-heart-fill text-danger fs-5'></i>
 											</div>
-										</div>
-									</Link>
-									<Link to={`/Cart`}>
-										<button className='w-100 rounded-3 p-2 text-white' style={{backgroundColor: "#32AA90"}}>
-											Add To Cart
-										</button>
-									</Link>
-								</div>
-							</div>
-							<div class='col-lg-3 col-md-6 col-sm-12'>
-								<div class='card p-4 rounded-4 text-center'>
-									<div class='position-absolute top-0 end-0 p-3'>
-										<i class='bi bi-heart-fill text-danger fs-5'></i>
-									</div>
-									<div className='text-center'>
-										<img src={toy} class='card-img-top w-50' alt='...' />
-									</div>
-									<Link to={`/productDesply`}>
-										<div class='card-body'>
-											<p class='card-text text-dark'>Toys</p>
-											<h5 class='card-title fw-bold text-dark'>Girls Milk Bottles</h5>
-											<div className='d-flex justify-content-center gap-3'>
-												<del
-													style={{
-														color: "rgba(0, 0, 0, 0.64)",
-													}}
-												>
-													$280.00
-												</del>
-												<p class='card-text text-dark'>$80.00</p>
+											<div className='text-center'>
+												<img src={product.imageCover.url} className='card-img-top w-50' alt={product.title} />
 											</div>
+											<Link to={`/productDesply/${product._id}`}>
+												<div className='card-body'>
+													<p className='card-text text-dark'>Toys</p>
+													<h5 className='card-title fw-bold text-dark'>Girls Milk Bottles</h5>
+													<div className='d-flex justify-content-center gap-3'>
+														<del
+															style={{
+																color: "rgba(0, 0, 0, 0.64)",
+															}}
+														>
+															{product.price}
+														</del>
+														<p className='card-text text-dark'>{product.finalPrice}</p>
+													</div>
+												</div>
+											</Link>
+											<Link to={`/Cart`}>
+												<button className='w-100 rounded-3 p-2 text-white' style={{backgroundColor: "#32AA90"}}>
+													Add To Cart
+												</button>
+											</Link>
 										</div>
-									</Link>
-									<Link to={`/Cart`}>
-										<button className='w-100 rounded-3 p-2 text-white' style={{backgroundColor: "#32AA90"}}>
-											Add To Cart
-										</button>
-									</Link>
-								</div>
-							</div>
-							<div class='col-lg-3 col-md-6 col-sm-12'>
-								<div class='card p-4 rounded-4 text-center'>
-									<div class='position-absolute top-0 end-0 p-3'>
-										<i class='bi bi-heart-fill text-danger fs-5'></i>
 									</div>
-									<div className='text-center'>
-										<img src={toy} class='card-img-top w-50' alt='...' />
-									</div>
-									<Link to={`/productDesply`}>
-										<div class='card-body'>
-											<p class='card-text text-dark'>Toys</p>
-											<h5 class='card-title fw-bold text-dark'>Girls Milk Bottles</h5>
-											<div className='d-flex justify-content-center gap-3'>
-												<del
-													style={{
-														color: "rgba(0, 0, 0, 0.64)",
-													}}
-												>
-													$280.00
-												</del>
-												<p class='card-text text-dark'>$80.00</p>
-											</div>
-										</div>
-									</Link>
-									<Link to={`/Cart`}>
-										<button className='w-100 rounded-3 p-2 text-white' style={{backgroundColor: "#32AA90"}}>
-											Add To Cart
-										</button>
-									</Link>
-								</div>
-							</div>
-							<div class='col-lg-3 col-md-6 col-sm-12'>
-								<div class='card p-4 rounded-4 text-center'>
-									<div class='position-absolute top-0 end-0 p-3'>
-										<i class='bi bi-heart-fill text-danger fs-5'></i>
-									</div>
-									<div className='text-center'>
-										<img src={toy} class='card-img-top w-50' alt='...' />
-									</div>
-									<Link to={`/productDesply`}>
-										<div class='card-body'>
-											<p class='card-text text-dark'>Toys</p>
-											<h5 class='card-title fw-bold text-dark'>Girls Milk Bottles</h5>
-											<div className='d-flex justify-content-center gap-3'>
-												<del
-													style={{
-														color: "rgba(0, 0, 0, 0.64)",
-													}}
-												>
-													$280.00
-												</del>
-												<p class='card-text text-dark'>$80.00</p>
-											</div>
-										</div>
-									</Link>
-									<Link to={`/Cart`}>
-										<button className='w-100 rounded-3 p-2 text-white' style={{backgroundColor: "#32AA90"}}>
-											Add To Cart
-										</button>
-									</Link>
-								</div>
-							</div>
-							<div class='col-lg-3 col-md-6 col-sm-12'>
-								<div class='card p-4 rounded-4 text-center'>
-									<div class='position-absolute top-0 end-0 p-3'>
-										<i class='bi bi-heart-fill text-danger fs-5'></i>
-									</div>
-									<div className='text-center'>
-										<img src={toy} class='card-img-top w-50' alt='...' />
-									</div>
-									<Link to={`/productDesply`}>
-										<div class='card-body'>
-											<p class='card-text text-dark'>Toys</p>
-											<h5 class='card-title fw-bold text-dark'>Girls Milk Bottles</h5>
-											<div className='d-flex justify-content-center gap-3'>
-												<del
-													style={{
-														color: "rgba(0, 0, 0, 0.64)",
-													}}
-												>
-													$280.00
-												</del>
-												<p class='card-text text-dark'>$80.00</p>
-											</div>
-										</div>
-									</Link>
-									<Link to={`/Cart`}>
-										<button className='w-100 rounded-3 p-2 text-white' style={{backgroundColor: "#32AA90"}}>
-											Add To Cart
-										</button>
-									</Link>
-								</div>
-							</div>
+								))
+							) : (
+								<p>choose Categorie</p>
+							)}
 						</div>
 					</div>
 				</div>

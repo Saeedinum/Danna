@@ -1,16 +1,62 @@
-import React, {useState} from "react";
+import {useState, useEffect} from "react";
+import {Link} from "react-router-dom";
+import axios from "axios";
+import { baseURL } from "../../utils/baseURL";
+
 import img from "../../images/image 54.png";
 import img2 from "../../images/image 44.png";
 import img3 from "../../images/image 55.png";
-import {Link} from "react-router-dom";
 
 export default function Cart() {
+	const [state, setState] = useState({
+		cart: null,
+		loading: true,
+		error: null,
+	});
+
+	useEffect(() => {
+		const fetchCart = async () => {
+			try {
+				const response = await axios.get(baseURL + "carts", {
+					headers: {
+						token: 
+						localStorage.getItem("token")
+							// "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTW9oYW1lZCBPc2FtYSIsInVzZXJJZCI6IjY1ZWE1ZjczZmE0OTk2ZGJlMDNlNTNiNSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzExMDkzMDcyfQ.XK5lGtfydIOuFrNBTZn3uML_7hku25jxqbUNAO85LK0",
+					},
+				});
+				console.log(response.data);
+				setState({
+					cart: response.data,
+					loading: false,
+					error: null,
+				});
+			} catch (err) {
+				setState({
+					cart: null,
+					loading: false,
+					error: err.message,
+				});
+			}
+		};
+
+		fetchCart();
+	}, []);
+
+	const {cart, loading, error} = state;
+
 	const [count, Setcount] = useState(1);
 	function inc() {
 		Setcount(count + 1);
 	}
 	function dec() {
 		Setcount(count - 1);
+	}
+	if (loading) {
+		return <p>Loading cart...</p>;
+	}
+
+	if (error) {
+		return <p>Error fetching cart: {error}</p>;
 	}
 
 	return (
@@ -19,7 +65,7 @@ export default function Cart() {
 				<h1>Your Cart</h1>
 				<Link to={`/productpage`}>
 					<div className='mt-2'>
-						<i class='bi bi-arrow-90deg-right rounded-3 text-white p-2' style={{backgroundColor: "#32AA90"}}></i>
+						<i className='bi bi-arrow-90deg-right rounded-3 text-white p-2' style={{backgroundColor: "#32AA90"}}></i>
 					</div>
 				</Link>
 			</div>
@@ -31,8 +77,8 @@ export default function Cart() {
 				<div className='product border-bottom'>
 					<div className='d-flex justify-content-between mb-4'>
 						<div className='div1'>
-							<div class='row'>
-								<div class='col-sm-8'>
+							<div className='row'>
+								<div className='col-sm-8'>
 									<div className='d-flex text-center'>
 										<img src={img} alt='' className='w-25' />
 										<div className='mt-4 fs-6' style={{fontFamily: "PT Sans"}}>
@@ -43,7 +89,7 @@ export default function Cart() {
 										</div>
 									</div>
 								</div>
-								<div class='col-sm-4'>
+								<div className='col-sm-4'>
 									<div className='d-flex mt-4 fs-6 gap-5 justify-content-center'>
 										<div className='d-flex gap-2 border' style={{fontFamily: "PT Sans"}}>
 											<button className='fs-4 ' onClick={dec}>
@@ -55,7 +101,7 @@ export default function Cart() {
 											</button>
 										</div>
 										<div className='remove fs-4'>
-											<i class='bi bi-trash3-fill text-danger'></i>
+											<i className='bi bi-trash3-fill text-danger'></i>
 										</div>
 									</div>
 								</div>
@@ -68,8 +114,8 @@ export default function Cart() {
 					</div>
 					<div className='d-flex justify-content-between mb-4'>
 						<div className='div1'>
-							<div class='row'>
-								<div class='col-sm-8'>
+							<div className='row'>
+								<div className='col-sm-8'>
 									<div className='d-flex text-center'>
 										<img src={img} alt='' className='w-25' />
 										<div className='mt-4 fs-6' style={{fontFamily: "PT Sans"}}>
@@ -80,7 +126,7 @@ export default function Cart() {
 										</div>
 									</div>
 								</div>
-								<div class='col-sm-4'>
+								<div className='col-sm-4'>
 									<div className='d-flex mt-4 fs-6 gap-5 justify-content-center'>
 										<div className='d-flex gap-2 border' style={{fontFamily: "PT Sans"}}>
 											<button className='fs-4 ' onClick={dec}>
@@ -92,7 +138,7 @@ export default function Cart() {
 											</button>
 										</div>
 										<div className='remove fs-4'>
-											<i class='bi bi-trash3-fill text-danger'></i>
+											<i className='bi bi-trash3-fill text-danger'></i>
 										</div>
 									</div>
 								</div>

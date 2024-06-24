@@ -1,36 +1,49 @@
-import React from "react";
-import "./DetailsDoctor.css";
+import {useState, useEffect} from "react";
+import {Link, useParams} from "react-router-dom";
+import axios from "axios";
+import Calendar from "react-calendar";
+import {baseURL} from "../../utils/baseURL";
+
 import Doc from "../../images/Rectangle 93.png";
 import viza from "../../images/image 18.png";
-import Calendar from "react-calendar";
-import {Link} from "react-router-dom";
+
+import "./DetailsDoctor.css";
+
 export default function DetailsDoctor() {
+	const {doctorID} = useParams();
+	const [doctor, setDoctor] = useState([]);
+	useEffect(() => {
+		axios.get(baseURL + "doctors/" + doctorID).then((response) => {
+			setDoctor(response.data);
+		});
+	}, [doctorID]);
+
 	return (
 		<div className='DetailsDoctor mt-5'>
 			<div className='container'>
-				<div class='row'>
-					<div class='col-sm-8  col-md-12 col-lg-8 card-img-doctor'>
-						<div class='card mb-3'>
-							<div class='row g-0'>
-								<div class='col-md-5 p-3'>
-									<img src={Doc} class='img-fluid rounded-start' alt='...' />
+				<div className='row'>
+					<div className='col-sm-8  col-md-12 col-lg-8 card-img-doctor'>
+						<div className='card mb-3'>
+							<div className='row g-0'>
+								<div className='col-md-5 p-3'>
+									<img src={Doc} className='img-fluid rounded-start' alt='...' />
 									<div className='rate-doc'>
 										<ul>
 											<li style={{color: "#B2AEAE", fontSize: "18px", fontWeight: "700"}}>6.3</li>
 											<li>
-												<i class='bi bi-star-fill'></i>
+												<i className='bi bi-star-fill'></i>
 											</li>
 										</ul>
 									</div>
 								</div>
-								<div class='col-md-7'>
-									<div class='card-body'>
-										<h2 class='card-title'>Dr.Topon Kumer</h2>
+								<div className='col-md-7'>
+									<div className='card-body'>
+										<h2 className='card-title'>Dr.Topon Kumer</h2>
 										<h4 className='card-title2'>The modern mother </h4>
-										<p class='card-text'>
-											<small class='text-muted'>About a doctor</small>
+										<p className='card-text'>
+											<small className='text-muted'>About a doctor</small>
 										</p>
-										<p class='card-text'>
+										<p className='card-text'>
 											The modern mother is under great pre The modern mother is
 											<br /> under great pre The modern mother is under great pre The <br />
 											modern mother is under great pre The modern mother is
@@ -43,12 +56,12 @@ export default function DetailsDoctor() {
 												<ul>
 													<li>
 														<a className='chat'>
-															<i class='bi bi-chat-dots'></i>
+															<i className='bi bi-chat-dots'></i>
 														</a>
 													</li>
 													<li>
 														<a className='video'>
-															<i class='bi bi-camera-video'></i>
+															<i className='bi bi-camera-video'></i>
 														</a>
 													</li>
 												</ul>
@@ -59,14 +72,14 @@ export default function DetailsDoctor() {
 								</div>
 							</div>
 						</div>
-						<div class='row row-cols-1 row-cols-md-3 g-4'>
-							<div class='col'>
-								<div class='card section-two'>
-									<div class='card-body'>
+						<div className='row row-cols-1 row-cols-md-3 g-4'>
+							<div className='col'>
+								<div className='card section-two'>
+									<div className='card-body'>
 										<div className='icon'>
 											<ul>
 												<li className='user'>
-													<i class='bi bi-person-fill'></i>
+													<i className='bi bi-person-fill'></i>
 												</li>
 											</ul>
 										</div>
@@ -77,13 +90,13 @@ export default function DetailsDoctor() {
 									</div>
 								</div>
 							</div>
-							<div class='col'>
-								<div class='card section-two'>
-									<div class='card-body'>
+							<div className='col'>
+								<div className='card section-two'>
+									<div className='card-body'>
 										<div className='icon'>
 											<ul>
 												<li className='exp'>
-													<i class='bi bi-stars'></i>
+													<i className='bi bi-stars'></i>
 												</li>
 											</ul>
 										</div>
@@ -94,13 +107,13 @@ export default function DetailsDoctor() {
 									</div>
 								</div>
 							</div>
-							<div class='col'>
-								<div class='card section-two'>
-									<div class='card-body'>
+							<div className='col'>
+								<div className='card section-two'>
+									<div className='card-body'>
 										<div className='icon'>
 											<ul>
 												<li className='star'>
-													<i class='bi bi-star-fill'></i>
+													<i className='bi bi-star-fill'></i>
 												</li>
 											</ul>
 										</div>
@@ -116,11 +129,11 @@ export default function DetailsDoctor() {
 							<h2>Time</h2>
 							<div className='card card-time'>
 								<div className='morning'>
-									<div class='card-morning'>
+									<div className='card-morning'>
 										<div className='icon'>
 											<ul>
 												<li className='morning'>
-													<i class='bi bi-cloud-sun-fill'></i>
+													<i className='bi bi-cloud-sun-fill'></i>
 												</li>
 											</ul>
 										</div>
@@ -129,42 +142,42 @@ export default function DetailsDoctor() {
 											<p className='card-text'>9:00AM to 12.00PM</p>
 										</div>
 									</div>
-									<div class='row row-cols-2 row-cols-lg-3 p-3 me-2'>
-										<div class='col-4 col-lg-2 col-md-3'>
+									<div className='row row-cols-2 row-cols-lg-3 p-3 me-2'>
+										<div className='col-4 col-lg-2 col-md-3'>
 											<div className='card date'>9:00AM</div>
 										</div>
-										<div class='col-4 col-lg-2 col-md-3'>
+										<div className='col-4 col-lg-2 col-md-3'>
 											<div className='card date'>9:00AM</div>
 										</div>
-										<div class='col-4 col-lg-2 col-md-3'>
+										<div className='col-4 col-lg-2 col-md-3'>
 											<div className='card date'>9:00AM</div>
 										</div>
-										<div class='col-4 col-lg-2 col-md-3'>
+										<div className='col-4 col-lg-2 col-md-3'>
 											<div className='card date active'>9:00AM</div>
 										</div>
-										<div class='col-4 col-lg-2 col-md-3'>
+										<div className='col-4 col-lg-2 col-md-3'>
 											<div className='card date'>9:00AM</div>
 										</div>
-										<div class='col-4 col-lg-2 col-md-3'>
+										<div className='col-4 col-lg-2 col-md-3'>
 											<div className='card date'>9:00AM</div>
 										</div>
-										<div class='col-4 col-lg-2 col-md-3'>
+										<div className='col-4 col-lg-2 col-md-3'>
 											<div className='card date unactive'>9:00AM</div>
 										</div>
-										<div class='col-4 col-lg-2 col-md-3'>
+										<div className='col-4 col-lg-2 col-md-3'>
 											<div className='card date active'>9:00AM</div>
 										</div>
-										<div class='col-4 col-lg-2 col-md-3'>
+										<div className='col-4 col-lg-2 col-md-3'>
 											<div className='card date'>9:00AM</div>
 										</div>
 									</div>
 								</div>
 								<div className='evening'>
-									<div class='card-evening'>
+									<div className='card-evening'>
 										<div className='icon'>
 											<ul>
 												<li className='evening'>
-													<i class='bi bi-cloud-moon-fill'></i>
+													<i className='bi bi-cloud-moon-fill'></i>
 												</li>
 											</ul>
 										</div>
@@ -173,32 +186,32 @@ export default function DetailsDoctor() {
 											<p className='card-text'>9:00AM to 12.00PM</p>
 										</div>
 									</div>
-									<div class='row row-cols-2 row-cols-lg-3 p-3 me-2'>
-										<div class='col-4 col-lg-2 col-md-3'>
+									<div className='row row-cols-2 row-cols-lg-3 p-3 me-2'>
+										<div className='col-4 col-lg-2 col-md-3'>
 											<div className='card date'>9:00AM</div>
 										</div>
-										<div class='col-4 col-lg-2 col-md-3'>
+										<div className='col-4 col-lg-2 col-md-3'>
 											<div className='card date'>9:00AM</div>
 										</div>
-										<div class='col-4 col-lg-2 col-md-3'>
+										<div className='col-4 col-lg-2 col-md-3'>
 											<div className='card date'>9:00AM</div>
 										</div>
-										<div class='col-4 col-lg-2 col-md-3'>
+										<div className='col-4 col-lg-2 col-md-3'>
 											<div className='card date active'>9:00AM</div>
 										</div>
-										<div class='col-4 col-lg-2 col-md-3'>
+										<div className='col-4 col-lg-2 col-md-3'>
 											<div className='card date'>9:00AM</div>
 										</div>
-										<div class='col-4 col-lg-2 col-md-3'>
+										<div className='col-4 col-lg-2 col-md-3'>
 											<div className='card date'>9:00AM</div>
 										</div>
-										<div class='col-4 col-lg-2 col-md-3'>
+										<div className='col-4 col-lg-2 col-md-3'>
 											<div className='card date unactive'>9:00AM</div>
 										</div>
-										<div class='col-4 col-lg-2 col-md-3'>
+										<div className='col-4 col-lg-2 col-md-3'>
 											<div className='card date'>9:00AM</div>
 										</div>
-										<div class='col-4 col-lg-2 col-md-3'>
+										<div className='col-4 col-lg-2 col-md-3'>
 											<div className='card date active'>9:00AM</div>
 										</div>
 									</div>
@@ -206,8 +219,8 @@ export default function DetailsDoctor() {
 							</div>
 						</div>
 					</div>
-					<div class='col-sm-4 col-md-9 col-lg-4'>
-						<div class='card p-3 calender'>
+					<div className='col-sm-4 col-md-9 col-lg-4'>
+						<div className='card p-3 calender'>
 							<Calendar />
 						</div>
 						<div className='card mt-3 card-booking-details'>
@@ -217,7 +230,7 @@ export default function DetailsDoctor() {
 									<span className='para_time_date'>time$date</span>
 									<ul className=' '>
 										<li>
-											<i class='bi bi-clock-history'></i>
+											<i className='bi bi-clock-history'></i>
 										</li>
 										<li style={{color: "rgba(0, 0, 0, 0.22)", fontWeight: "550"}}>06.00 AM sat , 08 Mar 2018</li>
 									</ul>
@@ -226,7 +239,7 @@ export default function DetailsDoctor() {
 									<span className='para_time_date'>Duration</span>
 									<ul className=' '>
 										<li>
-											<i class='bi bi-clock-history'></i>
+											<i className='bi bi-clock-history'></i>
 										</li>
 										<li style={{color: "rgba(0, 0, 0, 0.22)", fontWeight: "550"}}>30min</li>
 									</ul>
