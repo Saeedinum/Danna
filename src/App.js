@@ -49,7 +49,7 @@ function App() {
 				{path: "doctors", element: <Doctors />},
 				{path: "celendar1", element: <Celendar1 />},
 				{path: "aboutus", element: <AboutUs />},
-				{path: "detailsdoctors", element: <DetailsDoctors />},
+				{path: "detailsdoctors/:doctorID", element: <DetailsDoctors />},
 				{path: "artdet", element: <ArticleDetails />},
 				{path: "productpage", element: <ProductPage />},
 				{path: "profiledr", element: <ProfileDoctor />},
@@ -63,8 +63,15 @@ function App() {
 						</ProtectedRoutes>
 					),
 				},
-				{path: "productDesply", element: <ProductDesply />},
-				{path: "Cart", element: <Cart />},
+				{path: "productDesply/:productID", element: <ProductDesply />},
+				{
+					path: "Cart",
+					element: (
+						<ProtectedRoutes>
+							<Cart />
+						</ProtectedRoutes>
+					),
+				},
 				{path: "payment", element: <Payment />},
 				{path: "videos", element: <Videos />},
 				{path: "openvideos", element: <OpenVideos />},
