@@ -1,23 +1,23 @@
 import {useState, useEffect} from "react";
-import {useParams, Navigate, useNavigate} from "react-router-dom";
+import {useParams, useNavigate} from "react-router-dom";
 import axios from "axios";
-import {jwtDecode} from "jwt-decode";
+// import {jwtDecode} from "jwt-decode";
 
-import img1 from "../../images/image 64.png";
-import img2 from "../../images/image 65.png";
-import img3 from "../../images/image 66.png";
-import img4 from "../../images/image 67.png";
-import bigimg from "../../images/image 68.png";
+// import img1 from "../../images/image 64.png";
+// import img2 from "../../images/image 65.png";
+// import img3 from "../../images/image 66.png";
+// import img4 from "../../images/image 67.png";
+// import bigimg from "../../images/image 68.png";
+// import descriptionimg from "../../images/image 70.png";
+// import star from "../../images/star.png";
 import jir from "../../images/JIRAFF.png";
 import user from "../../images/user.jpg";
-import descriptionimg from "../../images/image 70.png";
-import star from "../../images/star.png";
 
-import ProtectedRoutes from "../ProtectedRoutes/ProtectedRoutes";
+// import ProtectedRoutes from "../ProtectedRoutes/ProtectedRoutes";
 
 export default function ProductDesply() {
 	const navigate = useNavigate();
-	const [a, seta] = useState(false);
+	// const [a, seta] = useState(false);
 	const [section, setSection] = useState(1);
 	const params = useParams();
 	const productId = params.productID;
@@ -256,8 +256,6 @@ export default function ProductDesply() {
 													</div>
 												</div>
 											</div>
-											<form action=''>
-												{/* //! wanna use React-hook-form 😒😒  */}
 												<div className=''>
 													<h4>ADD A REVIEW</h4>
 													<small className='text-muted'>Your email address will not be published. Required fields are marked *</small>
@@ -274,7 +272,7 @@ export default function ProductDesply() {
 												<div className='row'>
 													<div className='col-6'>
 														<div className='mb-3'>
-															<input type='email' className='form-control' id='exampleFormControlInput1' placeholder='Your Name' />
+															<input type='text' className='form-control' id='exampleFormControlInput1' placeholder='Your Name' />
 														</div>
 													</div>
 													<div className='col-6'>
@@ -293,13 +291,14 @@ export default function ProductDesply() {
 													onClick={() => {
 														if (!localStorage.getItem("token")) {
 															return navigate("/login");
+														}else{
+															
 														}
 													}}
 													className='btn btn-primary'
 												>
 													Submit
 												</button>
-											</form>
 										</div>
 									</div>
 								</div>

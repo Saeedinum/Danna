@@ -1,13 +1,14 @@
 import {useState, useEffect} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
-import { baseURL } from "../../utils/baseURL";
+import {baseURL} from "../../utils/baseURL";
 
 import img from "../../images/image 54.png";
-import img2 from "../../images/image 44.png";
-import img3 from "../../images/image 55.png";
+// import img2 from "../../images/image 44.png";
+// import img3 from "../../images/image 55.png";
 
 export default function Cart() {
+	const navigate = useNavigate();
 	const [state, setState] = useState({
 		cart: null,
 		loading: true,
@@ -17,11 +18,11 @@ export default function Cart() {
 	useEffect(() => {
 		const fetchCart = async () => {
 			try {
+				console.log(localStorage.getItem("token"))
 				const response = await axios.get(baseURL + "carts", {
 					headers: {
-						token: 
-						localStorage.getItem("token")
-							// "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTW9oYW1lZCBPc2FtYSIsInVzZXJJZCI6IjY1ZWE1ZjczZmE0OTk2ZGJlMDNlNTNiNSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzExMDkzMDcyfQ.XK5lGtfydIOuFrNBTZn3uML_7hku25jxqbUNAO85LK0",
+						token: localStorage.getItem("token") ?? navigate("/login"),
+						//! endpoint does not work ❌
 					},
 				});
 				console.log(response.data);
@@ -45,6 +46,7 @@ export default function Cart() {
 	const {cart, loading, error} = state;
 
 	const [count, Setcount] = useState(1);
+
 	function inc() {
 		Setcount(count + 1);
 	}

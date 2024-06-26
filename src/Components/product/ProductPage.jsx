@@ -1,16 +1,18 @@
 import {useState, useContext, useEffect} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
+import {baseURL} from "../../utils/baseURL";
 
-import categ1 from "../../images/toy.png";
+// import categ1 from "../../images/toy.png";
 import categ2 from "../../images/toy2.png";
 import seller from "../../images/seller.png";
-import toy from "../../images/toycateg.png";
+// import toy from "../../images/toycateg.png";
 
 import Carousel from "react-bootstrap/Carousel";
 import CardGroup from "react-bootstrap/CardGroup";
 
 export default function ProductPage() {
+	const navigate = useNavigate();
 	const [categories, setCategories] = useState({
 		result: [],
 		error: "",
@@ -25,7 +27,7 @@ export default function ProductPage() {
 
 	useEffect(() => {
 		axios
-			.get("https://danna-pi.vercel.app/api/v1/categories")
+			.get(baseURL + "categories")
 			.then((response) => {
 				setCategories(response.data);
 			})
@@ -37,13 +39,30 @@ export default function ProductPage() {
 	const fetchProductsByCategory = (categoryId) => {
 		console.log(categoryId);
 		axios
-			.get(`https://danna-pi.vercel.app/api/v1/products?category=${categoryId}`)
+			.get(`${baseURL}products?category=${categoryId}`)
 			.then((response) => {
 				setProducts(response.data);
 			})
 			.catch((error) => {
 				console.error("There was an error fetching the products!", error);
 			});
+	};
+
+	const addToCart = async (idProduct) => {
+		try {
+			const response = await axios.post(
+				baseURL + "carts",
+				{idProduct},
+				{
+					headers: {
+						token: localStorage.getItem("token") ?? navigate("/login"),
+					},
+				},
+			);
+			console.log("Product added to cart:", response.data);
+		} catch (err) {
+			console.error("Error adding product to cart:", err.message);
+		}
 	};
 
 	return (
@@ -209,7 +228,7 @@ export default function ProductPage() {
 												</div>
 											</Link>
 											<Link to={`/Cart`}>
-												<button className='w-100 rounded-3 p-2 text-white' style={{backgroundColor: "#32AA90"}}>
+												<button onClick={() => addToCart(product.id)} className='w-100 rounded-3 p-2 text-white' style={{backgroundColor: "#32AA90"}}>
 													Add To Cart
 												</button>
 											</Link>

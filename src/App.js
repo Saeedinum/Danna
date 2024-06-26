@@ -68,14 +68,21 @@ function App() {
 					path: "Cart",
 					element: (
 						<ProtectedRoutes>
-							<Cart />
+						<Cart />
 						</ProtectedRoutes>
 					),
 				},
 				{path: "payment", element: <Payment />},
 				{path: "videos", element: <Videos />},
 				{path: "openvideos", element: <OpenVideos />},
-				{path: "favourite", element: <Favourite />},
+				{
+					path: "favourite",
+					element: (
+						<ProtectedRoutes>
+							<Favourite />
+						</ProtectedRoutes>
+					),
+				},
 				{path: "Questions", element: <Questions />},
 				{path: "QuestionDet", element: <QuestionDet />},
 				{path: "ForgetNewPassword", element: <ForgetNewPassward />},
