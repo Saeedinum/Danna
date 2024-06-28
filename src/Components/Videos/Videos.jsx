@@ -1,4 +1,3 @@
-import React from "react";
 import imgVideo1 from "../../images/Group 18.png";
 import cardimg from "../../images/Group 19.png";
 import {Link} from "react-router-dom";

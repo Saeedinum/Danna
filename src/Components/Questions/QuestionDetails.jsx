@@ -1,4 +1,4 @@
-import React, {Component, useState} from "react";
+import  {Component, useState} from "react";
 import post from "../../images/Name.png";
 import rect from "../../images/photo_4_2024-02-13_23-29-14.jpg";
 import comme from "../../images/Ellipse 36.png";

@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import {Component} from "react";
 import Rectangle1 from "../../images/mother.jpg";
 import image from "../../images/image 55.png";
 import Ellipse from "../../images/child.png";

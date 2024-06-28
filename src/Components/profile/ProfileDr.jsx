@@ -1,4 +1,4 @@
-import React, {Component, useState} from "react";
+import {Component, useState} from "react";
 import {Dialog} from "primereact/dialog";
 import {InputText} from "primereact/inputtext";
 import {Button} from "primereact/button";

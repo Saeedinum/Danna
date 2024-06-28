@@ -1,5 +1,3 @@
-import React from "react";
-
 import circle1 from "../../images/Group 42.png";
 import circle2 from "../../images/circle2.png";
 import circle3 from "../../images/circle3.png";

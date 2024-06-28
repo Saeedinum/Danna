@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import {Component} from "react";
 import vector from "../../images/AI IMG.png";
 import name from "../../images/Name.png";
 import repot from "../../images/rebot 1.png";

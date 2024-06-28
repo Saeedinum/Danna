@@ -1,9 +1,8 @@
-import React from "react";
 import imgcontact from "../../images/image 112.png";
 import union3 from "../../images/Union3.png";
 import union2 from "../../images/Union2.png";
 import union1 from "../../images/Union.png";
-import {Form} from "react-bootstrap";
+// import {Form} from "react-bootstrap";
 
 export default function ContactUs() {
 	return (
@@ -13,7 +12,7 @@ export default function ContactUs() {
 				<div className='card-img-overlay container' style={{marginTop: "5%"}}>
 					<h4 className='card-title mt-5 fs-1'>Contact Us</h4>
 					<h1 className='card-text fs-5'>
-						Home ><span style={{color: "rgba(50, 170, 144, 1)"}}>Contact</span>
+						<span style={{color: "rgba(50, 170, 144, 1)"}}>Contact</span>
 					</h1>
 				</div>
 			</div>

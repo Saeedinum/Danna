@@ -1,7 +1,8 @@
-import React, {Component} from "react";
+import {Component} from "react";
 import {DateRangePicker} from "rsuite";
 
 import "rsuite/dist/styles/rsuite-default.css";
+
 export default class Celender2 extends Component {
 	render() {
 		return (

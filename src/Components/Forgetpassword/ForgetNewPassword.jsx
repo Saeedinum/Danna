@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import {Component} from "react";
 import forget from "../../images/image 7.png";
 export default class ForgetNewPassward extends Component {
 	render() {

@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import Celendar from "react-calendar";
+
 const Celendar1 = () => {
 	const [value, onchange] = useState(new Date());
 	return (

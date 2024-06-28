@@ -1,4 +1,3 @@
-import React from "react";
 import img from "../../images/bookdet.png";
 import img2 from "../../images/visa.png";
 import icon1 from "../../images/Payment method icon.png";
