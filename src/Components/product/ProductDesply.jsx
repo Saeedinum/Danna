@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 import {useParams, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {baseURL} from "../../utils/baseURL";
@@ -92,11 +92,12 @@ export default function ProductDesply() {
 		}
 	};
 
-	const addToCart = async (idProduct) => {
+	const quantityRef = useRef(null);
+	const addToCart = async (idProduct, quantity) => {
 		try {
 			const response = await axios.post(
 				baseURL + "carts",
-				{idProduct},
+				{product: idProduct, quantity: quantity},
 				{
 					headers: {
 						token: localStorage.getItem("token") ?? navigate("/login"),
@@ -163,13 +164,13 @@ export default function ProductDesply() {
 										<h4>${product.result.price}</h4>
 										<p className='color text-muted'>{product.result.description}</p>
 										<div className='d-flex gap-3'>
-											<input type='number' className='w-25' style={{outline: "none"}} />
+											<input ref={quantityRef} type='number' className='w-25' style={{outline: "none"}} />
 											<button
 												className='w-25 text-white'
 												style={{
 													backgroundColor: "rgba(50, 170, 144, 1)",
 												}}
-												onClick={() => addToCart(product.result._id)}
+												onClick={() => addToCart(product.result._id, quantityRef.current.value)}
 											>
 												Add To Cart
 											</button>
@@ -337,7 +338,6 @@ export default function ProductDesply() {
 															</div>
 														</div>
 													</div>
-
 													<Review productID={product.result._id} />
 												</div>
 											</div>
