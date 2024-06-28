@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter} from "react-router-dom";
+import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import Home from "./Components/Home";
 import Login from "./Components/LoginAndSiginup/Login";
 import Register from "./Components/LoginAndSiginup/Signup";
@@ -68,7 +68,7 @@ function App() {
 					path: "Cart",
 					element: (
 						<ProtectedRoutes>
-						<Cart />
+							<Cart />
 						</ProtectedRoutes>
 					),
 				},
@@ -90,7 +90,14 @@ function App() {
 				{path: "ForgetPasswardOtp", element: <ForgetPasswardOtp />},
 				{path: "Book", element: <Book />},
 				{path: "Bookdetail", element: <BookDet />},
-				{path: "PayProduct", element: <PaymentProduct />},
+				{
+					path: "PayProduct",
+					element: (
+						<ProtectedRoutes>
+							<PaymentProduct />
+						</ProtectedRoutes>
+					),
+				},
 
 				// { path: "product-details/:id", element: <ProtectedRoutes> <ProductDetails /></ProtectedRoutes> },
 				{path: "*", element: <Notfound />},

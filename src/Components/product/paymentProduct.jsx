@@ -1,6 +1,43 @@
-import React from "react";
+import {useState, useEffect} from "react";
+import {useNavigate} from "react-router-dom";
+import axios from "axios";
+import {baseURL} from "../../utils/baseURL";
+import OrderSkeleton from "../skeleton/orderSkeleton";
 
-export default function paymentProduct() {
+const PaymentProduct = () => {
+	const navigate = useNavigate();
+	const [state, setState] = useState({
+		cart: null,
+		loading: true,
+		error: null,
+	});
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await axios.get(baseURL + "carts", {
+					headers: {
+						token: localStorage.getItem("token") ?? navigate("/login"),
+					},
+				});
+				console.clear();
+				console.log(response.data);
+				setState({
+					cart: response.data.cart,
+					loading: false,
+					error: null,
+				});
+			} catch (err) {
+				setState({
+					cart: null,
+					loading: false,
+					error: err.message,
+				});
+			}
+		};
+		fetchData();
+	}, []);
+	const {cart, loading, error} = state;
 	return (
 		<div>
 			<div className='container mt-5'>
@@ -76,22 +113,26 @@ export default function paymentProduct() {
 									Subtotal
 								</small>
 							</div>
-							<div className='d-flex p-2 border-bottom'>
-								<p className='text-muted'>Soft Rabbit Textil Toy × 1</p>
-								<small className='ms-auto text-muted'>$80.00</small>
-							</div>
-							<div className='d-flex p-2 border-bottom'>
-								<p className='text-muted'>Wool Shark Toy × 2</p>
-								<small className='ms-auto text-muted'>$80.00</small>
-							</div>
-							<div className='d-flex p-2 border-bottom'>
-								<p className='text-muted'>Subtotal</p>
-								<small className='ms-auto text-muted'>$80.00</small>
-							</div>
-							<div className='d-flex p-2'>
-								<p className='fw-bold'>Total</p>
-								<small className='ms-auto fw-bold'>$805.00</small>
-							</div>
+							{loading || error ? (
+								<OrderSkeleton />
+							) : (
+								<>
+									{cart.cartItems.map((item, index) => (
+										<div className='d-flex p-2 border-bottom'>
+											<p className='text-muted'>
+												{item.product.title} × {item.quantity}
+											</p>
+											<small className='ms-auto text-muted'>
+												{new Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(item.product.price * item.quantity)}
+											</small>
+										</div>
+									))}
+									<div className='d-flex p-2'>
+										<p className='fw-bold'>Total</p>
+										<small className='ms-auto fw-bold'>{cart.totalPrice}</small>
+									</div>
+								</>
+							)}
 						</div>
 						<div className='card p-2 mt-5' style={{backgroundColor: "rgba(235, 233, 235, 1)", borderRadius: "16px"}}>
 							<h6 className='fs-3'>Cash on delivery</h6>
@@ -107,4 +148,5 @@ export default function paymentProduct() {
 			</div>
 		</div>
 	);
-}
+};
+export default PaymentProduct;

@@ -199,7 +199,7 @@ export default function Cart() {
 						fontFamily: "PT Sans",
 						backgroundColor: "#32AA90",
 					}}
-					onClick={() => navigate("/checkout")}
+					onClick={() => navigate("/PayProduct")}
 				>
 					Checkout
 				</button>
