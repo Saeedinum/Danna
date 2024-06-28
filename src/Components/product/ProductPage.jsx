@@ -74,43 +74,6 @@ export default function ProductPage() {
 		}
 	};
 
-	const addToFavorite = async (idProduct) => {
-		// !  Unauthorized
-		console.log("add   " + idProduct);
-		console.log(" token " + localStorage.getItem("token"));
-		try {
-			const response = await axios.patch(
-				baseURL + "wishlist",
-				{product: idProduct},
-				{
-					headers: {
-						token: localStorage.getItem("token") ?? navigate("/login"),
-					},
-				},
-			);
-			console.log("Product added to favorite:", response.data);
-		} catch (err) {
-			console.log(err.message);
-		}
-	};
-
-	const removeFromFavorite = async (idProduct) => {
-		// !  Unauthorized
-		console.log("remove from favorite " + idProduct);
-		console.log(" token " + localStorage.getItem("token"));
-		try {
-			const response = await axios.delete(baseURL + "wishlist", {
-				headers: {
-					token: localStorage.getItem("token") ?? navigate("/login"),
-				},
-				data: {product: idProduct}, // Add the data payload here
-			});
-			console.log("Product removed from favorite:", response.data);
-		} catch (err) {
-			console.error("❌Error removing product from favorite:", err.message);
-		}
-	};
-
 	const [favorites, setFavorites] = useState({});
 	useEffect(() => {
 		if (localStorage.getItem("token")) {
@@ -136,16 +99,43 @@ export default function ProductPage() {
 		}
 	}, []);
 
-	const toggleFavorite = (idProduct) => {
+	const toggleFavorite = async (idProduct) => {
 		const isFavorite = favorites[idProduct];
 		setFavorites((prevFavorites) => ({
 			...prevFavorites,
 			[idProduct]: !isFavorite,
 		}));
 		if (isFavorite) {
-			removeFromFavorite(idProduct);
+			console.log("remove from favorite " + idProduct);
+			console.log(" token " + localStorage.getItem("token"));
+			try {
+				const response = await axios.delete(baseURL + "wishlist", {
+					headers: {
+						token: localStorage.getItem("token") ?? navigate("/login"),
+					},
+					data: {product: idProduct}, // Add the data payload here
+				});
+				console.log("Product removed from favorite:", response.data);
+			} catch (err) {
+				console.error("❌Error removing product from favorite:", err.message);
+			}
 		} else {
-			addToFavorite(idProduct);
+			console.log("add   " + idProduct);
+			console.log(" token " + localStorage.getItem("token"));
+			try {
+				const response = await axios.patch(
+					baseURL + "wishlist",
+					{product: idProduct},
+					{
+						headers: {
+							token: localStorage.getItem("token") ?? navigate("/login"),
+						},
+					},
+				);
+				console.log("Product added to favorite:", response.data);
+			} catch (err) {
+				console.log(err.message);
+			}
 		}
 	};
 
