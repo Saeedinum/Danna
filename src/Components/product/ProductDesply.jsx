@@ -337,48 +337,8 @@ export default function ProductDesply() {
 															</div>
 														</div>
 													</div>
-													<div className=''>
-														<h4>ADD A REVIEW</h4>
-														<small className='text-muted'>Your email address will not be published. Required fields are marked *</small>
-													</div>
-													<div className='mt-3'>
-														<small className='fs-6'>YOUR RATING *</small>
-														<Rating />
-													</div>
-													<div className='form-floating '>
-														<textarea className='form-control' placeholder='Leave a comment here' id='floatingTextarea'></textarea>
-														<label htmlFor='floatingTextarea'>Your review</label>
-													</div>
-													<br />
-													<div className='row'>
-														<div className='col-6'>
-															<div className='mb-3'>
-																<input type='text' className='form-control' id='exampleFormControlInput1' placeholder='Your Name' />
-															</div>
-														</div>
-														<div className='col-6'>
-															<div className='mb-3'>
-																<input type='email' className='form-control' id='exampleFormControlInput1' placeholder='name@example.com' />
-															</div>
-														</div>
-													</div>
-													<div className='mb-3 form-check'>
-														<input type='checkbox' className='form-check-input' id='exampleCheck1' />
-														<label className='form-check-label' htmlFor='exampleCheck1'>
-															Check me out
-														</label>
-													</div>
-													<button
-														onClick={() => {
-															if (!localStorage.getItem("token")) {
-																return navigate("/login");
-															} else {
-															}
-														}}
-														className='btn btn-primary'
-													>
-														Submit
-													</button>
+
+													<Review productID={product.result._id} />
 												</div>
 											</div>
 										</div>
@@ -393,25 +353,131 @@ export default function ProductDesply() {
 	);
 }
 
-const Rating = () => {
-	const [rating, setRating] = useState(0);
+const Review = ({productID}) => {
+	const navigate = useNavigate();
+	const [review, setReview] = useState({
+		rate: 0,
+		comment: "",
+		name: "",
+		email: "",
+		check: false,
+	});
 	return (
-		<ul className='d-flex p-0 '>
-			<li>
-				<i onClick={() => setRating(1)} className={`bi  ${rating >= 1 ? "bi-star-fill" : "bi-star"}`} style={{color: "rgba(255, 199, 0, 1)"}}></i>
-			</li>
-			<li>
-				<i onClick={() => setRating(2)} className={`bi  ${rating >= 2 ? "bi-star-fill" : "bi-star"}`} style={{color: "rgba(255, 199, 0, 1)"}}></i>
-			</li>
-			<li>
-				<i onClick={() => setRating(3)} className={`bi  ${rating >= 3 ? "bi-star-fill" : "bi-star"}`} style={{color: "rgba(255, 199, 0, 1)"}}></i>
-			</li>
-			<li>
-				<i onClick={() => setRating(4)} className={`bi  ${rating >= 4 ? "bi-star-fill" : "bi-star"}`} style={{color: "rgba(255, 199, 0, 1)"}}></i>
-			</li>
-			<li>
-				<i onClick={() => setRating(5)} className={`bi  ${rating >= 5 ? "bi-star-fill" : "bi-star"}`} style={{color: "rgba(255, 199, 0, 1)"}}></i>
-			</li>
-		</ul>
+		<>
+			<div className=''>
+				<h4>ADD A REVIEW</h4>
+				<small className='text-muted'>Your email address will not be published. Required fields are marked *</small>
+			</div>
+			<div className='mt-3'>
+				<small className='fs-6'>YOUR RATING *</small>
+				<ul className='d-flex p-0 '>
+					<li>
+						<i
+							onClick={() => setReview({...review, rate: 1})}
+							className={`bi  ${review.rate >= 1 ? "bi-star-fill" : "bi-star"}`}
+							style={{color: "rgba(255, 199, 0, 1)"}}
+						></i>
+					</li>
+					<li>
+						<i
+							onClick={() => setReview({...review, rate: 2})}
+							className={`bi  ${review.rate >= 2 ? "bi-star-fill" : "bi-star"}`}
+							style={{color: "rgba(255, 199, 0, 1)"}}
+						></i>
+					</li>
+					<li>
+						<i
+							onClick={() => setReview({...review, rate: 3})}
+							className={`bi  ${review.rate >= 3 ? "bi-star-fill" : "bi-star"}`}
+							style={{color: "rgba(255, 199, 0, 1)"}}
+						></i>
+					</li>
+					<li>
+						<i
+							onClick={() => setReview({...review, rate: 4})}
+							className={`bi  ${review.rate >= 4 ? "bi-star-fill" : "bi-star"}`}
+							style={{color: "rgba(255, 199, 0, 1)"}}
+						></i>
+					</li>
+					<li>
+						<i
+							onClick={() => setReview({...review, rate: 5})}
+							className={`bi  ${review.rate >= 5 ? "bi-star-fill" : "bi-star"}`}
+							style={{color: "rgba(255, 199, 0, 1)"}}
+						></i>
+					</li>
+				</ul>
+			</div>
+			<div className='form-floating '>
+				<textarea
+					onChange={(e) => setReview({...review, comment: e.target.value})}
+					className='form-control'
+					placeholder='Leave a comment here'
+					id='floatingTextarea'
+				></textarea>
+				<label htmlFor='floatingTextarea'>Your review</label>
+			</div>
+			<br />
+			<div className='row'>
+				<div className='col-6'>
+					<div className='mb-3'>
+						<input
+							onChange={(e) => setReview({...review, name: e.target.value})}
+							type='text'
+							className='form-control'
+							id='exampleFormControlInput1'
+							placeholder='Your Name'
+						/>
+					</div>
+				</div>
+				<div className='col-6'>
+					<div className='mb-3'>
+						<input
+							onChange={(e) => setReview({...review, email: e.target.value})}
+							type='email'
+							className='form-control'
+							id='exampleFormControlInput1'
+							placeholder='name@example.com'
+						/>
+					</div>
+				</div>
+			</div>
+			<div className='mb-3 form-check'>
+				<input onChange={(e) => setReview({...review, check: e.target.checked})} type='checkbox' className='form-check-input' id='exampleCheck1' />
+				<label className='form-check-label' htmlFor='exampleCheck1'>
+					Check me out
+				</label>
+			</div>
+			<button
+				onClick={async () => {
+					if (!localStorage.getItem("token")) {
+						return navigate("/login");
+					} else {
+						console.log(review);
+						try {
+							const response = await axios.post(
+								baseURL + "reviews",
+								{
+									comment: review.comment,
+									product: productID,
+									ratings: review.rate,
+								},
+								{
+									headers: {
+										token: localStorage.getItem("token"),
+									},
+								},
+							);
+							console.log("Review added:", response.data);
+						} catch (err) {
+							console.error("Error adding review:", err.message);
+						}
+					}
+				}}
+				className='btn btn-primary'
+			>
+				Submit
+			</button>
+		</>
 	);
 };
