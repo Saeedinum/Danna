@@ -1,4 +1,4 @@
-import {useState, useContext, useEffect} from "react";
+import {useState, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {baseURL} from "../../utils/baseURL";
@@ -10,13 +10,14 @@ import seller from "../../images/seller.png";
 
 import Carousel from "react-bootstrap/Carousel";
 import CardGroup from "react-bootstrap/CardGroup";
+import CategorySkeleton from "../skeleton/categorySkeleton";
+import ProductSkeleton from "../skeleton/productSkeleton";
 
 export default function ProductPage() {
 	const navigate = useNavigate();
 	const [categories, setCategories] = useState({
 		result: [],
 		error: "",
-		loading: "",
 	});
 
 	const [products, setProducts] = useState({
@@ -32,6 +33,10 @@ export default function ProductPage() {
 				setCategories(response.data);
 			})
 			.catch((error) => {
+				setCategories({
+					result: [],
+					error: "Error fetching categories",
+				});
 				console.error(error);
 			});
 	}, []);
@@ -44,6 +49,10 @@ export default function ProductPage() {
 				setProducts(response.data);
 			})
 			.catch((error) => {
+				setProducts({
+					result: [],
+					error: "Error fetching products",
+				});
 				console.error("There was an error fetching the products!", error);
 			});
 	};
@@ -62,6 +71,81 @@ export default function ProductPage() {
 			console.log("Product added to cart:", response.data);
 		} catch (err) {
 			console.error("Error adding product to cart:", err.message);
+		}
+	};
+
+	const addToFavorite = async (idProduct) => {
+		// !  Unauthorized
+		console.log("add   " + idProduct);
+		console.log(" token " + localStorage.getItem("token"));
+		try {
+			const response = await axios.patch(
+				baseURL + "wishlist",
+				{product: idProduct},
+				{
+					headers: {
+						token: localStorage.getItem("token") ?? navigate("/login"),
+					},
+				},
+			);
+			console.log("Product added to favorite:", response.data);
+		} catch (err) {
+			console.log(err.message);
+		}
+	};
+
+	const removeFromFavorite = async (idProduct) => {
+		// !  Unauthorized
+		console.log("remove from favorite " + idProduct);
+		console.log(" token " + localStorage.getItem("token"));
+		try {
+			const response = await axios.delete(baseURL + "wishlist", {
+				headers: {
+					token: localStorage.getItem("token") ?? navigate("/login"),
+				},
+				data: {product: idProduct}, // Add the data payload here
+			});
+			console.log("Product removed from favorite:", response.data);
+		} catch (err) {
+			console.error("❌Error removing product from favorite:", err.message);
+		}
+	};
+
+	const [favorites, setFavorites] = useState({});
+	useEffect(() => {
+		if (localStorage.getItem("token")) {
+			const fetchWishlist = async () => {
+				try {
+					const response = await axios.get(baseURL + "wishlist", {
+						headers: {
+							token: localStorage.getItem("token"),
+						},
+					});
+					console.log(response);
+					response.data.result.map((product) => {
+						setFavorites((prevFavorites) => ({
+							...prevFavorites,
+							[product._id]: true,
+						}));
+					});
+				} catch (err) {
+					console.log(err.message);
+				}
+			};
+			fetchWishlist();
+		}
+	}, []);
+
+	const toggleFavorite = (idProduct) => {
+		const isFavorite = favorites[idProduct];
+		setFavorites((prevFavorites) => ({
+			...prevFavorites,
+			[idProduct]: !isFavorite,
+		}));
+		if (isFavorite) {
+			removeFromFavorite(idProduct);
+		} else {
+			addToFavorite(idProduct);
 		}
 	};
 
@@ -87,7 +171,19 @@ export default function ProductPage() {
 										</div>
 									))
 								) : (
-									<p>Loading categories...</p>
+									<div
+										style={{
+											display: "flex",
+											justifyContent: "center",
+											alignItems: "center",
+										}}
+									>
+										<CategorySkeleton />
+										<CategorySkeleton />
+										<CategorySkeleton />
+										<CategorySkeleton />
+										<CategorySkeleton />
+									</div>
 								)}
 							</CardGroup>
 						</Carousel.Item>
@@ -201,12 +297,14 @@ export default function ProductPage() {
 					</div>
 					<div className='mt-5'>
 						<div className='row gy-4'>
-							{products ? (
+							{products.result.length > 0 ? (
 								products.result.map((product) => (
 									<div key={product._id} className='col-lg-3 col-md-6 col-sm-12'>
 										<div className='card p-4 rounded-4 text-center'>
 											<div className='position-absolute top-0 end-0 p-3'>
-												<i className='bi bi-heart-fill text-danger fs-5'></i>
+												<button onClick={() => toggleFavorite(product._id)} className='btn'>
+													<i className={`bi ${favorites[product._id] ? "bi-heart-fill" : "bi-heart"} text-danger fs-5`}></i>
+												</button>
 											</div>
 											<div className='text-center'>
 												<img src={product.imageCover.url} className='card-img-top w-50' alt={product.title} />
@@ -236,7 +334,19 @@ export default function ProductPage() {
 									</div>
 								))
 							) : (
-								<p>choose Categorie</p>
+								<div
+									style={{
+										display: "flex",
+										justifyContent: "center",
+										alignItems: "center",
+									}}
+								>
+									<ProductSkeleton />
+									<ProductSkeleton />
+									<ProductSkeleton />
+									<ProductSkeleton />
+									<ProductSkeleton />
+								</div>
 							)}
 						</div>
 					</div>
