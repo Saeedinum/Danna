@@ -129,7 +129,9 @@ const PaymentProduct = () => {
 									))}
 									<div className='d-flex p-2'>
 										<p className='fw-bold'>Total</p>
-										<small className='ms-auto fw-bold'>{cart.totalPrice}</small>
+										<small className='ms-auto fw-bold'>
+											{new Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(cart.totalPrice)}
+										</small>
 									</div>
 								</>
 							)}

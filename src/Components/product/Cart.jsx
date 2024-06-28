@@ -191,7 +191,7 @@ export default function Cart() {
 				<h3>Cart Totals</h3>
 				<div className='d-flex justify-content-between border-bottom mt-3'>
 					<h5>Total</h5>
-					<h5>${cart.totalPrice}</h5>
+					<h5>{new Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(cart.totalPrice)}</h5>
 				</div>
 				<button
 					className='p-2 fs-4 mt-4 text-white'
