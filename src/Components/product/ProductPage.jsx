@@ -3,10 +3,8 @@ import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {baseURL} from "../../utils/baseURL";
 
-// import categ1 from "../../images/toy.png";
 import categ2 from "../../images/toy2.png";
 import seller from "../../images/seller.png";
-// import toy from "../../images/toycateg.png";
 
 import Carousel from "react-bootstrap/Carousel";
 import CardGroup from "react-bootstrap/CardGroup";
@@ -61,7 +59,7 @@ export default function ProductPage() {
 		try {
 			const response = await axios.post(
 				baseURL + "carts",
-				{idProduct},
+				{product: idProduct},
 				{
 					headers: {
 						token: localStorage.getItem("token") ?? navigate("/login"),

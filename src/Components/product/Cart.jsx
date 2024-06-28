@@ -2,10 +2,7 @@ import {useState, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {baseURL} from "../../utils/baseURL";
-
-import img from "../../images/image 54.png";
-// import img2 from "../../images/image 44.png";
-// import img3 from "../../images/image 55.png";
+import CartSkeleton from "../skeleton/cartSkeleton";
 
 export default function Cart() {
 	const navigate = useNavigate();
@@ -15,51 +12,122 @@ export default function Cart() {
 		error: null,
 	});
 
-	useEffect(() => {
-		const fetchCart = async () => {
-			try {
-				console.log(localStorage.getItem("token"))
-				const response = await axios.get(baseURL + "carts", {
-					headers: {
-						token: localStorage.getItem("token") ?? navigate("/login"),
-						//! endpoint does not work ❌
-					},
-				});
-				console.log(response.data);
-				setState({
-					cart: response.data,
-					loading: false,
-					error: null,
-				});
-			} catch (err) {
-				setState({
-					cart: null,
-					loading: false,
-					error: err.message,
-				});
-			}
-		};
+	const fetchCart = async () => {
+		try {
+			const response = await axios.get(baseURL + "carts", {
+				headers: {
+					token: localStorage.getItem("token") ?? navigate("/login"),
+				},
+			});
+			setState({
+				cart: response.data.cart,
+				loading: false,
+				error: null,
+			});
+		} catch (err) {
+			setState({
+				cart: null,
+				loading: false,
+				error: err.message,
+			});
+		}
+	};
 
+	useEffect(() => {
 		fetchCart();
 	}, []);
 
 	const {cart, loading, error} = state;
+	if (loading || error) {
+		return (
+			<>
+				<div
+					style={{
+						marginLeft: "200px",
+					}}
+				>
+					<CartSkeleton />;
+				</div>
+			</>
+		);
+	}
 
-	const [count, Setcount] = useState(1);
+	const incrementItem = async (productID) => {
+		const item = state.cart.cartItems.find((item) => item.product._id === productID);
+		const newQuantity = item.quantity + 1;
+		try {
+			await axios.put(
+				baseURL + "carts/" + productID,
+				{
+					quantity: newQuantity,
+				},
+				{
+					headers: {
+						token: localStorage.getItem("token"),
+					},
+				},
+			);
+			setState((prevState) => ({
+				...prevState,
+				cart: {
+					...prevState.cart,
+					cartItems: prevState.cart.cartItems.map((item) => (item.product._id === productID ? {...item, quantity: newQuantity} : item)),
+				},
+			}));
+			await fetchCart();
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
-	function inc() {
-		Setcount(count + 1);
-	}
-	function dec() {
-		Setcount(count - 1);
-	}
-	if (loading) {
-		return <p>Loading cart...</p>;
-	}
+	const decrementItem = async (productID) => {
+		const item = state.cart.cartItems.find((item) => item.product._id === productID);
+		const newQuantity = item.quantity > 1 ? item.quantity - 1 : item.quantity;
+		if (newQuantity === item.quantity) return;
+		try {
+			await axios.put(
+				baseURL + "carts/" + productID,
+				{
+					quantity: newQuantity,
+				},
+				{
+					headers: {
+						token: localStorage.getItem("token"),
+					},
+				},
+			);
+			setState((prevState) => ({
+				...prevState,
+				cart: {
+					...prevState.cart,
+					cartItems: prevState.cart.cartItems.map((item) => (item.product._id === productID ? {...item, quantity: newQuantity} : item)),
+				},
+			}));
+			await fetchCart();
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
-	if (error) {
-		return <p>Error fetching cart: {error}</p>;
-	}
+	const removeItem = async (cartItemID) => {
+		try {
+			await axios.delete(baseURL + "carts/" + cartItemID, {
+				headers: {
+					token: localStorage.getItem("token"),
+				},
+			});
+			setState((prevState) => ({
+				...prevState,
+				cart: {
+					...prevState.cart,
+					cartItems: prevState.cart.cartItems.filter((item) => item._id !== cartItemID),
+				},
+			}));
+			await fetchCart();
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	return (
 		<div className='container'>
@@ -77,87 +145,53 @@ export default function Cart() {
 					<h5 style={{color: "rgba(0, 0, 0, 0.33)"}}>Total</h5>
 				</div>
 				<div className='product border-bottom'>
-					<div className='d-flex justify-content-between mb-4'>
-						<div className='div1'>
-							<div className='row'>
-								<div className='col-sm-8'>
-									<div className='d-flex text-center'>
-										<img src={img} alt='' className='w-25' />
-										<div className='mt-4 fs-6' style={{fontFamily: "PT Sans"}}>
-											<ul>
-												<li>Soft Rabbit Textile toy</li>
-												<li>$80.00</li>
-											</ul>
+					{cart.cartItems.map((item, index) => (
+						<div key={index} className='d-flex justify-content-between mb-4'>
+							<div className='div1'>
+								<div className='row'>
+									<div className='col-sm-8'>
+										<div className='d-flex text-center'>
+											<img src={item.product.imageCover.url} alt={item.product.title} className='w-25' />
+											<div className='mt-4 fs-6' style={{fontFamily: "PT Sans"}}>
+												<ul>
+													<li>{item.product.title}</li>
+													<li>{new Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(item.product.price)}</li>
+												</ul>
+											</div>
 										</div>
 									</div>
-								</div>
-								<div className='col-sm-4'>
-									<div className='d-flex mt-4 fs-6 gap-5 justify-content-center'>
-										<div className='d-flex gap-2 border' style={{fontFamily: "PT Sans"}}>
-											<button className='fs-4 ' onClick={dec}>
-												-
-											</button>
-											<h5 className='mt-2'> {count} </h5>
-											<button className='fs-4' onClick={inc}>
-												+
-											</button>
-										</div>
-										<div className='remove fs-4'>
-											<i className='bi bi-trash3-fill text-danger'></i>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div className='div2 mt-4 fs-6' style={{fontFamily: "PT Sans"}}>
-							{" "}
-							{count * 80}{" "}
-						</div>
-					</div>
-					<div className='d-flex justify-content-between mb-4'>
-						<div className='div1'>
-							<div className='row'>
-								<div className='col-sm-8'>
-									<div className='d-flex text-center'>
-										<img src={img} alt='' className='w-25' />
-										<div className='mt-4 fs-6' style={{fontFamily: "PT Sans"}}>
-											<ul>
-												<li>Soft Rabbit Textile toy</li>
-												<li>$80.00</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div className='col-sm-4'>
-									<div className='d-flex mt-4 fs-6 gap-5 justify-content-center'>
-										<div className='d-flex gap-2 border' style={{fontFamily: "PT Sans"}}>
-											<button className='fs-4 ' onClick={dec}>
-												-
-											</button>
-											<h5 className='mt-2'> {count} </h5>
-											<button className='fs-4' onClick={inc}>
-												+
-											</button>
-										</div>
-										<div className='remove fs-4'>
-											<i className='bi bi-trash3-fill text-danger'></i>
+									<div className='col-sm-4'>
+										<div className='d-flex mt-4 fs-6 gap-5 justify-content-center'>
+											<div className='d-flex gap-2 border' style={{fontFamily: "PT Sans"}}>
+												<button className='fs-4 ' onClick={() => decrementItem(item.product._id)}>
+													-
+												</button>
+												<h5 className='mt-2'>{item.quantity}</h5>
+												<button className='fs-4' onClick={() => incrementItem(item.product._id)}>
+													+
+												</button>
+											</div>
+											<div className='remove fs-4'>
+												<button onClick={() => removeItem(item._id)}>
+													<i className='bi bi-trash3-fill text-danger'></i>
+												</button>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
+							<div className='div2 mt-4 fs-6' style={{fontFamily: "PT Sans"}}>
+								{new Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(item.product.price * item.quantity)}
+							</div>
 						</div>
-						<div className='div2 mt-4 fs-6' style={{fontFamily: "PT Sans"}}>
-							{" "}
-							{count * 80}{" "}
-						</div>
-					</div>
+					))}
 				</div>
 			</div>
 			<div className='card border-0 w-50 mt-5 p-4'>
 				<h3>Cart Totals</h3>
 				<div className='d-flex justify-content-between border-bottom mt-3'>
 					<h5>Total</h5>
-					<h5>$500.00</h5>
+					<h5>${cart.totalPrice}</h5>
 				</div>
 				<button
 					className='p-2 fs-4 mt-4 text-white'
@@ -165,6 +199,7 @@ export default function Cart() {
 						fontFamily: "PT Sans",
 						backgroundColor: "#32AA90",
 					}}
+					onClick={() => navigate("/checkout")}
 				>
 					Checkout
 				</button>
