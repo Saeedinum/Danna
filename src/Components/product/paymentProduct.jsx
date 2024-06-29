@@ -37,6 +37,37 @@ const PaymentProduct = () => {
 		};
 		fetchData();
 	}, []);
+
+	const handlePlaceOrder = async (cashOrder) => {
+		const url = cashOrder ? `${baseURL}orders/checkout/${state.cart._id}` : `${baseURL}orders/${state.cart._id}`;
+		try {
+			const response = await axios.post(
+				url,
+				{
+					shippingAddress: {
+						firstName: "",
+						lastName: "",
+						country: "",
+						streetAddress: "",
+						city: "",
+						state: "",
+						phone: "",
+						email: "",
+						zip: "",
+					},
+				},
+				{
+					headers: {
+						token: localStorage.getItem("token") ?? navigate("/login"),
+					},
+				},
+			);
+			console.log("Order placed successfully:", response.data);
+		} catch (err) {
+			console.error("Error placing order:", err);
+		}
+	};
+
 	const {cart, loading, error} = state;
 	return (
 		<div>
