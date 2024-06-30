@@ -1,10 +1,9 @@
-import {Component} from "react";
-import vector from "../../images/AI IMG.png";
-import name from "../../images/Name.png";
-import repot from "../../images/rebot 1.png";
+import vector from "@images/AI IMG.png";
+import name from "@images/Name.png";
+import repot from "@images/rebot 1.png";
 import {Link} from "react-router-dom";
 
-export default function ChatBot() {
+const ChatBot = () => {
 	return (
 		<div className='chatbot p-2' style={{background: "#F5FAFF"}}>
 			<div className='container'>
@@ -46,4 +45,5 @@ export default function ChatBot() {
 			</div>
 		</div>
 	);
-}
+};
+export default ChatBot;

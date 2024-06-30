@@ -1,11 +1,9 @@
 import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
-import {baseURL} from "../../utils/baseURL";
+import {baseURL} from "@utils/baseURL";
 
-import Doctors1 from "../../images/Ellipse 1.png";
-
-export default function Doctors() {
+const Doctors = () => {
 	const [doctors, setDoctors] = useState([]);
 	useEffect(() => {
 		axios
@@ -77,4 +75,5 @@ export default function Doctors() {
 			</div>
 		</div>
 	);
-}
+};
+export default Doctors;

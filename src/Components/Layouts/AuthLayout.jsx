@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {Link, NavLink, Outlet} from "react-router-dom";
-import Logo from "../../images/LOGO 1.svg";
+import Logo from "@images/LOGO 1.svg";
 
 const throttle = (callback, delay) => {
 	let lastTime = 0;
@@ -13,7 +13,7 @@ const throttle = (callback, delay) => {
 	};
 };
 
-export default function AuthLayout() {
+const AuthLayout = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
 
 	useEffect(() => {
@@ -101,4 +101,5 @@ export default function AuthLayout() {
 			<Outlet />
 		</>
 	);
-}
+};
+export default AuthLayout;

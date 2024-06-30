@@ -1,8 +1,8 @@
 import {useState} from "react";
-import ch1 from "../../images/g.png";
-import ch2 from "../../images/d.png";
-import ch3 from "../../images/f.png";
-import ch4 from "../../images/Frame 3359.png";
+import ch1 from "@images/g.png";
+import ch2 from "@images/d.png";
+import ch3 from "@images/f.png";
+import ch4 from "@images/Frame 3359.png";
 
 export default function Book() {
 	const [sidebar, Setsidebar] = useState(false);

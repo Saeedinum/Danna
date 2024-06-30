@@ -1,13 +1,13 @@
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
-import "../../Styles/Signup.css";
-import logo from "../../images/LOGO 1.png";
-import img from "../../images/form-img 2.png";
 import axios from "axios";
-import {baseURL} from "../../utils/baseURL.js";
+import logo from "@images/LOGO 1.png";
+import img from "@images/form-img 2.png";
+import {baseURL} from "@utils/baseURL.js";
 import {useFormik} from "formik";
 import * as Yup from "yup";
+import "@Styles/Signup.css";
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -20,13 +20,13 @@ const Login = () => {
 
 	function sendDataToApi(values) {
 		setLoading(false);
-
 		axios
 			.post(baseURL + "users/login", values)
 			.then(({data}) => {
 				console.log(data);
 				if (data.message == "success") {
 					localStorage.setItem("token", data.token);
+					//@ need userID for articles
 					toast.success(`${data.message}`);
 					navigate("/");
 					setLoading(true);

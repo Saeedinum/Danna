@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
-import Logo from "../../images/LOGO 1.png";
+import Logo from "@images/LOGO 1.png";
 
-export default function footor() {
+const Footor = () => {
 	return (
 		<div className='footor shadow mt-5'>
 			<div className='container'>
@@ -90,7 +90,8 @@ export default function footor() {
 			</div>
 		</div>
 	);
-}
+};
+
 // import { Link } from "react-router-dom";
 // import style from "../../Styles/Navbar.module.css";
 // import main from "../../Styles/Footer.module.css";
@@ -292,5 +293,4 @@ export default function footor() {
 //   );
 
 // };
-
-// export default Footer;
+export default Footor;

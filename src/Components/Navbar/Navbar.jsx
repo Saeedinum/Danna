@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import {Link, NavLink} from "react-router-dom";
 
-import Logo from "../../images/LOGO 1.svg";
+import Logo from "@images/LOGO 1.svg";
 import "./Navbar.css";
 
 // Throttle function to limit the frequency of scroll event handling
@@ -16,7 +16,7 @@ const throttle = (callback, delay) => {
 	};
 };
 
-export default function Navbar() {
+const Navbar = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
 
 	useEffect(() => {
@@ -106,4 +106,5 @@ export default function Navbar() {
 			</nav>
 		</>
 	);
-}
+};
+export default Navbar;

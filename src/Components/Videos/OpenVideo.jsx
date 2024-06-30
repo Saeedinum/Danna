@@ -1,6 +1,4 @@
-import React from "react";
-
-export default function OpenVideo() {
+const OpenVideo = () => {
 	return (
 		<div>
 			<div className='container'>
@@ -16,4 +14,5 @@ export default function OpenVideo() {
 			</div>
 		</div>
 	);
-}
+};
+export default OpenVideo;

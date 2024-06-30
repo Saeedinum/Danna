@@ -1,10 +1,9 @@
-import imgcontact from "../../images/image 112.png";
-import union3 from "../../images/Union3.png";
-import union2 from "../../images/Union2.png";
-import union1 from "../../images/Union.png";
-// import {Form} from "react-bootstrap";
+import imgcontact from "@images/image 112.png";
+import union3 from "@images/Union3.png";
+import union2 from "@images/Union2.png";
+import union1 from "@images/Union.png";
 
-export default function ContactUs() {
+const ContactUs = () => {
 	return (
 		<div>
 			<div className='card' style={{width: "100%", border: "none"}}>
@@ -125,4 +124,5 @@ export default function ContactUs() {
 			</div>
 		</div>
 	);
-}
+};
+export default ContactUs;
