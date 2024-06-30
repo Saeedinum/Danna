@@ -1,14 +1,13 @@
 import {useState, useEffect, useRef} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
-import {baseURL} from "../../utils/baseURL";
+import {baseURL} from "@utils/baseURL";
 import {format, isToday, isYesterday, parseISO} from "date-fns";
 
-import Rectangle1 from "../../images/mother.jpg";
-import child from "../../images/card.jpg";
-import Ellipse from "../../images/child.png";
-import Rectangle4 from "../../images/mot.jpg";
-import comme from "../../images/Ellipse 36.png";
+import Rectangle1 from "@images/mother.jpg";
+import Ellipse from "@images/child.png";
+import Rectangle4 from "@images/mot.jpg";
+import comme from "@images/Ellipse 36.png";
 
 import {
 	FacebookShareButton,
@@ -147,23 +146,25 @@ const Articles = () => {
 								<h4 className='text-center fw-bold'>Most Popular</h4>
 								<div className='baby_card mt-1'>
 									{popularArticles.popularArticles.map((article) => (
-										<div className='card mb-3 shadow border-top border-3 border-warning rounded-3 border-0 bg-white p-2' style={{borderTop: ""}}>
-											<div className='row'>
-												<div className='d-flex'>
-													<div className='col-md-4' style={{width: "40%"}}>
-														<img src={article.articleCover.url} alt={article.title} />
-													</div>
-													<div className='col-md-8'>
-														<div className='card-body'>
-															<h5 className='card-title text-primary'>{article.title}</h5>
+										<Link key={article._id} to={`/articleDetails/${article._id}`}>
+											<div className='card mb-3 shadow border-top border-3 border-warning rounded-3 border-0 bg-white p-2' style={{borderTop: ""}}>
+												<div className='row'>
+													<div className='d-flex'>
+														<div className='col-md-4' style={{width: "40%"}}>
+															<img src={article.articleCover.url} alt={article.title} />
 														</div>
+														<div className='col-md-8'>
+															<div className='card-body'>
+																<h5 className='card-title text-primary'>{article.title}</h5>
+															</div>
+														</div>
+														{/* style */}
+														{article.likes}
+														{article.comments}
 													</div>
-													{/* style */}
-													{article.likes}
-													{article.comments}
 												</div>
 											</div>
-										</div>
+										</Link>
 									))}
 								</div>
 							</div>
@@ -277,8 +278,8 @@ const Article = ({article}) => {
 			<div key={article._id} className='col-lg-6 col-sm-12'>
 				{
 					<div className='card border-0 box shadow rounded-3'>
-						<Link to={`/artdet/${article?._id}`}>
-							<img src={child} className='card-img-top' alt='...' />
+						<Link to={`/articleDetails/${article?._id}`}>
+							<img src={article?.articleCover.url} className='card-img-top' alt={article?.title} />
 							<div className='card-body content text-dark'>
 								<h5 className='card-title'>{article?.title} </h5>
 								<p className='card-text'>{article?.description.slice(0, 200)}...</p>
