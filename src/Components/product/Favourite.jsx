@@ -3,7 +3,6 @@ import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {baseURL} from "../../utils/baseURL";
 
-import toy from "../../images/toycateg.png";
 
 export default function Favourite() {
 	const navigate = useNavigate();
@@ -23,7 +22,7 @@ export default function Favourite() {
 				});
 				console.log(response.data);
 				setState({
-					favourite: response.data,
+					favourite: response.data.result,
 					loading: false,
 					error: null,
 				});
@@ -38,12 +37,12 @@ export default function Favourite() {
 
 		fetchWishlist();
 	}, []);
-
+	console.log(state.favourite);
 	const addToCart = async (idProduct) => {
 		try {
 			const response = await axios.post(
 				baseURL + "carts",
-				{idProduct},
+				{product: idProduct},
 				{
 					headers: {
 						token: localStorage.getItem("token") ?? navigate("/login"),
@@ -58,16 +57,12 @@ export default function Favourite() {
 
 	const removeFromWishlist = async (idProduct) => {
 		try {
-			const response = await axios.delete(
-				//! waiting for fake data to be added in whishlist ❌
-				baseURL + "wishlist",
-				{idProduct},
-				{
-					headers: {
-						token: localStorage.getItem("token") ?? navigate("/login"),
-					},
+			const response = await axios.delete(baseURL + "wishlist", {
+				headers: {
+					token: localStorage.getItem("token") ?? navigate("/login"),
 				},
-			);
+				data: {product: idProduct}, // Add the data payload here
+			});
 			console.log("Product removed from wishlist:", response.data);
 			setState((prevState) => ({
 				...prevState,
@@ -90,29 +85,28 @@ export default function Favourite() {
 			</div>
 			<div className='mt-5'>
 				<div className='row gy-4'>
-					{
-						//! waiting for fake data to be added in whishlist ❌
-						<div className='col-lg-3 col-md-6 col-sm-12'>
+					{state.favourite.map((item) => (
+						<div key={item.id} className='col-lg-3 col-md-6 col-sm-12'>
 							<div className='card p-4 rounded-4 text-center'>
-								<div className='position-absolute top-0 end-0 p-3'>
+								<div style={{cursor: "pointer"}} onClick={() => removeFromWishlist(item.id)} className='position-absolute top-0 end-0 p-3'>
 									<i className='bi bi-x-lg'></i>
 								</div>
 								<div className='text-center'>
-									<img src={toy} className='card-img-top w-50' alt='...' />
+									<img src={item.imageCover.url} className='card-img-top w-50' alt='...' />
 								</div>
 								<div className='card-body'>
-									<p className='card-text'>Toys</p>
-									<h5 className='card-title fw-bold'>Girls Milk Bottles</h5>
+									<p className='card-text'>{item.category.name}</p>
+									<h5 className='card-title fw-bold'>{item.title}</h5>
 									<div className='d-flex justify-content-center gap-3'>
-										<del>$280.00</del>
-										<p className='card-text'>$80.00</p>
+										<del>{item?.price ? new Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(item?.price) : ""}</del>
+										<p className='card-text'>{new Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(item?.finalPrice)}</p>
 									</div>
 								</div>
 								<Link>
 									<button
 										onClick={() => {
-											addToCart("idProduct");
-											removeFromWishlist("idProduct");
+											addToCart(item.id);
+											removeFromWishlist(item.id);
 										}}
 										className='w-100 rounded-3 p-2 text-white'
 										style={{backgroundColor: "#32AA90"}}
@@ -122,7 +116,7 @@ export default function Favourite() {
 								</Link>
 							</div>
 						</div>
-					}
+					))}
 				</div>
 			</div>
 		</div>
