@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import img from "../../images/image 21.png";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.module.css";
-// npm i react-datepicker
-export default function Payment() {
+import img from "@images/image 21.png";
+
+const Payment = () => {
 	const [Dateobj, setDateobj] = useState(null);
 	const [DatSav, setDateSav] = useState(null);
 	const handleDate = (dt) => {
@@ -75,4 +75,5 @@ export default function Payment() {
 			</div>
 		</div>
 	);
-}
+};
+export default Payment;

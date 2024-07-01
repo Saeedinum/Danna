@@ -1,10 +1,10 @@
 import {useState, useEffect, useRef} from "react";
 import {useParams, useNavigate} from "react-router-dom";
 import axios from "axios";
-import {baseURL} from "../../utils/baseURL";
-import jir from "../../images/JIRAFF.png";
-import user from "../../images/user.jpg";
-import {ImageCoverSkeleton, SideImagesSkeleton, TitleSkeleton, DescriptionSkeleton} from "../skeleton/productDesplay";
+import {baseURL} from "@utils/baseURL";
+import jir from "@images/JIRAFF.png";
+import user from "@images/user.jpg";
+import {ImageCoverSkeleton, SideImagesSkeleton, TitleSkeleton, DescriptionSkeleton} from "@skeleton/productDesplay";
 
 export default function ProductDesply() {
 	const navigate = useNavigate();

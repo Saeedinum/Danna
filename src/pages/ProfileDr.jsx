@@ -1,12 +1,12 @@
-import {Component, useState} from "react";
+import {useState} from "react";
 import {Dialog} from "primereact/dialog";
 import {InputText} from "primereact/inputtext";
 import {Button} from "primereact/button";
-import Ellipse from "../../images/profile.png";
-import "../../Styles/ProfileDr.css";
+import Ellipse from "@images/profile.png";
+import "@styles/ProfileDr.css";
 import Avatar from "react-avatar-edit";
 
-export default function ProfileDr() {
+const ProfileDr = () => {
 	const [image, setimage] = useState("");
 	const [imageCrop, setimageCrop] = useState("");
 	const [src, setsrc] = useState(false);
@@ -215,6 +215,6 @@ export default function ProfileDr() {
 			</div>
 		</div>
 	);
-}
+};
 
-//   npm i react-avatar-edit
+export default ProfileDr;

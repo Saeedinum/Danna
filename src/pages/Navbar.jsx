@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import {Link, NavLink} from "react-router-dom";
 
 import Logo from "@images/LOGO 1.svg";
-import "./Navbar.css";
+import "@styles/Navbar.css";
 
 // Throttle function to limit the frequency of scroll event handling
 const throttle = (callback, delay) => {

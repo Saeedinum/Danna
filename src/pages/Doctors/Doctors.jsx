@@ -9,7 +9,6 @@ const Doctors = () => {
 		axios
 			.get(baseURL + "doctors")
 			.then((response) => {
-				//! no endpoint for doctors
 				setDoctors(response.data);
 			})
 			.catch((error) => {

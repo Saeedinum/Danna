@@ -21,7 +21,7 @@ import babyvedio1 from "@images/Rectangle 23.png";
 import imgchat from "@images/Componentchat.png";
 import app from "@images/pre-footer_05 1.png";
 
-import "@Styles/Home.css";
+import "@styles/Home.css";
 const Home = () => {
 	return (
 		<div className='home'>

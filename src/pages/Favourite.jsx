@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
-import {baseURL} from "../../utils/baseURL";
+import {baseURL} from "@utils/baseURL";
 
 
 export default function Favourite() {

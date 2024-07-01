@@ -1,17 +1,15 @@
 import {useEffect, useState} from "react";
-import {Link, Navigate, useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
-import "../../Styles/Signup.css";
-import logo from "../../images/LOGO 1.png";
-import img from "../../images/form-img 2.png";
+import "@styles/Signup.css";
+import logo from "@images/LOGO 1.png";
+import img from "@images/form-img 2.png";
 import axios from "axios";
-import {baseURL} from "../../utils/baseURL.js";
+import {baseURL} from "@utils/baseURL.js";
 import {useFormik} from "formik";
 import * as Yup from "yup";
 import {jwtDecode} from "jwt-decode";
 
 const UpdateProfile = () => {
-	const navigate = useNavigate();
 	const [loading, setLoading] = useState(true);
 	const [id, setId] = useState("");
 
@@ -22,7 +20,6 @@ const UpdateProfile = () => {
 			console.log(decoded);
 			setId(decoded.userId);
 		} catch (error) {
-			// console.log(error);
 		}
 	}, []);
 

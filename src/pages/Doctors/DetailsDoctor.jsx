@@ -7,7 +7,7 @@ import {baseURL} from "@utils/baseURL";
 import Doc from "@images/Rectangle 93.png";
 import viza from "@images/image 18.png";
 
-import "./DetailsDoctor.css";
+import "@styles/DetailsDoctor.css";
 
 const DetailsDoctor = () => {
 	const {doctorID} = useParams();

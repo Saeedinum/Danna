@@ -1,10 +1,11 @@
-import {Component, useState} from "react";
-import post from "../../images/Name.png";
-import rect from "../../images/photo_4_2024-02-13_23-29-14.jpg";
-import comme from "../../images/Ellipse 36.png";
-import doc from "../../images/photo_2024-03-16_01-05-58.jpg";
+import {useState} from "react";
+import post from "@images/Name.png";
+import rect from "@images/photo_4_2024-02-13_23-29-14.jpg";
+import comme from "@images/Ellipse 36.png";
+import doc from "@images/photo_2024-03-16_01-05-58.jpg";
 import {Link} from "react-router-dom";
-export default function Questions() {
+
+const Questions = () => {
 	// const [show,setShow]=useState(false);
 	const [like, setLike] = useState(21),
 		[isLike, setIsLike] = useState(false);
@@ -27,61 +28,75 @@ export default function Questions() {
 				<div className='row'>
 					<div className='col-sm-8'>
 						<div className='posts'>
-							<div className='bg-white p-3 mt-3 rounded border-0'>
-								<div className='d-flex' type='button'>
-									<div className='p-1'>
-										<img src={post} alt='avatar' className='rounded-circle me-2' />
-									</div>
-									<input
-										type='text'
-										className='form-control rounded-pill bg-gray w-100'
-										placeholder='what is on your mind ...?'
-										data-bs-toggle='modal'
-										data-bs-target='#createModal'
-									/>
-								</div>
-								{/* post */}
-								<div className='modal fade' id='createModal' tabindex='-1' aria-labelledby='createModalLabel' aria-hidden='true' data-bs-backdrop='false'>
-									<div className='modal-dialog modal-dialog-centered'>
-										<div className='modal-content'>
-											<div className='modal-header align-items-center'>
-												<h5 className='text-dark text-center w-100 m-0' id='exampleModalLabel'>
-													Create Post
-												</h5>
-												<button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-											</div>
-											<div className='modal-body'>
-												<div className='my-1 p-1'>
-													<div className='d-flex flex-column'>
-														<div className='d-flex align-items-center'>
-															<div className='p-2'>
-																<img src={post} alt='avatar' className='rounded-circle' />
-															</div>
-															<div>
-																<p className='m-0 fw-bold'>nada</p>
-															</div>
-														</div>
-														<div>
-															<textarea id='' cols='30' rows='5' className='form-control '></textarea>
-														</div>
-														<div className='d-flex justify-content-between border-0 border-light rounded p-3 mt-3'>
-															<p className='m-0'>Add to your post</p>
-															<div className='d-flex gap-2'>
-																<i className='bi bi-aspect-ratio-fill text-success'></i>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div className='modal-footer'>
-												<button type='button' className='btn btn-success w-100'>
-													Post
-												</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+							{/* <div className="bg-white p-3 mt-3 rounded border-0">
+                    <div className="d-flex" type='button'>
+                        <div className="p-1">
+                            <img src={post} alt="avatar" className='rounded-circle me-2' />
+                        </div>
+                        <input type='text' className='form-control rounded-pill bg-gray w-100' placeholder='what is on your mind ...?'  data-bs-toggle="modal" data-bs-target="#createModal" />
+                    </div>
+                    <div className="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true" data-bs-backdrop="false">
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                        <div className="modal-header align-items-center">
+                            <h5 className="text-dark text-center w-100 m-0" id="exampleModalLabel">Create Post</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <div className="my-1 p-1">
+                                <div className="d-flex flex-column">
+                                    <div className="d-flex align-items-center">
+                                        <div className="p-2">
+                                            <img src={post} alt="avatar" className='rounded-circle' />
+                                        </div>
+                                        <div>
+                                            <p className="m-0 fw-bold">nada</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <textarea id="" cols="30" rows="5" className='form-control '></textarea>
+                                    </div>
+                                    <div className="d-flex align-items-center justify-content-between">
+                                        <i className="bi bi-emoji-laughing text-muted" type="button"></i>
+                                    </div>
+                                    <div className="d-flex justify-content-between border-0 border-light rounded p-3 mt-3">
+                                        <p className="m-0">Add to your post</p>
+                                        <div className='d-flex gap-2'>
+                                        <i className="bi bi-aspect-ratio-fill text-success"></i>
+                                        <i className="bi bi-emoji-laughing text-warning"></i>
+                                        <i className="bi bi-emoji-laughing text-primary"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-success w-100">Post</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div className="row mt-2">
+                    <div className="col">
+                        <div className="d-flex align-items-center justify-content-center rounded dropdown-item gap-2" type="button">
+                            <i className="bi bi-aspect-ratio-fill text-success fs-4"></i>
+                            <p className="m-0 text-muted fs-5">Media</p>
+                        </div>
+                    </div>
+                    <div className="col">
+                    <div className="d-flex align-items-center justify-content-center rounded dropdown-item gap-2" type="button">
+                            <i className="bi bi-threads text-primary fs-4"></i>
+                            <p className="m-0 text-muted fs-5">Tag</p>
+                        </div>
+                    </div>
+                    <div className="col">
+                    <div className="d-flex align-items-center justify-content-center rounded dropdown-item gap-2" type="button">
+                            <i className="bi bi-emoji-laughing text-warning fs-4"></i>
+                            <p className="m-0 text-muted fs-5">Feeling</p>
+                        </div>
+                    </div>
+                    </div>
+                </div> */}
 							<div className='bg-white p-4 rounded shaddow mt-3'>
 								<div className='d-flex justify-content-between'>
 									<div className='d-flex'>
@@ -92,17 +107,15 @@ export default function Questions() {
 										</div>
 									</div>
 								</div>
-								<Link to={`/QuestionDet`}>
-									<div className='mt-3'>
-										<div>
-											<p className='text-dark'>
-												Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis expedita omnis saepe quod corporis alias velit dolorum
-												voluptate aut tenetur! Tempora facere amet ratione eaque numquam! Aspernatur nisi modi impedit!
-											</p>
-											<img src={rect} alt='post image' className='img-fluid w-100 ' />
-										</div>
+								<div className='mt-3'>
+									<div>
+										<p>
+											Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis expedita omnis saepe quod corporis alias velit dolorum
+											voluptate aut tenetur! Tempora facere amet ratione eaque numquam! Aspernatur nisi modi impedit!
+										</p>
+										<img src={rect} alt='post image' className='img-fluid w-100 ' />
 									</div>
-								</Link>
+								</div>
 								<div className='card mt-3 border-0' style={{background: "rgba(186, 217, 250, 1)"}}>
 									<div className='container'>
 										<div className='d-flex'>
@@ -222,7 +235,13 @@ export default function Questions() {
 														<p className='m-0 fw-bold'>Posts Rate</p>
 														<span className='text-muted'>+500</span>
 														<div className='progress mt-2'>
-															<div className='progress-bar bg-warning w-50' role='progressbar' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100'>
+															<div
+																className='progress-bar bg-warning w-50'
+																role='progressbar'
+																aria-valuenow='25'
+																aria-valuemin='0'
+																aria-valuemax='100'
+															>
 																50%
 															</div>
 														</div>
@@ -242,7 +261,13 @@ export default function Questions() {
 														<p className='m-0 fw-bold'>Posts Rate</p>
 														<span className='text-muted'>+2000</span>
 														<div className='progress mt-2'>
-															<div className='progress-bar bg-success w-75' role='progressbar' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100'>
+															<div
+																className='progress-bar bg-success w-75'
+																role='progressbar'
+																aria-valuenow='25'
+																aria-valuemin='0'
+																aria-valuemax='100'
+															>
 																75%
 															</div>
 														</div>
@@ -269,4 +294,5 @@ export default function Questions() {
 			</div>
 		</div>
 	);
-}
+};
+export default Questions;
