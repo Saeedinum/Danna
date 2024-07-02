@@ -45,13 +45,15 @@ export default function ProductDesply() {
 
 	useEffect(() => {
 		try {
-			const response = axios.get(baseURL + "wishlist", {
-				headers: {
-					token: localStorage.getItem("token"),
-				},
-			});
-			const wishlist = response.data.result;
-			setIsInWishlist(wishlist.some((item) => item._id === productId));
+			if (localStorage.getItem("token")) {
+				const response = axios.get(baseURL + "wishlist", {
+					headers: {
+						token: localStorage.getItem("token"),
+					},
+				});
+				const wishlist = response.data.result;
+				setIsInWishlist(wishlist.some((item) => item._id === productId));
+			}
 		} catch (error) {
 			console.error("Error checking wishlist status:", error);
 		}
@@ -97,7 +99,7 @@ export default function ProductDesply() {
 		try {
 			const response = await axios.post(
 				baseURL + "carts",
-				{product: idProduct, quantity: quantity},
+				{product: idProduct, quantity: +quantity},
 				{
 					headers: {
 						token: localStorage.getItem("token") ?? navigate("/login"),
