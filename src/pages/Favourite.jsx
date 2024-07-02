@@ -3,7 +3,6 @@ import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {baseURL} from "@utils/baseURL";
 
-
 export default function Favourite() {
 	const navigate = useNavigate();
 	const [state, setState] = useState({
@@ -61,7 +60,7 @@ export default function Favourite() {
 				headers: {
 					token: localStorage.getItem("token") ?? navigate("/login"),
 				},
-				data: {product: idProduct}, // Add the data payload here
+				data: {product: idProduct},
 			});
 			console.log("Product removed from wishlist:", response.data);
 			setState((prevState) => ({
@@ -85,18 +84,18 @@ export default function Favourite() {
 			</div>
 			<div className='mt-5'>
 				<div className='row gy-4'>
-					{state.favourite.map((item) => (
-						<div key={item.id} className='col-lg-3 col-md-6 col-sm-12'>
+					{state?.favourite?.map((item) => (
+						<div key={item?.id} className='col-lg-3 col-md-6 col-sm-12'>
 							<div className='card p-4 rounded-4 text-center'>
-								<div style={{cursor: "pointer"}} onClick={() => removeFromWishlist(item.id)} className='position-absolute top-0 end-0 p-3'>
+								<div style={{cursor: "pointer"}} onClick={() => removeFromWishlist(item?.id)} className='position-absolute top-0 end-0 p-3'>
 									<i className='bi bi-x-lg'></i>
 								</div>
 								<div className='text-center'>
-									<img src={item.imageCover.url} className='card-img-top w-50' alt='...' />
+									<img src={item?.imageCover?.url} className='card-img-top w-50' alt='...' />
 								</div>
 								<div className='card-body'>
-									<p className='card-text'>{item.category.name}</p>
-									<h5 className='card-title fw-bold'>{item.title}</h5>
+									<p className='card-text'>{item?.category?.name}</p>
+									<h5 className='card-title fw-bold'>{item?.title}</h5>
 									<div className='d-flex justify-content-center gap-3'>
 										<del>{item?.price ? new Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(item?.price) : ""}</del>
 										<p className='card-text'>{new Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(item?.finalPrice)}</p>
@@ -105,8 +104,8 @@ export default function Favourite() {
 								<Link>
 									<button
 										onClick={() => {
-											addToCart(item.id);
-											removeFromWishlist(item.id);
+											addToCart(item?.id);
+											removeFromWishlist(item?.id);
 										}}
 										className='w-100 rounded-3 p-2 text-white'
 										style={{backgroundColor: "#32AA90"}}
