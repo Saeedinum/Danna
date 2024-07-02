@@ -3,6 +3,8 @@ import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {baseURL} from "@utils/baseURL";
 import ProductSkeleton from "@skeleton/productSkeleton";
+import Lottie from "lottie-react";
+import empty from "@lottie/empty.json";
 
 export default function Favourite() {
 	const navigate = useNavigate();
@@ -73,6 +75,34 @@ export default function Favourite() {
 		}
 	};
 
+	if (state.favourite.length === 0 && !state.loading && !state.error) {
+		return (
+			<>
+				<div style={{display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", gap: "100px", height: "50vh"}}>
+					<Lottie animationData={empty} style={{width: "20%", height: "60%"}} />
+					<div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", marginTop: "0px", height: "100vh"}}>
+						<h2 style={{fontFamily: "PT Sans", color: "#555"}}>Your favourite is empty, add some products</h2>
+						<Link to={`/productpage`} style={{marginTop: "10px", textDecoration: "none"}}>
+							<button
+								style={{
+									padding: "10px 20px",
+									fontSize: "16px",
+									color: "white",
+									backgroundColor: "#32AA90",
+									border: "none",
+									borderRadius: "5px",
+									cursor: "pointer",
+									marginTop: "10px",
+								}}
+							>
+								Go to Products
+							</button>
+						</Link>
+					</div>
+				</div>
+			</>
+		);
+	}
 	return (
 		<div className='container'>
 			<div className='d-flex justify-content-between mt-2 border-bottom'>
