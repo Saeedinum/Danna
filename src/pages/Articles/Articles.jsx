@@ -78,7 +78,7 @@ const Articles = () => {
 	useEffect(() => {
 		fetchPopularArticles();
 		fetchArticles();
-	}, []);
+	});
 
 	return (
 		<div className='articles' style={{fontFamily: "Amaranth"}}>
@@ -196,7 +196,7 @@ const CommentComponent = ({articleComments, articleID}) => {
 			return;
 		}
 		try {
-			const response = await axios.post(
+			axios.post(
 				baseURL + "article-comments",
 				{
 					comment: comment,
@@ -209,9 +209,7 @@ const CommentComponent = ({articleComments, articleID}) => {
 				},
 			);
 			setComment("");
-		} catch (err) {
-			console.error(err);
-		}
+		} catch (err) {}
 	};
 
 	return (
@@ -331,17 +329,14 @@ const Article = ({article}) => {
 												try {
 													const method = like ? "DELETE" : "PATCH";
 													const url = `${baseURL}articles/likes/${article._id}`;
-													const response = await axios({
+													axios({
 														method: method,
 														url: url,
 														headers: {
 															token: localStorage.getItem("token") ?? navigate("/login"),
 														},
 													});
-													console.log(response);
-												} catch (err) {
-													console.error(err);
-												}
+												} catch (err) {}
 											}}
 										></i>
 									</li>

@@ -40,7 +40,6 @@ const Videos = () => {
 				}));
 			}
 			setVideo(selectedVideo);
-			console.log(selectedVideo);
 		} catch (err) {
 			setVideos({
 				videos: [],

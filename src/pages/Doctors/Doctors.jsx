@@ -11,10 +11,8 @@ const Doctors = () => {
 			.then((response) => {
 				setDoctors(response.data);
 			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, []);
+			.catch((error) => {});
+	});
 
 	return (
 		<div>

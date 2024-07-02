@@ -23,7 +23,6 @@ const Login = () => {
 		axios
 			.post(baseURL + "users/login", values)
 			.then(({data}) => {
-				console.log(data);
 				if (data.message == "success") {
 					localStorage.setItem("token", data.token);
 					//@ need userID for articles
@@ -38,7 +37,6 @@ const Login = () => {
 				}
 			})
 			.catch((err) => {
-				console.log(err);
 				setLoading(true);
 				toast.error(`${err.response?.data.message}`, {
 					position: "bottom-center",

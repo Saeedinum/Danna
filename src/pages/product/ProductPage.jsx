@@ -35,12 +35,10 @@ export default function ProductPage() {
 					result: [],
 					error: "Error fetching categories",
 				});
-				console.error(error);
 			});
-	}, []);
+	});
 
 	const fetchProductsByCategory = (categoryId) => {
-		console.log(categoryId);
 		axios
 			.get(`${baseURL}products?category=${categoryId}`)
 			.then((response) => {
@@ -51,13 +49,12 @@ export default function ProductPage() {
 					result: [],
 					error: "Error fetching products",
 				});
-				console.error("There was an error fetching the products!", error);
 			});
 	};
 
 	const addToCart = async (idProduct) => {
 		try {
-			const response = await axios.post(
+			axios.post(
 				baseURL + "carts",
 				{product: idProduct},
 				{
@@ -66,10 +63,7 @@ export default function ProductPage() {
 					},
 				},
 			);
-			console.log("Product added to cart:", response.data);
-		} catch (err) {
-			console.error("Error adding product to cart:", err.message);
-		}
+		} catch (err) {}
 	};
 
 	const [favorites, setFavorites] = useState({});
@@ -82,20 +76,17 @@ export default function ProductPage() {
 							token: localStorage.getItem("token"),
 						},
 					});
-					console.log(response);
 					response.data.result.map((product) => {
 						setFavorites((prevFavorites) => ({
 							...prevFavorites,
 							[product._id]: true,
 						}));
 					});
-				} catch (err) {
-					console.log(err.message);
-				}
+				} catch (err) {}
 			};
 			fetchWishlist();
 		}
-	}, []);
+	});
 
 	const toggleFavorite = async (idProduct) => {
 		const isFavorite = favorites[idProduct];
@@ -104,24 +95,17 @@ export default function ProductPage() {
 			[idProduct]: !isFavorite,
 		}));
 		if (isFavorite) {
-			console.log("remove from favorite " + idProduct);
-			console.log(" token " + localStorage.getItem("token"));
 			try {
-				const response = await axios.delete(baseURL + "wishlist", {
+				axios.delete(baseURL + "wishlist", {
 					headers: {
 						token: localStorage.getItem("token") ?? navigate("/login"),
 					},
 					data: {product: idProduct}, // Add the data payload here
 				});
-				console.log("Product removed from favorite:", response.data);
-			} catch (err) {
-				console.error("❌Error removing product from favorite:", err.message);
-			}
+			} catch (err) {}
 		} else {
-			console.log("add   " + idProduct);
-			console.log(" token " + localStorage.getItem("token"));
 			try {
-				const response = await axios.patch(
+				axios.patch(
 					baseURL + "wishlist",
 					{product: idProduct},
 					{
@@ -130,10 +114,7 @@ export default function ProductPage() {
 						},
 					},
 				);
-				console.log("Product added to favorite:", response.data);
-			} catch (err) {
-				console.log(err.message);
-			}
+			} catch (err) {}
 		}
 	};
 
@@ -151,7 +132,7 @@ export default function ProductPage() {
 							<CardGroup>
 								{categories.result.length > 0 ? (
 									categories.result.map((categori) => (
-										<div className='card p-2 text-center border-0' key={categori._id} onClick={() => fetchProductsByCategory(categori._id)}>
+										<div key={categori._id} className='card p-2 text-center border-0' onClick={() => fetchProductsByCategory(categori._id)}>
 											<img src={categori.image.url} style={{width: "100px"}} className='card-img-top rounded-circle ms-4' alt={categori.title} />
 											<div className='card-body'>
 												<h5 className='card-title'>{categori.title}</h5>

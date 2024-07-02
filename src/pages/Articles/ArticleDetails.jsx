@@ -17,11 +17,8 @@ const ArticleDetails = () => {
 	const fetchArticle = async () => {
 		try {
 			const response = await axios.get(baseURL + "articles/" + id);
-			console.log(response.data);
 			setArticle(response.data.result);
-		} catch (err) {
-			console.log(err);
-		}
+		} catch (err) {}
 	};
 
 	const fetchPopularArticles = async () => {

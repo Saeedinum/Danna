@@ -22,7 +22,6 @@ export default function Favourite() {
 						token: localStorage.getItem("token") ?? navigate("/login"),
 					},
 				});
-				console.log(response.data);
 				setState({
 					favourite: response.data.result,
 					loading: false,
@@ -38,11 +37,10 @@ export default function Favourite() {
 		};
 
 		fetchWishlist();
-	}, []);
-	console.log(state.favourite);
+	});
 	const addToCart = async (idProduct) => {
 		try {
-			const response = await axios.post(
+			axios.post(
 				baseURL + "carts",
 				{product: idProduct},
 				{
@@ -51,28 +49,22 @@ export default function Favourite() {
 					},
 				},
 			);
-			console.log("Product added to cart:", response.data);
-		} catch (err) {
-			console.error("Error adding product to cart:", err.message);
-		}
+		} catch (err) {}
 	};
 
 	const removeFromWishlist = async (idProduct) => {
 		try {
-			const response = await axios.delete(baseURL + "wishlist", {
+			axios.delete(baseURL + "wishlist", {
 				headers: {
 					token: localStorage.getItem("token") ?? navigate("/login"),
 				},
 				data: {product: idProduct},
 			});
-			console.log("Product removed from wishlist:", response.data);
 			setState((prevState) => ({
 				...prevState,
 				favourite: prevState.favourite.filter((item) => item.id !== idProduct),
 			}));
-		} catch (err) {
-			console.error("Error removing product from wishlist:", err.message);
-		}
+		} catch (err) {}
 	};
 
 	if (state.favourite.length === 0 && !state.loading && !state.error) {

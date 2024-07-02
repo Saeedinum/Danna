@@ -37,7 +37,7 @@ export default function Cart() {
 
 	useEffect(() => {
 		fetchCart();
-	}, []);
+	});
 
 	const {cart, loading, error} = state;
 	if (loading || error) {
@@ -58,7 +58,7 @@ export default function Cart() {
 		const item = state.cart.cartItems.find((item) => item.product._id === productID);
 		const newQuantity = item.quantity + 1;
 		try {
-			await axios.put(
+			axios.put(
 				baseURL + "carts/" + productID,
 				{
 					quantity: newQuantity,
@@ -77,9 +77,7 @@ export default function Cart() {
 				},
 			}));
 			await fetchCart();
-		} catch (err) {
-			console.log(err);
-		}
+		} catch (err) {}
 	};
 
 	const decrementItem = async (productID) => {
@@ -87,7 +85,7 @@ export default function Cart() {
 		const newQuantity = item.quantity > 1 ? item.quantity - 1 : item.quantity;
 		if (newQuantity === item.quantity) return;
 		try {
-			await axios.put(
+			axios.put(
 				baseURL + "carts/" + productID,
 				{
 					quantity: newQuantity,
@@ -106,14 +104,12 @@ export default function Cart() {
 				},
 			}));
 			await fetchCart();
-		} catch (err) {
-			console.log(err);
-		}
+		} catch (err) {}
 	};
 
 	const removeItem = async (cartItemID) => {
 		try {
-			await axios.delete(baseURL + "carts/" + cartItemID, {
+			axios.delete(baseURL + "carts/" + cartItemID, {
 				headers: {
 					token: localStorage.getItem("token"),
 				},
@@ -126,9 +122,7 @@ export default function Cart() {
 				},
 			}));
 			await fetchCart();
-		} catch (err) {
-			console.log(err);
-		}
+		} catch (err) {}
 	};
 
 	if (cart.cartItems.length === 0 && !loading && !error) {
