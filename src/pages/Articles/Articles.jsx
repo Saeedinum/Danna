@@ -1,8 +1,9 @@
-import {useState, useEffect, useRef} from "react";
+import {useState, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {baseURL} from "@utils/baseURL";
 import {format, isToday, isYesterday, parseISO} from "date-fns";
+import {ArticlesSkeleton, PopularArticlesSkeleton} from "@skeleton/ArticlesSkeleton";
 
 import Rectangle1 from "@images/mother.jpg";
 import Ellipse from "@images/child.png";
@@ -28,23 +29,17 @@ const Articles = () => {
 	const [articles, setArticles] = useState({
 		articles: [],
 		error: "",
-		loading: "",
+		loading: true,
 	});
 	const [popularArticles, setPopularArticles] = useState({
 		popularArticles: [],
 		error: "",
-		loading: "",
+		loading: true,
 	});
 
 	const fetchArticles = async () => {
 		try {
-			const response = await axios.get(baseURL + "articles", {
-				// params: {
-				// 	"page": 1,
-				// 	"sort": "-title",
-				// 	"likes[gt]": 1000,
-				// },
-			});
+			const response = await axios.get(baseURL + "articles");
 			setArticles({
 				articles: response.data.result,
 				loading: false,
@@ -83,7 +78,7 @@ const Articles = () => {
 	useEffect(() => {
 		fetchPopularArticles();
 		fetchArticles();
-	}, []);
+	});
 
 	return (
 		<div className='articles' style={{fontFamily: "Amaranth"}}>
@@ -106,9 +101,22 @@ const Articles = () => {
 								</div>
 							</div>
 							<div className='row gy-4'>
-								{articles?.articles.map((article) => (
-									<Article article={article} />
-								))}
+								{articles?.loading || articles?.error ? (
+									<div
+										style={{
+											display: "grid",
+											gridTemplateColumns: "repeat(2, auto)",
+											margin: "0 100px 0 0px",
+										}}
+									>
+										<ArticlesSkeleton />
+										<ArticlesSkeleton />
+										<ArticlesSkeleton />
+										<ArticlesSkeleton />
+									</div>
+								) : (
+									articles?.articles.map((article) => <Article article={article} />)
+								)}
 							</div>
 						</div>
 						<div className='col-sm-4'>
@@ -145,27 +153,31 @@ const Articles = () => {
 							<div className='card mt-5 popular shadow rounded-3 border-0 h-25' style={{background: "rgba(221, 221, 221, 0.16)"}}>
 								<h4 className='text-center fw-bold'>Most Popular</h4>
 								<div className='baby_card mt-1'>
-									{popularArticles.popularArticles.map((article) => (
-										<Link key={article._id} to={`/articleDetails/${article._id}`}>
-											<div className='card mb-3 shadow border-top border-3 border-warning rounded-3 border-0 bg-white p-2' style={{borderTop: ""}}>
-												<div className='row'>
-													<div className='d-flex'>
-														<div className='col-md-4' style={{width: "40%"}}>
-															<img src={article.articleCover.url} alt={article.title} />
-														</div>
-														<div className='col-md-8'>
-															<div className='card-body'>
-																<h5 className='card-title text-primary'>{article.title}</h5>
+									{popularArticles.loading || popularArticles.error ? (
+										<PopularArticlesSkeleton />
+									) : (
+										popularArticles.popularArticles.map((article) => (
+											<Link key={article._id} to={`/articleDetails/${article._id}`}>
+												<div className='card mb-3 shadow border-top border-3 border-warning rounded-3 border-0 bg-white p-2' style={{borderTop: ""}}>
+													<div className='row'>
+														<div className='d-flex'>
+															<div className='col-md-4' style={{width: "40%"}}>
+																<img src={article.articleCover.url} alt={article.title} />
 															</div>
+															<div className='col-md-8'>
+																<div className='card-body'>
+																	<h5 className='card-title text-primary'>{article.title}</h5>
+																</div>
+															</div>
+															{/* style */}
+															{article.likes}
+															{article.comments}
 														</div>
-														{/* style */}
-														{article.likes}
-														{article.comments}
 													</div>
 												</div>
-											</div>
-										</Link>
-									))}
+											</Link>
+										))
+									)}
 								</div>
 							</div>
 						</div>
@@ -184,7 +196,7 @@ const CommentComponent = ({articleComments, articleID}) => {
 			return;
 		}
 		try {
-			const response = await axios.post(
+			axios.post(
 				baseURL + "article-comments",
 				{
 					comment: comment,
@@ -197,9 +209,7 @@ const CommentComponent = ({articleComments, articleID}) => {
 				},
 			);
 			setComment("");
-		} catch (err) {
-			console.error(err);
-		}
+		} catch (err) {}
 	};
 
 	return (
@@ -319,17 +329,14 @@ const Article = ({article}) => {
 												try {
 													const method = like ? "DELETE" : "PATCH";
 													const url = `${baseURL}articles/likes/${article._id}`;
-													const response = await axios({
+													axios({
 														method: method,
 														url: url,
 														headers: {
 															token: localStorage.getItem("token") ?? navigate("/login"),
 														},
 													});
-													console.log(response);
-												} catch (err) {
-													console.error(err);
-												}
+												} catch (err) {}
 											}}
 										></i>
 									</li>

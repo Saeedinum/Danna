@@ -1,10 +1,9 @@
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {Link, NavLink} from "react-router-dom";
 
 import Logo from "@images/LOGO 1.svg";
 import "@styles/Navbar.css";
 
-// Throttle function to limit the frequency of scroll event handling
 const throttle = (callback, delay) => {
 	let lastTime = 0;
 	return function () {
@@ -18,14 +17,13 @@ const throttle = (callback, delay) => {
 
 const Navbar = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
-
 	useEffect(() => {
 		const handleScroll = throttle(() => {
 			setIsScrolled(window.scrollY > 70);
 		}, 50);
 
 		window.addEventListener("scroll", handleScroll);
-	}, []);
+	});
 
 	return (
 		<>

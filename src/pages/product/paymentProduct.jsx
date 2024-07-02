@@ -20,8 +20,6 @@ const PaymentProduct = () => {
 						token: localStorage.getItem("token") ?? navigate("/login"),
 					},
 				});
-				console.clear();
-				console.log(response.data);
 				setState({
 					cart: response.data.cart,
 					loading: false,
@@ -36,12 +34,12 @@ const PaymentProduct = () => {
 			}
 		};
 		fetchData();
-	}, []);
+	});
 
 	const handlePlaceOrder = async (cashOrder) => {
 		const url = cashOrder ? `${baseURL}orders/checkout/${state.cart._id}` : `${baseURL}orders/${state.cart._id}`;
 		try {
-			const response = await axios.post(
+			 axios.post(
 				url,
 				{
 					shippingAddress: {
@@ -62,10 +60,7 @@ const PaymentProduct = () => {
 					},
 				},
 			);
-			console.log("Order placed successfully:", response.data);
-		} catch (err) {
-			console.error("Error placing order:", err);
-		}
+		} catch (err) {}
 	};
 
 	const {cart, loading, error} = state;

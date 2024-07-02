@@ -24,7 +24,6 @@ const Register = () => {
 		axios
 			.post(baseURL + "users", values)
 			.then(({data}) => {
-				console.log(data);
 				if (data.message == "success") {
 					toast.success(`${data.message}`);
 					navigate("/login");
@@ -37,7 +36,6 @@ const Register = () => {
 				}
 			})
 			.catch((err) => {
-				console.log(err);
 				setLoading(true);
 				toast.error(`${err.response.data.message}`, {
 					position: "bottom-center",

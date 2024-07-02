@@ -28,7 +28,7 @@ import MainLayout from "@layouts/MainLayout.jsx";
 import AuthLayout from "@layouts/AuthLayout.jsx";
 
 import ProtectedRoutes from "@components/ProtectedRoutes.jsx";
-import Notfound from "@pages/Notfound/Notfound.jsx";
+import Notfound from "@pages/Notfound.jsx";
 import UpdateProfile from "@pages/UpdateProfile.jsx";
 import ProductPage from "@pages/product/ProductPage.jsx";
 import ProfileDoctor from "@pages/ProfileDr.jsx";
@@ -37,7 +37,7 @@ import Cart from "@pages/Cart.jsx";
 import Payment from "@pages/Payment.jsx";
 import Favourite from "@pages/Favourite.jsx";
 import Questions from "@pages/Questions/Questions.jsx";
-import Videos from "@pages/Videos/Videos.jsx";
+import Videos from "@pages/Videos.jsx";
 import QuestionDet from "@pages/Questions/QuestionDetails.jsx";
 import ForgetNewPassward from "@pages/Forgetpassword/ForgetNewPassword.jsx";
 import ForgetPassward from "@pages/Forgetpassword/ForgetPassword.jsx";

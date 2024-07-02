@@ -1,7 +1,7 @@
 // import errorImg from "../../images/image 70.png";
 import {useRouteError, isRouteErrorResponse, Link} from "react-router-dom";
 import Lottie from "lottie-react";
-import errorAnimation from "./lotti.json";
+import notFound from "@lottie/notFound.json";
 
 export default function Notfound() {
 	const error = useRouteError();
@@ -19,7 +19,7 @@ export default function Notfound() {
 				</Link>
 			</div>
 			<div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-				<Lottie animationData={errorAnimation} style={{width: "30%", height: "30%"}} />
+				<Lottie animationData={notFound} style={{width: "30%", height: "30%"}} />
 			</div>
 		</>
 	);

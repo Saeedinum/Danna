@@ -3,6 +3,8 @@ import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {baseURL} from "@utils/baseURL";
 import CartSkeleton from "@skeleton/cartSkeleton";
+import Lottie from "lottie-react";
+import emptyCart from "@lottie/emptyCart.json";
 
 export default function Cart() {
 	const navigate = useNavigate();
@@ -35,7 +37,7 @@ export default function Cart() {
 
 	useEffect(() => {
 		fetchCart();
-	}, []);
+	});
 
 	const {cart, loading, error} = state;
 	if (loading || error) {
@@ -56,7 +58,7 @@ export default function Cart() {
 		const item = state.cart.cartItems.find((item) => item.product._id === productID);
 		const newQuantity = item.quantity + 1;
 		try {
-			await axios.put(
+			axios.put(
 				baseURL + "carts/" + productID,
 				{
 					quantity: newQuantity,
@@ -75,9 +77,7 @@ export default function Cart() {
 				},
 			}));
 			await fetchCart();
-		} catch (err) {
-			console.log(err);
-		}
+		} catch (err) {}
 	};
 
 	const decrementItem = async (productID) => {
@@ -85,7 +85,7 @@ export default function Cart() {
 		const newQuantity = item.quantity > 1 ? item.quantity - 1 : item.quantity;
 		if (newQuantity === item.quantity) return;
 		try {
-			await axios.put(
+			axios.put(
 				baseURL + "carts/" + productID,
 				{
 					quantity: newQuantity,
@@ -104,14 +104,12 @@ export default function Cart() {
 				},
 			}));
 			await fetchCart();
-		} catch (err) {
-			console.log(err);
-		}
+		} catch (err) {}
 	};
 
 	const removeItem = async (cartItemID) => {
 		try {
-			await axios.delete(baseURL + "carts/" + cartItemID, {
+			axios.delete(baseURL + "carts/" + cartItemID, {
 				headers: {
 					token: localStorage.getItem("token"),
 				},
@@ -124,10 +122,37 @@ export default function Cart() {
 				},
 			}));
 			await fetchCart();
-		} catch (err) {
-			console.log(err);
-		}
+		} catch (err) {}
 	};
+
+	if (cart.cartItems.length === 0 && !loading && !error) {
+		return (
+			<>
+				<div style={{display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", gap: "100px", height: "50vh"}}>
+					<Lottie animationData={emptyCart} style={{width: "20%", height: "60%"}} />
+					<div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", marginTop: "0px", height: "100vh"}}>
+						<h2 style={{fontFamily: "PT Sans", color: "#555"}}>Your cart is empty, add some products</h2>
+						<Link to={`/productpage`} style={{marginTop: "10px", textDecoration: "none"}}>
+							<button
+								style={{
+									padding: "10px 20px",
+									fontSize: "16px",
+									color: "white",
+									backgroundColor: "#32AA90",
+									border: "none",
+									borderRadius: "5px",
+									cursor: "pointer",
+									marginTop: "10px",
+								}}
+							>
+								Go to Products
+							</button>
+						</Link>
+					</div>
+				</div>
+			</>
+		);
+	}
 
 	return (
 		<div className='container'>

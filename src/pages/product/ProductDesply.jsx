@@ -38,10 +38,9 @@ export default function ProductDesply() {
 				setLoading(false);
 			})
 			.catch((error) => {
-				console.error(error);
 				setLoading(false);
 			});
-	}, []);
+	});
 
 	useEffect(() => {
 		try {
@@ -54,31 +53,22 @@ export default function ProductDesply() {
 				const wishlist = response.data.result;
 				setIsInWishlist(wishlist.some((item) => item._id === productId));
 			}
-		} catch (error) {
-			console.error("Error checking wishlist status:", error);
-		}
-	}, []);
+		} catch (error) {}
+	});
 
 	const toggleFavorite = async (idProduct) => {
 		if (isInWishlist) {
-			console.log("remove from favorite " + idProduct);
-			console.log(" token " + localStorage.getItem("token"));
 			try {
-				const response = await axios.delete(baseURL + "wishlist", {
+				axios.delete(baseURL + "wishlist", {
 					headers: {
 						token: localStorage.getItem("token") ?? navigate("/login"),
 					},
 					data: {product: idProduct},
 				});
-				console.log("Product removed from favorite:", response.data);
-			} catch (err) {
-				console.error("❌Error removing product from favorite:", err.message);
-			}
+			} catch (err) {}
 		} else {
-			console.log("add   " + idProduct);
-			console.log(" token " + localStorage.getItem("token"));
 			try {
-				const response = await axios.patch(
+				axios.patch(
 					baseURL + "wishlist",
 					{product: idProduct},
 					{
@@ -87,17 +77,14 @@ export default function ProductDesply() {
 						},
 					},
 				);
-				console.log("Product added to favorite:", response.data);
-			} catch (err) {
-				console.log(err.message);
-			}
+			} catch (err) {}
 		}
 	};
 
 	const quantityRef = useRef(null);
 	const addToCart = async (idProduct, quantity) => {
 		try {
-			const response = await axios.post(
+			axios.post(
 				baseURL + "carts",
 				{product: idProduct, quantity: +quantity},
 				{
@@ -106,10 +93,7 @@ export default function ProductDesply() {
 					},
 				},
 			);
-			console.log("Product added to cart:", response.data);
-		} catch (err) {
-			console.error("Error adding product to cart:", err.message);
-		}
+		} catch (err) {}
 	};
 	return (
 		<div
@@ -455,9 +439,8 @@ const Review = ({productID}) => {
 					if (!localStorage.getItem("token")) {
 						return navigate("/login");
 					} else {
-						console.log(review);
 						try {
-							const response = await axios.post(
+							axios.post(
 								baseURL + "reviews",
 								{
 									comment: review.comment,
@@ -470,10 +453,7 @@ const Review = ({productID}) => {
 									},
 								},
 							);
-							console.log("Review added:", response.data);
-						} catch (err) {
-							console.error("Error adding review:", err.message);
-						}
+						} catch (err) {}
 					}
 				}}
 				className='btn btn-primary'

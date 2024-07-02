@@ -12,6 +12,7 @@ module.exports = {
 			"@skeleton": path.resolve(__dirname, "src/skeleton"),
 			"@test": path.resolve(__dirname, "src/test"),
 			"@layouts": path.resolve(__dirname, "src/layouts"),
+			"@lottie": path.resolve(__dirname, "src/lottie"),
 		},
 	},
 };

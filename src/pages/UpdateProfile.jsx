@@ -17,11 +17,9 @@ const UpdateProfile = () => {
 		const token = localStorage.getItem("token");
 		try {
 			const decoded = jwtDecode(token);
-			console.log(decoded);
 			setId(decoded.userId);
-		} catch (error) {
-		}
-	}, []);
+		} catch (error) {}
+	});
 
 	function sendDataToApi(values) {
 		setLoading(false);
@@ -33,7 +31,6 @@ const UpdateProfile = () => {
 				},
 			})
 			.then(({data}) => {
-				console.log(data);
 				if (data.message == "success") {
 					toast.success(`${data.message}`);
 					setLoading(true);
@@ -45,7 +42,6 @@ const UpdateProfile = () => {
 				}
 			})
 			.catch((err) => {
-				console.log(err);
 				setLoading(true);
 				toast.error(`${err.response.data.message}`, {
 					position: "bottom-center",
