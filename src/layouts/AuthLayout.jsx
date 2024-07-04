@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {Link, NavLink, Outlet} from "react-router-dom";
-import Logo from "../images/LOGO 1.svg";
+import Logo from "../assets/LOGO 1.svg";
 
 const throttle = (callback, delay) => {
 	let lastTime = 0;
@@ -97,7 +97,6 @@ const AuthLayout = () => {
 					</div>
 				</div>
 			</nav>
-
 			<Outlet />
 		</>
 	);
