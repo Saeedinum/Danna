@@ -1,7 +1,10 @@
-const path = require(`path`);
+import {defineConfig} from "vite";
+import react from "@vitejs/plugin-react";
+import path from "path";
 
-module.exports = {
-	webpack: {
+export default defineConfig({
+	plugins: [react()],
+	resolve: {
 		alias: {
 			"@": path.resolve(__dirname, "src/"),
 			"@components": path.resolve(__dirname, "src/components"),
@@ -15,4 +18,9 @@ module.exports = {
 			"@lottie": path.resolve(__dirname, "src/lottie"),
 		},
 	},
-};
+	test: {
+		globals: true,
+		environment: "jsdom",
+		setupFiles: "./src/setupTests.js",
+	},
+});
