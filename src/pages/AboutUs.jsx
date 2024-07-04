@@ -1,20 +1,20 @@
-import circle1 from "@images/Group 42.png";
-import circle2 from "@images/circle2.png";
-import circle3 from "@images/circle3.png";
-import doctorimg1 from "@images/Frame 171.png";
-import doctorimg2 from "@images/Frame 173.png";
-import doctorimg3 from "@images/Frame 175.png";
-import imgheader from "@images/Group 43.png";
-import heart from "@images/image 104.png";
-import cloud from "@images/image 95.png";
-import docts from "@images/Frame 169.png";
-import girlbaby from "@images/image 92.png";
-import plane from "@images/image 103.png";
-import brain from "@images/noto_brain.png";
-import doccircle from "@images/Component 35.png";
-import doctorimg4 from "@images/Frame 174.png";
+import circle1 from "../assets/Group 42.png";
+import circle2 from "../assets/circle2.png";
+import circle3 from "../assets/circle3.png";
+import doctorimg1 from "../assets/Frame 171.png";
+import doctorimg2 from "../assets/Frame 173.png";
+import doctorimg3 from "../assets/Frame 175.png";
+import imgheader from "../assets/Group 43.png";
+import heart from "../assets/image 104.png";
+import cloud from "../assets/image 95.png";
+import docts from "../assets/Frame 169.png";
+import girlbaby from "../assets/image 92.png";
+import plane from "../assets/image 103.png";
+import brain from "../assets/noto_brain.png";
+import doccircle from "../assets/Component 35.png";
+import doctorimg4 from "../assets/Frame 174.png";
 
-export default function AboutUs() {
+const AboutUs = () => {
 	return (
 		<div>
 			<div
@@ -368,14 +368,5 @@ export default function AboutUs() {
 			</div>
 		</div>
 	);
-}
-
-{
-	/* <div className='card   shadow border-0 text-start w-75' style={{ border: 'none' }}>
-                                    <img src={brain} alt="" className='mt-3 ms-3' style={{width: '15%'}}/>
-                                    <div className='card-body'>
-                                        <h4 className='card-title fs-5 fw-bold'>Neurology Care</h4>
-                                        <p className='card-text'>etur adipiscing elit. Ut elit<br/> tellus, luctus nec etur adipiscing<br/> elit. Ut elit tellus, luctus nec </p>
-                                    </div>
-                                </div> */
-}
+};
+export default AboutUs;

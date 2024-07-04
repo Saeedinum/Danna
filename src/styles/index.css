@@ -36,7 +36,6 @@ img {
 	z-index: 999;
 }
 
-/* ___ form ____ */
 .error-message {
 	position: absolute;
 	left: 20px;
@@ -48,6 +47,7 @@ img {
 	box-shadow: 0 0 10px 0px #0000008c;
 	z-index: 9;
 }
+
 .error-message i {
 	position: absolute;
 	top: -9px;

@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
-import {Link, NavLink, Outlet} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
+
 import Logo from "../assets/LOGO 1.svg";
+import "./Navbar.css";
 
 const throttle = (callback, delay) => {
 	let lastTime = 0;
@@ -13,19 +15,21 @@ const throttle = (callback, delay) => {
 	};
 };
 
-const AuthLayout = () => {
+const Navbar = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
-
 	useEffect(() => {
 		const handleScroll = throttle(() => {
 			setIsScrolled(window.scrollY > 70);
 		}, 50);
 
 		window.addEventListener("scroll", handleScroll);
-	}, []);
+	});
+
 	return (
 		<>
-			<nav className={`navbar navbar-expand-lg ${isScrolled ? "scrolled" : ""}`}>
+			<nav
+				className={`navbar navbar-expand-lg ${isScrolled ? "scrolled" : ""}`}
+			>
 				<div className='container-fluid px-5'>
 					<Link className='navbar-brand' to='/'>
 						<img src={Logo} alt='' />
@@ -81,24 +85,23 @@ const AuthLayout = () => {
 						</ul>
 						<ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
 							<li className='nav-item'>
-								<NavLink className='nav-link' to='/signup'>
-									Sign Up
+								<NavLink className='nav-link' to='/profile'>
+									User Name
 								</NavLink>
 							</li>
 							<li className='nav-item'>
 								<span className='nav-link'>/</span>
 							</li>
 							<li className='nav-item'>
-								<NavLink className='nav-link' to='/login'>
-									Login
+								<NavLink className='nav-link' to='/login' onClick={() => localStorage.clear()}>
+									Log Out
 								</NavLink>
 							</li>
 						</ul>
 					</div>
 				</div>
 			</nav>
-			<Outlet />
 		</>
 	);
 };
-export default AuthLayout;
+export default Navbar;

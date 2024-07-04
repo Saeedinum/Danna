@@ -1,12 +1,11 @@
 import {useState} from "react";
-import post from "@images/Name.png";
-import rect from "@images/photo_4_2024-02-13_23-29-14.jpg";
-import comme from "@images/Ellipse 36.png";
-import doc from "@images/photo_2024-03-16_01-05-58.jpg";
+import post from "../../assets/Name.png";
+import rect from "../../assets/photo_4_2024-02-13_23-29-14.jpg";
+import comme from "../../assets/Ellipse 36.png";
+import doc from "../../assets/photo_2024-03-16_01-05-58.jpg";
 import {Link} from "react-router-dom";
 
 const Questions = () => {
-	// const [show,setShow]=useState(false);
 	const [like, setLike] = useState(21),
 		[isLike, setIsLike] = useState(false);
 
@@ -28,75 +27,6 @@ const Questions = () => {
 				<div className='row'>
 					<div className='col-sm-8'>
 						<div className='posts'>
-							{/* <div className="bg-white p-3 mt-3 rounded border-0">
-                    <div className="d-flex" type='button'>
-                        <div className="p-1">
-                            <img src={post} alt="avatar" className='rounded-circle me-2' />
-                        </div>
-                        <input type='text' className='form-control rounded-pill bg-gray w-100' placeholder='what is on your mind ...?'  data-bs-toggle="modal" data-bs-target="#createModal" />
-                    </div>
-                    <div className="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true" data-bs-backdrop="false">
-                    <div className="modal-dialog modal-dialog-centered">
-                        <div className="modal-content">
-                        <div className="modal-header align-items-center">
-                            <h5 className="text-dark text-center w-100 m-0" id="exampleModalLabel">Create Post</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div className="modal-body">
-                            <div className="my-1 p-1">
-                                <div className="d-flex flex-column">
-                                    <div className="d-flex align-items-center">
-                                        <div className="p-2">
-                                            <img src={post} alt="avatar" className='rounded-circle' />
-                                        </div>
-                                        <div>
-                                            <p className="m-0 fw-bold">nada</p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <textarea id="" cols="30" rows="5" className='form-control '></textarea>
-                                    </div>
-                                    <div className="d-flex align-items-center justify-content-between">
-                                        <i className="bi bi-emoji-laughing text-muted" type="button"></i>
-                                    </div>
-                                    <div className="d-flex justify-content-between border-0 border-light rounded p-3 mt-3">
-                                        <p className="m-0">Add to your post</p>
-                                        <div className='d-flex gap-2'>
-                                        <i className="bi bi-aspect-ratio-fill text-success"></i>
-                                        <i className="bi bi-emoji-laughing text-warning"></i>
-                                        <i className="bi bi-emoji-laughing text-primary"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-success w-100">Post</button>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                    <div className="row mt-2">
-                    <div className="col">
-                        <div className="d-flex align-items-center justify-content-center rounded dropdown-item gap-2" type="button">
-                            <i className="bi bi-aspect-ratio-fill text-success fs-4"></i>
-                            <p className="m-0 text-muted fs-5">Media</p>
-                        </div>
-                    </div>
-                    <div className="col">
-                    <div className="d-flex align-items-center justify-content-center rounded dropdown-item gap-2" type="button">
-                            <i className="bi bi-threads text-primary fs-4"></i>
-                            <p className="m-0 text-muted fs-5">Tag</p>
-                        </div>
-                    </div>
-                    <div className="col">
-                    <div className="d-flex align-items-center justify-content-center rounded dropdown-item gap-2" type="button">
-                            <i className="bi bi-emoji-laughing text-warning fs-4"></i>
-                            <p className="m-0 text-muted fs-5">Feeling</p>
-                        </div>
-                    </div>
-                    </div>
-                </div> */}
 							<div className='bg-white p-4 rounded shaddow mt-3'>
 								<div className='d-flex justify-content-between'>
 									<div className='d-flex'>
