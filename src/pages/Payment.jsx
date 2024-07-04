@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.module.css";
-import img from "../images/image 21.png";
+import img from "../assets/image 21.png";
 
 const Payment = () => {
 	const [Dateobj, setDateobj] = useState(null);
