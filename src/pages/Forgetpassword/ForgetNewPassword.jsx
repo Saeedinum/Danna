@@ -1,4 +1,4 @@
-import forget from "@images/image 7.png";
+import forget from "../../images/image 7.png";
 
 const ForgetNewPassword = () => {
 	return (

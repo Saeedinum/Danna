@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
-import {baseURL} from "@utils/baseURL";
+import {baseURL} from "../../utils/baseURL";
 
 const Doctors = () => {
 	const [doctors, setDoctors] = useState([]);

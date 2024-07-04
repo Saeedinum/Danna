@@ -2,12 +2,12 @@ import {useState, useEffect} from "react";
 import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 import Calendar from "react-calendar";
-import {baseURL} from "@utils/baseURL";
+import {baseURL} from "../../utils/baseURL";
 
-import Doc from "@images/Rectangle 93.png";
-import viza from "@images/image 18.png";
+import Doc from "../../images/Rectangle 93.png";
+import viza from "../../images/image 18.png";
 
-import "@styles/DetailsDoctor.css";
+import "../../styles/DetailsDoctor.css";
 
 const DetailsDoctor = () => {
 	const {doctorID} = useParams();

@@ -1,7 +1,7 @@
 // import errorImg from "../../images/image 70.png";
 import {useRouteError, isRouteErrorResponse, Link} from "react-router-dom";
 import Lottie from "lottie-react";
-import notFound from "@lottie/notFound.json";
+import notFound from "../lottie/notFound.json";
 
 export default function Notfound() {
 	const error = useRouteError();

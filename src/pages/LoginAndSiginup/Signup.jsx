@@ -1,11 +1,11 @@
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
-import "@styles/Signup.css";
-import logo from "@images/LOGO 1.png";
-import img from "@images/form-img 2.png";
+import "../../styles/Signup.css";
+import logo from "../../images/LOGO 1.png";
+import img from "../../images/form-img 2.png";
 import axios from "axios";
-import {baseURL} from "@utils/baseURL.js";
+import {baseURL} from "../../utils/baseURL.js";
 import {useFormik} from "formik";
 import * as Yup from "yup";
 
@@ -65,7 +65,7 @@ const Register = () => {
 				.max(30)
 				.transform((value, originalValue) => originalValue.replace(/\s/g, ""))
 				.matches(
-					/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+{};:,<.>])(?=.*[a-zA-Z])\S{8,30}$/,
+					/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!../../#$%^&*()\-_=+{};:,<.>])(?=.*[a-zA-Z])\S{8,30}$/,
 					"password should be {8:30} characters & contain at least 1 {lowercase, uppercase & special} character",
 				)
 				.trim()

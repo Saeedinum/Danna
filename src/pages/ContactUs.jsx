@@ -1,7 +1,7 @@
-import imgcontact from "@images/image 112.png";
-import union3 from "@images/Union3.png";
-import union2 from "@images/Union2.png";
-import union1 from "@images/Union.png";
+import imgcontact from "../images/image 112.png";
+import union3 from "../images/Union3.png";
+import union2 from "../images/Union2.png";
+import union1 from "../images/Union.png";
 
 const ContactUs = () => {
 	return (

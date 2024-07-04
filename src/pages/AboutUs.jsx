@@ -1,18 +1,18 @@
-import circle1 from "@images/Group 42.png";
-import circle2 from "@images/circle2.png";
-import circle3 from "@images/circle3.png";
-import doctorimg1 from "@images/Frame 171.png";
-import doctorimg2 from "@images/Frame 173.png";
-import doctorimg3 from "@images/Frame 175.png";
-import imgheader from "@images/Group 43.png";
-import heart from "@images/image 104.png";
-import cloud from "@images/image 95.png";
-import docts from "@images/Frame 169.png";
-import girlbaby from "@images/image 92.png";
-import plane from "@images/image 103.png";
-import brain from "@images/noto_brain.png";
-import doccircle from "@images/Component 35.png";
-import doctorimg4 from "@images/Frame 174.png";
+import circle1 from "../images/Group 42.png";
+import circle2 from "../images/circle2.png";
+import circle3 from "../images/circle3.png";
+import doctorimg1 from "../images/Frame 171.png";
+import doctorimg2 from "../images/Frame 173.png";
+import doctorimg3 from "../images/Frame 175.png";
+import imgheader from "../images/Group 43.png";
+import heart from "../images/image 104.png";
+import cloud from "../images/image 95.png";
+import docts from "../images/Frame 169.png";
+import girlbaby from "../images/image 92.png";
+import plane from "../images/image 103.png";
+import brain from "../images/noto_brain.png";
+import doccircle from "../images/Component 35.png";
+import doctorimg4 from "../images/Frame 174.png";
 
 export default function AboutUs() {
 	return (

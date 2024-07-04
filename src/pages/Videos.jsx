@@ -1,9 +1,9 @@
 import {useState, useEffect} from "react";
 import {Link, useParams} from "react-router-dom";
 import axios from "axios";
-import {baseURL} from "@utils/baseURL";
+import {baseURL} from "../utils/baseURL";
 import ReactPlayer from "react-player";
-import {VideosSkeleton, MainVideoSkeleton} from "@skeleton/VideosSkeleton";
+import {VideosSkeleton, MainVideoSkeleton} from "../skeleton/VideosSkeleton";
 
 const Videos = () => {
 	const {id} = useParams();

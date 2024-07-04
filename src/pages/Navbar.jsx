@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 import {Link, NavLink} from "react-router-dom";
 
-import Logo from "@images/LOGO 1.svg";
-import "@styles/Navbar.css";
+import Logo from "../images/LOGO 1.svg";
+import "../styles/Navbar.css";
 
 const throttle = (callback, delay) => {
 	let lastTime = 0;

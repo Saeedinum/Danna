@@ -2,12 +2,12 @@ import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import axios from "axios";
-import logo from "@images/LOGO 1.png";
-import img from "@images/form-img 2.png";
-import {baseURL} from "@utils/baseURL.js";
+import logo from "../../images/LOGO 1.png";
+import img from "../../images/form-img 2.png";
+import {baseURL} from "../../utils/baseURL.js";
 import {useFormik} from "formik";
 import * as Yup from "yup";
-import "@styles/Signup.css";
+import "../../styles/Signup.css";
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -25,7 +25,7 @@ const Login = () => {
 			.then(({data}) => {
 				if (data.message == "success") {
 					localStorage.setItem("token", data.token);
-					//@ need userID for articles
+					//../../ need userID for articles
 					toast.success(`${data.message}`);
 					navigate("/");
 					setLoading(true);
@@ -53,7 +53,7 @@ const Login = () => {
 				.max(30)
 				.transform((value, originalValue) => originalValue.replace(/\s/g, ""))
 				.matches(
-					/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+{};:,<.>])(?=.*[a-zA-Z])\S{8,30}$/,
+					/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!../../#$%^&*()\-_=+{};:,<.>])(?=.*[a-zA-Z])\S{8,30}$/,
 					"password should be {8:30} characters & contain at least 1 {lowercase, uppercase & special} character",
 				)
 				.trim()

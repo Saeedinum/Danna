@@ -1,10 +1,10 @@
 import {useState, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
-import {baseURL} from "@utils/baseURL";
-import CartSkeleton from "@skeleton/cartSkeleton";
+import {baseURL} from "../utils/baseURL";
+import CartSkeleton from "../skeleton/cartSkeleton";
 import Lottie from "lottie-react";
-import emptyCart from "@lottie/emptyCart.json";
+import emptyCart from "../lottie/emptyCart.json";
 
 export default function Cart() {
 	const navigate = useNavigate();

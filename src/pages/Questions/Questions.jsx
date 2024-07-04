@@ -1,8 +1,8 @@
 import {useState} from "react";
-import post from "@images/Name.png";
-import rect from "@images/photo_4_2024-02-13_23-29-14.jpg";
-import comme from "@images/Ellipse 36.png";
-import doc from "@images/photo_2024-03-16_01-05-58.jpg";
+import post from "../../images/Name.png";
+import rect from "../../images/photo_4_2024-02-13_23-29-14.jpg";
+import comme from "../../images/Ellipse 36.png";
+import doc from "../../images/photo_2024-03-16_01-05-58.jpg";
 import {Link} from "react-router-dom";
 const Questions = () => {
 	// const [show,setShow]=useState(false);

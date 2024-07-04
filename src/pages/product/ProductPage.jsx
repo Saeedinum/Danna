@@ -1,15 +1,15 @@
 import {useState, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
-import {baseURL} from "@utils/baseURL";
+import {baseURL} from "../../utils/baseURL";
 
-import categ2 from "@images/toy2.png";
-import seller from "@images/seller.png";
+import categ2 from "../../images/toy2.png";
+import seller from "../../images/seller.png";
 
 import Carousel from "react-bootstrap/Carousel";
 import CardGroup from "react-bootstrap/CardGroup";
-import CategorySkeleton from "@skeleton/categorySkeleton";
-import ProductSkeleton from "@skeleton/productSkeleton";
+import CategorySkeleton from "../../skeleton/categorySkeleton";
+import ProductSkeleton from "../../skeleton/productSkeleton";
 
 export default function ProductPage() {
 	const navigate = useNavigate();

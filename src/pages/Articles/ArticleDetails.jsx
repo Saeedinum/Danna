@@ -1,9 +1,9 @@
 import {useState, useEffect} from "react";
 import {Link, useParams} from "react-router-dom";
 import axios from "axios";
-import {baseURL} from "@utils/baseURL.js";
-import image from "@images/image 55.png";
-import {PopularArticlesSkeleton, ArticleDetailsSkeleton} from "@skeleton/ArticlesSkeleton";
+import {baseURL} from "../../utils/baseURL.js";
+import image from "../../images/image 55.png";
+import {PopularArticlesSkeleton, ArticleDetailsSkeleton} from "../../skeleton/ArticlesSkeleton";
 
 const ArticleDetails = () => {
 	const {id} = useParams();

@@ -1,4 +1,4 @@
-import forget from "@images/image 7.png";
+import forget from "../../images/image 7.png";
 
 const ForgetPasswordOtp = () => {
 	return (
@@ -13,7 +13,7 @@ const ForgetPasswordOtp = () => {
 							<h4 className='text-center fw-bold mt-5 p-3' style={{color: "rgba(50, 170, 144, 1)"}}>
 								OTP VERIFICATION
 							</h4>
-							<p className='text-secondary text-center'>Enter the OTP sent to - nd----6@gmail.com</p>
+							<p className='text-secondary text-center'>Enter the OTP sent to - nd----6../../gmail.com</p>
 							<form action=''>
 								<div className='mt-3 d-flex gap-3'>
 									<input type='text' className='form-control shadow-sm border-0' style={{background: "rgba(246, 246, 246, 1)"}} />

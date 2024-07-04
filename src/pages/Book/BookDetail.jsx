@@ -1,10 +1,10 @@
 import {Link} from "react-router-dom";
 
-import img from "@images/bookdet.png";
-import img2 from "@images/visa.png";
-import icon1 from "@images/Payment method icon.png";
-import icon2 from "@images/Payment method icon (1).png";
-import icon3 from "@images/Payment method icon (2).png";
+import img from "../../images/bookdet.png";
+import img2 from "../../images/visa.png";
+import icon1 from "../../images/Payment method icon.png";
+import icon2 from "../../images/Payment method icon (1).png";
+import icon3 from "../../images/Payment method icon (2).png";
 
 export default function Book() {
 	return (

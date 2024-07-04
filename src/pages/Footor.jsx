@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import Logo from "@images/LOGO 1.png";
+import Logo from "../images/LOGO 1.png";
 
 const Footor = () => {
 	return (
@@ -57,7 +57,7 @@ const Footor = () => {
 						</Link>
 						<div className='d-flex gap-2 mt-5'>
 							<i className='bi bi-envelope-paper-fill' style={{color: "rgba(50, 170, 144, 1)"}}></i>
-							<p className='text-muted'>Dana22@gmail.com</p>
+							<p className='text-muted'>Dana22../gmail.com</p>
 						</div>
 					</div>
 					<div className='col-lg-3 col-md-6'>

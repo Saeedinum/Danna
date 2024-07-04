@@ -1,14 +1,14 @@
 import {useState, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
-import {baseURL} from "@utils/baseURL";
+import {baseURL} from "../../utils/baseURL";
 import {format, isToday, isYesterday, parseISO} from "date-fns";
-import {ArticlesSkeleton, PopularArticlesSkeleton} from "@skeleton/ArticlesSkeleton";
+import {ArticlesSkeleton, PopularArticlesSkeleton} from "../../skeleton/ArticlesSkeleton";
 
-import Rectangle1 from "@images/mother.jpg";
-import Ellipse from "@images/child.png";
-import Rectangle4 from "@images/mot.jpg";
-import comme from "@images/Ellipse 36.png";
+import Rectangle1 from "../../images/mother.jpg";
+import Ellipse from "../../images/child.png";
+import Rectangle4 from "../../images/mot.jpg";
+import comme from "../../images/Ellipse 36.png";
 
 import {
 	FacebookShareButton,

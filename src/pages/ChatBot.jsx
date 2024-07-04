@@ -1,6 +1,6 @@
-import vector from "@images/AI IMG.png";
-import name from "@images/Name.png";
-import repot from "@images/rebot 1.png";
+import vector from "../images/AI IMG.png";
+import name from "../images/Name.png";
+import repot from "../images/rebot 1.png";
 import {Link} from "react-router-dom";
 
 const ChatBot = () => {

@@ -1,27 +1,27 @@
 import {Link} from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
 
-import homing2 from "@images/Component 21.png";
-import Rectangle1 from "@images/Rectangle 14.png";
-import dricon from "@images/Component 39.png";
-import chaticon from "@images/Component 34.png";
-import videosicon from "@images/videos.png";
-import prodicon from "@images/product.png";
-import quesicon from "@images/Component 38.png";
-import articon from "@images/Component 37.png";
-import icons from "@images/Component 22.png";
-import unsplash from "@images/unsplash_xT0TfNMn4Tk.png";
-import doctorbook from "@images/Component 24.png";
-import imgvideo from "@images/video.png";
-import doctorbook2 from "@images/Component 23.png";
-import heart from "@images/heart.png";
-import doctor from "@images/Ellipse 1.png";
-import sticker from "@images/image 12.png";
-import babyvedio1 from "@images/Rectangle 23.png";
-import imgchat from "@images/Componentchat.png";
-import app from "@images/pre-footer_05 1.png";
+import homing2 from "../images/Component 21.png";
+import Rectangle1 from "../images/Rectangle 14.png";
+import dricon from "../images/Component 39.png";
+import chaticon from "../images/Component 34.png";
+import videosicon from "../images/videos.png";
+import prodicon from "../images/product.png";
+import quesicon from "../images/Component 38.png";
+import articon from "../images/Component 37.png";
+import icons from "../images/Component 22.png";
+import unsplash from "../images/unsplash_xT0TfNMn4Tk.png";
+import doctorbook from "../images/Component 24.png";
+import imgvideo from "../images/video.png";
+import doctorbook2 from "../images/Component 23.png";
+import heart from "../images/heart.png";
+import doctor from "../images/Ellipse 1.png";
+import sticker from "../images/image 12.png";
+import babyvedio1 from "../images/Rectangle 23.png";
+import imgchat from "../images/Componentchat.png";
+import app from "../images/pre-footer_05 1.png";
 
-import "@styles/Home.css";
+import "../styles/Home.css";
 const Home = () => {
 	return (
 		<div className='home'>

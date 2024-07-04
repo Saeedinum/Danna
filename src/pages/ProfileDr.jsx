@@ -2,8 +2,8 @@ import {useState} from "react";
 import {Dialog} from "primereact/dialog";
 import {InputText} from "primereact/inputtext";
 import {Button} from "primereact/button";
-import Ellipse from "@images/profile.png";
-import "@styles/ProfileDr.css";
+import Ellipse from "../images/profile.png";
+import "../styles/ProfileDr.css";
 import Avatar from "react-avatar-edit";
 
 const ProfileDr = () => {

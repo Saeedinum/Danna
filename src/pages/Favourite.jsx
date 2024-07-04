@@ -1,10 +1,10 @@
 import {useState, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
-import {baseURL} from "@utils/baseURL";
-import ProductSkeleton from "@skeleton/productSkeleton";
+import {baseURL} from "../utils/baseURL";
+import ProductSkeleton from "../skeleton/productSkeleton";
 import Lottie from "lottie-react";
-import empty from "@lottie/empty.json";
+import empty from "../lottie/empty.json";
 
 export default function Favourite() {
 	const navigate = useNavigate();
