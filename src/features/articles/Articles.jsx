@@ -1,9 +1,8 @@
 import {useState, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import axios from "axios";
 import {format, isToday, isYesterday, parseISO} from "date-fns";
-import ArticlesSkeleton  from "./skeleton/ArticlesSkeleton.jsx";
-import PopularSkeleton  from "./skeleton/PopularSkeleton.jsx";
+import ArticlesSkeleton from "./skeleton/ArticlesSkeleton.jsx";
+import PopularSkeleton from "./skeleton/PopularSkeleton.jsx";
 
 import Rectangle1 from "../../assets/mother.jpg";
 import Ellipse from "../../assets/child.png";
@@ -25,61 +24,11 @@ import {
 	EmailIcon,
 } from "react-share";
 
-const baseURL = import.meta.env.VITE_API_BASE_URL;
+import {useGetArticlesQuery, useGetPopularArticlesQuery, useSendCommentMutation, useToggleLikeMutation} from "../api/apiSlice.js";
+
 const Articles = () => {
-	const [articles, setArticles] = useState({
-		articles: [],
-		error: "",
-		loading: true,
-	});
-	const [popularArticles, setPopularArticles] = useState({
-		popularArticles: [],
-		error: "",
-		loading: true,
-	});
-
-	const fetchArticles = async () => {
-		try {
-			const response = await axios.get(baseURL + "articles");
-			setArticles({
-				articles: response.data.result,
-				loading: false,
-				error: null,
-			});
-		} catch (err) {
-			setArticles({
-				articles: [],
-				loading: false,
-				error: err,
-			});
-		}
-	};
-
-	const fetchPopularArticles = async () => {
-		try {
-			const response = await axios.get(baseURL + "articles", {
-				params: {
-					sort: "-likes,-comments",
-				},
-			});
-			setPopularArticles({
-				popularArticles: response.data.result,
-				loading: false,
-				error: null,
-			});
-		} catch (err) {
-			setPopularArticles({
-				popularArticles: [],
-				loading: false,
-				error: err,
-			});
-		}
-	};
-
-	useEffect(() => {
-		fetchPopularArticles();
-		fetchArticles();
-	});
+	const {data: {result: articles} = {}, error: articlesError, isLoading: articlesIsLoading} = useGetArticlesQuery();
+	const {data: {result: popularArticles} = {}, error: popularArticlesError, isLoading: popularArticlesIsLoading} = useGetPopularArticlesQuery();
 
 	return (
 		<div className='articles' style={{fontFamily: "Amaranth"}}>
@@ -102,7 +51,7 @@ const Articles = () => {
 								</div>
 							</div>
 							<div className='row gy-4'>
-								{articles?.loading || articles?.error ? (
+								{articlesIsLoading == "loading" || articlesError ? (
 									<div
 										style={{
 											display: "grid",
@@ -116,7 +65,7 @@ const Articles = () => {
 										<ArticlesSkeleton />
 									</div>
 								) : (
-									articles?.articles.map((article) => <Article article={article} />)
+									articles?.map((article) => <Article key={article._id} article={article} />)
 								)}
 							</div>
 						</div>
@@ -143,10 +92,8 @@ const Articles = () => {
 										to provide a perfect life for their children
 									</p>
 									<div className='text-center justify-content-center'>
-										<Link to={`/artdet`}>
-											<a href='#' className='btn  text-white rounded w-50' style={{background: "#32AA90"}}>
-												Read More
-											</a>
+										<Link to={`/artdet`} className='btn text-white rounded w-50' style={{background: "#32AA90"}}>
+											Read More
 										</Link>
 									</div>
 								</div>
@@ -154,10 +101,10 @@ const Articles = () => {
 							<div className='card mt-5 popular shadow rounded-3 border-0 h-25' style={{background: "rgba(221, 221, 221, 0.16)"}}>
 								<h4 className='text-center fw-bold'>Most Popular</h4>
 								<div className='baby_card mt-1'>
-									{popularArticles.loading || popularArticles.error ? (
+									{popularArticlesIsLoading || popularArticlesError ? (
 										<PopularSkeleton />
 									) : (
-										popularArticles.popularArticles.map((article) => (
+										popularArticles.map((article) => (
 											<Link key={article._id} to={`/articleDetails/${article._id}`}>
 												<div className='card mb-3 shadow border-top border-3 border-warning rounded-3 border-0 bg-white p-2' style={{borderTop: ""}}>
 													<div className='row'>
@@ -189,164 +136,136 @@ const Articles = () => {
 	);
 };
 
-const CommentComponent = ({articleComments, articleID}) => {
-	const navigate = useNavigate();
-	const [comment, setComment] = useState("");
-	const handleSendComment = async () => {
-		if (comment.trim() === "") {
-			return;
-		}
-		try {
-			axios.post(
-				baseURL + "article-comments",
-				{
-					comment: comment,
-					article: articleID,
-				},
-				{
-					headers: {
-						token: localStorage.getItem("token") ?? navigate("/login"),
-					},
-				},
-			);
-			setComment("");
-		} catch (err) {}
-	};
-
-	return (
-		<div className='modal fade' id='createModal' tabIndex='-1' aria-labelledby='createModalLabel' aria-hidden='true' data-bs-backdrop='false'>
-			<div className='modal-dialog modal-dialog-centered'>
-				<div className='modal-content'>
-					<div className='modal-header align-items-center'>
-						<h5 className='text-dark text-center w-100 m-0' id='exampleModalLabel'>
-							Create Comment
-						</h5>
-						<button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-					</div>
-					<div className='main-container'>
-						{articleComments.map((comment) => (
-							<div className='bg-white rounded p-2 mt-2'>
-								<div className='d-flex justify-content-between'>
-									<div className='d-flex'>
-										<img
-											src={comment?.user?.profileImage?.url}
-											style={{width: "30px", height: "30px"}}
-											alt='avatar'
-											className='rounded-circle me-2'
-										/>
-										<div className='comment-container p-1 rounded' style={{background: "#EEE"}}>
-											<p className='m-0 fw-bold'>{comment?.user?.username}</p>
-											<p className='m-0'>{comment?.comment}</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						))}
-					</div>
-					<div className='modal-body'>
-						<div className='d-flex'>
-							<div className='p-1'>
-								<img src={comme} alt='avatar' className='rounded-circle' />
-							</div>
-							<div className='w-100'>
-								<input
-									type='text'
-									className='form-control rounded-pill bg-gray'
-									value={comment}
-									onChange={(e) => setComment(e.target.value)}
-									placeholder='Write a comment...'
-								/>
-							</div>
-							<div onClick={handleSendComment} style={{cursor: "pointer"}} className='p-1'>
-								<div
-									className='icon rounded-circle text-white text-center p-1'
-									style={{background: "#32aa90", width: "30px", height: "30px", transform: "rotate(45deg)"}}
-								>
-									<i className='bi bi-send-fill me-1'></i>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
-};
-
 const Article = ({article}) => {
+	const [toggleLike] = useToggleLikeMutation();
+	const [sendComment] = useSendCommentMutation();
 	const doesUserLikeThis = article.usersLiked
 		.map((user) => {
 			return user._id;
 		})
-		.includes(localStorage.getItem("ID"));
+		.includes(localStorage.getItem("ID") ?? "ID");
 
 	const navigate = useNavigate();
 	const [share, setShare] = useState(false);
 	const [like, setLike] = useState(doesUserLikeThis);
 
+	const articleComments = article.articleComments;
+	const [comment, setComment] = useState("");
+
 	return (
 		<>
-			<div key={article._id} className='col-lg-6 col-sm-12'>
-				{
-					<div className='card border-0 box shadow rounded-3'>
-						<Link to={`/articleDetails/${article?._id}`}>
-							<img src={article?.articleCover.url} className='card-img-top' alt={article?.title} />
-							<div className='card-body content text-dark'>
-								<h5 className='card-title'>{article?.title} </h5>
-								<p className='card-text'>{article?.description.slice(0, 200)}...</p>
+			<div className='col-lg-6 col-sm-12'>
+				<div className='card border-0 box shadow rounded-3'>
+					<Link to={`/articleDetails/${article?._id}`}>
+						<img src={article?.articleCover.url} className='card-img-top' alt={article?.title} />
+						<div className='card-body content text-dark'>
+							<h5 className='card-title'>{article?.title} </h5>
+							<p className='card-text'>{article?.description.slice(0, 200)}...</p>
+						</div>
+					</Link>
+					<div className='info d-flex justify-content-between p-2'>
+						<p>
+							{isToday(parseISO(article?.updatedAt))
+								? "Today"
+								: isYesterday(parseISO(article?.updatedAt))
+								? "Yesterday"
+								: format(parseISO(article?.updatedAt), "yyyy-MM-dd")}
+						</p>
+						<ul className='icons d-flex gap-4'>
+							<li>
+								<i
+									className='bi bi-share'
+									onClick={() => {
+										setShare(!share);
+									}}
+								></i>
+							</li>
+							<li data-bs-toggle='modal' data-bs-target='#createModal'>
+								<i className='bi bi-chat-left'></i>
+							</li>
+							<a className='d-flex gap-1 text-dark'>
+								{article?.likes + (like ? 1 : 0)}
+								<li style={{color: "#FE6C93"}}>
+									<i
+										className={`bi bi-heart${like ? "-fill" : ""}`}
+										onClick={async () => {
+											if (!localStorage.getItem("token")) {
+												return navigate("/login");
+											}
+											setLike(!like);
+											toggleLike({articleID: article._id, method: like ? "DELETE" : "PATCH"});
+										}}
+									></i>
+								</li>
+							</a>
+						</ul>
+					</div>
+				</div>
+				<div className='modal fade' id='createModal' tabIndex='-1' aria-labelledby='createModalLabel' aria-hidden='true' data-bs-backdrop='false'>
+					<div className='modal-dialog modal-dialog-centered'>
+						<div className='modal-content'>
+							<div className='modal-header align-items-center'>
+								<h5 className='text-dark text-center w-100 m-0' id='exampleModalLabel'>
+									Create Comment
+								</h5>
+								<button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
 							</div>
-						</Link>
-						<div className='info d-flex justify-content-between p-2'>
-							<p>
-								{isToday(parseISO(article?.updatedAt))
-									? "Today"
-									: isYesterday(parseISO(article?.updatedAt))
-									? "Yesterday"
-									: format(parseISO(article?.updatedAt), "yyyy-MM-dd")}
-							</p>
-							<ul className='icons d-flex gap-4'>
-								<a>
-									<li>
-										<i
-											className='bi bi-share'
-											onClick={() => {
-												setShare(!share);
-											}}
-										></i>
-									</li>
-								</a>
-								<a>
-									<li data-bs-toggle='modal' data-bs-target='#createModal'>
-										<i className='bi bi-chat-left'></i>
-									</li>
-								</a>
-								<a className='d-flex gap-1 text-dark'>
-									{article?.likes + (like ? 1 : 0)}
-									<li style={{color: "#FE6C93"}}>
-										<i
-											className={`bi bi-heart${like ? "-fill" : ""}`}
-											onClick={async () => {
-												setLike(!like);
-												try {
-													const method = like ? "DELETE" : "PATCH";
-													const url = `${baseURL}articles/likes/${article._id}`;
-													axios({
-														method: method,
-														url: url,
-														headers: {
-															token: localStorage.getItem("token") ?? navigate("/login"),
-														},
-													});
-												} catch (err) {}
-											}}
-										></i>
-									</li>
-								</a>
-							</ul>
+							<div className='main-container'>
+								{articleComments.map((comment) => (
+									<div key={comment?._id} className='bg-white rounded p-2 mt-2'>
+										<div className='d-flex justify-content-between'>
+											<div className='d-flex'>
+												<img
+													src={comment?.user?.profileImage?.url}
+													style={{width: "30px", height: "30px"}}
+													alt='avatar'
+													className='rounded-circle me-2'
+												/>
+												<div className='comment-container p-1 rounded' style={{background: "#EEE"}}>
+													<p className='m-0 fw-bold'>{comment?.user?.username}</p>
+													<p className='m-0'>{comment?.comment}</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								))}
+							</div>
+							<div className='modal-body'>
+								<div className='d-flex'>
+									<div className='p-1'>
+										<img src={comme} alt='avatar' className='rounded-circle' />
+									</div>
+									<div className='w-100'>
+										<input
+											type='text'
+											className='form-control rounded-pill bg-gray'
+											value={comment}
+											onChange={(e) => setComment(e.target.value)}
+											placeholder='Write a comment...'
+										/>
+									</div>
+									<div
+										onClick={() => {
+											if (!localStorage.getItem("token")) {
+												return navigate("/login");
+											}
+											sendComment({articleID: article._id, comment: comment});
+										}}
+										style={{cursor: "pointer"}}
+										className='p-1'
+									>
+										<div
+											className='icon rounded-circle text-white text-center p-1'
+											style={{background: "#32aa90", width: "30px", height: "30px", transform: "rotate(45deg)"}}
+										>
+											<i className='bi bi-send-fill me-1'></i>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
-				}
-				<CommentComponent articleComments={article.articleComments} articleID={article._id} />
+				</div>
 				{share && (
 					<div className='share'>
 						<div className='card border-0 shadow w-75 p-3 mt-3 ms-5'>
