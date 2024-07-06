@@ -10,7 +10,7 @@ import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import {ToastContainer} from "react-toastify";
 import {Offline} from "react-detect-offline";
 
-import Home from "./pages/home/Home.jsx"
+import Home from "./pages/home/Home.jsx";
 import Login from "./pages/login/Login.jsx";
 import Register from "./pages/signup/Signup.jsx";
 import Articles from "./features/articles/Articles.jsx";
@@ -22,7 +22,7 @@ import DetailsDoctors from "./features/doctors/DetailsDoctor.jsx";
 import ShowArticle from "./features/articles/ShowArticle.jsx";
 import ContactUs from "./pages/ContactUs";
 import ChatBot from "./pages/ChatBot";
-import ProductDesply from "./features//ecommerce/products/ProductDesply.jsx"
+import ProductDesply from "./features//ecommerce/products/ProductDesply.jsx";
 import MainLayout from "./layouts/MainLayout.jsx";
 import AuthLayout from "./layouts/AuthLayout.jsx";
 
@@ -44,6 +44,9 @@ import ForgetPasswardOtp from "./features/authentication/ForgetPasswordOtp.jsx";
 import Book from "./features/booking/Book.jsx";
 import BookDet from "./features/booking/BookDetail.jsx";
 import PaymentProduct from "./features/ecommerce/products/paymentProduct.jsx";
+
+import {Provider} from "react-redux";
+import store from "./store/store.js";
 
 const routes = createBrowserRouter([
 	{
@@ -119,11 +122,21 @@ const routes = createBrowserRouter([
 	},
 ]);
 
+// if (process.env.NODE_ENV === "production") {
+// 	if (typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === "object") {
+// 		for (const [key, value] of Object.entries(window.__REACT_DEVTOOLS_GLOBAL_HOOK__)) {
+// 			window.__REACT_DEVTOOLS_GLOBAL_HOOK__[key] = typeof value === "function" ? () => {} : null;
+// 		}
+// 	}
+// }
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
 		<div className='App'>
-			<RouterProvider router={routes} />
+				<Provider store={store}>
+					<RouterProvider router={routes} />
+				</Provider>
 			<Offline>
 				<div className='offline'>You are Offline Now!</div>
 			</Offline>
