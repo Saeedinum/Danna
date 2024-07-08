@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 
 import categ2 from "../../../assets/toy2.png";
@@ -10,78 +10,23 @@ import CardGroup from "react-bootstrap/CardGroup";
 import CategorySkeleton from "../categories/Skeleton";
 import ProductSkeleton from "./skeleton/ProductsSkeleton";
 
-import {useGetProductsByCategoryQuery} from "../../api/productsAPI";
+import Lottie from "lottie-react";
+import EmptyLottie from "../../../lottie/empty.json";
+
+import {useGetProductsByCategoryQuery, useGetCategoriesQuery} from "../../api/productsAPI";
+import {useAddToCartMutation} from "../../api/cartAPI";
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 export default function ProductPage() {
-	console.log("first")
-
-  const { data, error, isLoading } = useGetProductsByCategoryQuery({ categoryID: "65dac803742b5bc45b7f1206" });
-	console.log(data);
-
-
-	useEffect(() => {
-		//@ get products by category
-		//@ get favourtits
-		//@ git catogries
-	}, []);
-
 	const navigate = useNavigate();
-	const [categories, setCategories] = useState({
-		result: [],
-		error: "",
-	});
 
-	const [products, setProducts] = useState({
-		result: [],
-		error: "",
-		loading: "",
-	});
+	const {data: categories} = useGetCategoriesQuery();
 
-	useEffect(() => {
-		axios
-			.get(baseURL + "categories")
-			.then((response) => {
-				setCategories(response.data);
-			})
-			.catch((error) => {
-				setCategories({
-					result: [],
-					error: "Error fetching categories",
-				});
-			});
-	} , []);
-
-	const fetchProductsByCategory = (categoryId) => {
-		axios
-			.get(`${baseURL}products?category=${categoryId}`)
-			.then((response) => {
-				setProducts(response.data);
-			})
-			.catch((error) => {
-				setProducts({
-					result: [],
-					error: "Error fetching products",
-				});
-			});
-	};
-
-	const addToCart = async (idProduct) => {
-		try {
-			axios.post(
-				baseURL + "carts",
-				{product: idProduct},
-				{
-					headers: {
-						token: localStorage.getItem("token") ?? navigate("/login"),
-					},
-				},
-			);
-		} catch (err) {}
-	};
+	const [addToCart, {isLoading: cartloading , error:ierror}] = useAddToCartMutation();
 
 	const [favorites, setFavorites] = useState({});
+
 	useEffect(() => {
 		if (localStorage.getItem("token")) {
 			const fetchWishlist = async () => {
@@ -101,7 +46,7 @@ export default function ProductPage() {
 			};
 			fetchWishlist();
 		}
-	});
+	}, []);
 
 	const toggleFavorite = async (idProduct) => {
 		const isFavorite = favorites[idProduct];
@@ -133,6 +78,78 @@ export default function ProductPage() {
 		}
 	};
 
+	const {id} = useParams();
+	let Products = [];
+	const {data, currenData, isLoading, error, isError, refetch} = useGetProductsByCategoryQuery({categoryID: id});
+
+	if (isError) {
+		if (error?.data?.message == "Not products added yet") {
+			Products = <Lottie animationData={EmptyLottie} style={{width: "30%", height: "30%"}} />;
+		} else {
+			Products = <h1>Network error</h1>;
+		}
+	} else {
+		Products = (
+			<div className='row gy-4'>
+				{data?.result.length > 0 ? (
+					data?.result.map((product) => (
+						<div key={product._id} className='col-lg-3 col-md-6 col-sm-12'>
+							<div className='card p-4 rounded-4 text-center'>
+								<div className='position-absolute top-0 end-0 p-3'>
+									<button onClick={() => toggleFavorite(product._id)} className='btn'>
+										<i className={`bi ${favorites[product._id] ? "bi-heart-fill" : "bi-heart"} text-danger fs-5`}></i>
+									</button>
+								</div>
+								<div className='text-center'>
+									<img src={product.imageCover.url} className='card-img-top w-50' alt={product.title} />
+								</div>
+								<Link to={`/productDesply/${product._id}`}>
+									<div className='card-body'>
+										<p className='card-text text-dark'>Toys</p>
+										<h5 className='card-title fw-bold text-dark'>Girls Milk Bottles</h5>
+										<div className='d-flex justify-content-center gap-3'>
+											<del
+												style={{
+													color: "rgba(0, 0, 0, 0.64)",
+												}}
+											>
+												{product.price}
+											</del>
+											<p className='card-text text-dark'>{product.finalPrice}</p>
+										</div>
+									</div>
+								</Link>
+								<Link>
+									<button
+										onClick={() => addToCart(product.id)}
+										className='w-100 rounded-3 p-2 text-white'
+										style={{backgroundColor: "#32AA90"}}
+									>
+										Add To Cart
+									</button>
+								</Link>
+							</div>
+						</div>
+					))
+				) : (
+					<div
+						style={{
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
+						}}
+					>
+						<ProductSkeleton />
+						<ProductSkeleton />
+						<ProductSkeleton />
+						<ProductSkeleton />
+						<ProductSkeleton />
+					</div>
+				)}
+			</div>
+		);
+	}
+
 	return (
 		<div
 			className='productpage'
@@ -145,9 +162,10 @@ export default function ProductPage() {
 					<Carousel>
 						<Carousel.Item>
 							<CardGroup>
-								{categories.result.length > 0 ? (
-									categories.result.map((categori) => (
-										<div
+								{categories?.result.length > 0 ? (
+									categories?.result.map((categori) => (
+										<Link
+											to={`/productpage/${categori._id}`}
 											key={categori._id}
 											className='card p-2 text-center border-0'
 											onClick={() => {
@@ -158,7 +176,7 @@ export default function ProductPage() {
 											<div className='card-body'>
 												<h5 className='card-title'>{categori.title}</h5>
 											</div>
-										</div>
+										</Link>
 									))
 								) : (
 									<div
@@ -286,59 +304,8 @@ export default function ProductPage() {
 						</p>
 					</div>
 					<div className='mt-5'>
-						<div className='row gy-4'>
-							{products.result.length > 0 ? (
-								products.result.map((product) => (
-									<div key={product._id} className='col-lg-3 col-md-6 col-sm-12'>
-										<div className='card p-4 rounded-4 text-center'>
-											<div className='position-absolute top-0 end-0 p-3'>
-												<button onClick={() => toggleFavorite(product._id)} className='btn'>
-													<i className={`bi ${favorites[product._id] ? "bi-heart-fill" : "bi-heart"} text-danger fs-5`}></i>
-												</button>
-											</div>
-											<div className='text-center'>
-												<img src={product.imageCover.url} className='card-img-top w-50' alt={product.title} />
-											</div>
-											<Link to={`/productDesply/${product._id}`}>
-												<div className='card-body'>
-													<p className='card-text text-dark'>Toys</p>
-													<h5 className='card-title fw-bold text-dark'>Girls Milk Bottles</h5>
-													<div className='d-flex justify-content-center gap-3'>
-														<del
-															style={{
-																color: "rgba(0, 0, 0, 0.64)",
-															}}
-														>
-															{product.price}
-														</del>
-														<p className='card-text text-dark'>{product.finalPrice}</p>
-													</div>
-												</div>
-											</Link>
-											<Link to={`/Cart`}>
-												<button onClick={() => addToCart(product.id)} className='w-100 rounded-3 p-2 text-white' style={{backgroundColor: "#32AA90"}}>
-													Add To Cart
-												</button>
-											</Link>
-										</div>
-									</div>
-								))
-							) : (
-								<div
-									style={{
-										display: "flex",
-										justifyContent: "center",
-										alignItems: "center",
-									}}
-								>
-									<ProductSkeleton />
-									<ProductSkeleton />
-									<ProductSkeleton />
-									<ProductSkeleton />
-									<ProductSkeleton />
-								</div>
-							)}
-						</div>
+						{/* !----------------- */}
+						{Products}
 					</div>
 				</div>
 			</div>

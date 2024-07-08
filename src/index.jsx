@@ -64,7 +64,7 @@ const routes = createBrowserRouter([
 			{path: "celendar1", element: <Celendar1 />},
 			{path: "aboutus", element: <AboutUs />},
 			{path: "detailsdoctors/:doctorID", element: <DetailsDoctors />},
-			{path: "productpage", element: <ProductsPage />},
+			{path: "productpage/:id?", element: <ProductsPage />},
 			{path: "profiledr", element: <ProfileDoctor />},
 			{path: "contactus", element: <ContactUs />},
 			{
@@ -132,7 +132,7 @@ const routes = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-	<React.StrictMode>
+	// <React.StrictMode>
 		<div className='App'>
 			<Provider store={store}>
 				<RouterProvider router={routes} />
@@ -142,5 +142,5 @@ root.render(
 			</Offline>
 			<ToastContainer theme='colored' autoClose={3000} />
 		</div>
-	</React.StrictMode>,
+	// </React.StrictMode>,
 );
