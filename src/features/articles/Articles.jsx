@@ -24,7 +24,7 @@ import {
 	EmailIcon,
 } from "react-share";
 
-import {useGetArticlesQuery, useGetPopularArticlesQuery, useSendCommentMutation, useToggleLikeMutation} from "../api/apiSlice.js";
+import {useGetArticlesQuery, useGetPopularArticlesQuery, useSendCommentMutation, useToggleLikeMutation} from "../api/articlesAPI.js";
 
 const Articles = () => {
 	const {data: {result: articles} = {}, error: articlesError, isLoading: articlesIsLoading} = useGetArticlesQuery();

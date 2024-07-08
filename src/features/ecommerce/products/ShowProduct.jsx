@@ -3,10 +3,10 @@ import {useParams, useNavigate} from "react-router-dom";
 import axios from "axios";
 import jir from "../../../assets/JIRAFF.png";
 import user from "../../../assets/user.jpg";
-import {ImageCoverSkeleton, SideImagesSkeleton, TitleSkeleton, DescriptionSkeleton} from "./productDesplay";
+import {ImageCoverSkeleton, SideImagesSkeleton, TitleSkeleton, DescriptionSkeleton} from "./skeleton/ShowProductSkeleton";
 
-const baseURL = import.meta.env.VITE_API_BASE_URL
-export default function ProductDesply() {
+const baseURL = import.meta.env.VITE_API_BASE_URL;
+const  ShowProduct = () => {
 	const navigate = useNavigate();
 	const [section, setSection] = useState(1);
 	const params = useParams();
@@ -463,3 +463,4 @@ const Review = ({productID}) => {
 		</>
 	);
 };
+export default ShowProduct

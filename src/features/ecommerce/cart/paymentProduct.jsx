@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import OrderSkeleton from "./orderSkeleton";
 
-const baseURL = import.meta.env.VITE_API_BASE_URL
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 const PaymentProduct = () => {
 	const navigate = useNavigate();
 	const [state, setState] = useState({
@@ -39,7 +39,7 @@ const PaymentProduct = () => {
 	const handlePlaceOrder = async (cashOrder) => {
 		const url = cashOrder ? `${baseURL}orders/checkout/${state.cart._id}` : `${baseURL}orders/${state.cart._id}`;
 		try {
-			 axios.post(
+			axios.post(
 				url,
 				{
 					shippingAddress: {

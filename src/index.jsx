@@ -22,14 +22,14 @@ import DetailsDoctors from "./features/doctors/DetailsDoctor.jsx";
 import ShowArticle from "./features/articles/ShowArticle.jsx";
 import ContactUs from "./pages/ContactUs";
 import ChatBot from "./pages/ChatBot";
-import ProductDesply from "./features//ecommerce/products/ProductDesply.jsx";
+import ShowProduct from "./features/ecommerce/products/ShowProduct.jsx";
 import MainLayout from "./layouts/MainLayout.jsx";
 import AuthLayout from "./layouts/AuthLayout.jsx";
 
 import ProtectedRoutes from "./features/authentication/ProtectedRoutes.jsx";
 import Notfound from "./pages/error/Notfound.jsx";
 import UpdateProfile from "./features/authentication/UpdateProfile.jsx";
-import ProductPage from "./features/ecommerce/products/ProductPage.jsx";
+import ProductsPage from "./features/ecommerce/products/ProductsPage.jsx";
 import ProfileDoctor from "./features/doctors/ProfileDr.jsx";
 import Cart from "./features/ecommerce/cart/Cart.jsx";
 
@@ -43,7 +43,7 @@ import ForgetPassward from "./features/authentication/ForgetPassword.jsx";
 import ForgetPasswardOtp from "./features/authentication/ForgetPasswordOtp.jsx";
 import Book from "./features/booking/Book.jsx";
 import BookDet from "./features/booking/BookDetail.jsx";
-import PaymentProduct from "./features/ecommerce/products/paymentProduct.jsx";
+import PaymentProduct from "./features/ecommerce/cart/paymentProduct.jsx";
 
 import {Provider} from "react-redux";
 import store from "./store/store.js";
@@ -64,7 +64,7 @@ const routes = createBrowserRouter([
 			{path: "celendar1", element: <Celendar1 />},
 			{path: "aboutus", element: <AboutUs />},
 			{path: "detailsdoctors/:doctorID", element: <DetailsDoctors />},
-			{path: "productpage", element: <ProductPage />},
+			{path: "productpage/:id?", element: <ProductsPage />},
 			{path: "profiledr", element: <ProfileDoctor />},
 			{path: "contactus", element: <ContactUs />},
 			{
@@ -75,7 +75,7 @@ const routes = createBrowserRouter([
 					</ProtectedRoutes>
 				),
 			},
-			{path: "productDesply/:productID", element: <ProductDesply />},
+			{path: "productDesply/:productID", element: <ShowProduct />},
 			{
 				path: "Cart",
 				element: (
@@ -132,15 +132,15 @@ const routes = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-	<React.StrictMode>
+	// <React.StrictMode>
 		<div className='App'>
-				<Provider store={store}>
-					<RouterProvider router={routes} />
-				</Provider>
+			<Provider store={store}>
+				<RouterProvider router={routes} />
+			</Provider>
 			<Offline>
 				<div className='offline'>You are Offline Now!</div>
 			</Offline>
 			<ToastContainer theme='colored' autoClose={3000} />
 		</div>
-	</React.StrictMode>,
+	// </React.StrictMode>,
 );
