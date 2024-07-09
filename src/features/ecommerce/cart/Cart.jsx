@@ -5,42 +5,18 @@ import Skeleton from "./Skeleton.jsx";
 import Lottie from "lottie-react";
 import emptyCart from "./emptyCart.json";
 
+import {useFetchCartQuery} from "../../api/cartAPI.js";
+
 const baseURL = import.meta.env.VITE_API_BASE_URL;
-export default function Cart() {
+
+const Cart = () => {
+	
+	const {data, isLoading, isError} = useFetchCartQuery();
+	const cart = data?.cart;
+
 	const navigate = useNavigate();
-	const [state, setState] = useState({
-		cart: null,
-		loading: true,
-		error: null,
-	});
 
-	const fetchCart = async () => {
-		try {
-			const response = await axios.get(baseURL + "carts", {
-				headers: {
-					token: localStorage.getItem("token") ?? navigate("/login"),
-				},
-			});
-			setState({
-				cart: response.data.cart,
-				loading: false,
-				error: null,
-			});
-		} catch (err) {
-			setState({
-				cart: null,
-				loading: false,
-				error: err.message,
-			});
-		}
-	};
-
-	useEffect(() => {
-		fetchCart();
-	});
-
-	const {cart, loading, error} = state;
-	if (loading || error) {
+	if (isLoading || isError) {
 		return (
 			<>
 				<div
@@ -125,7 +101,7 @@ export default function Cart() {
 		} catch (err) {}
 	};
 
-	if (cart.cartItems.length === 0 && !loading && !error) {
+	if (cart.length === 0 && !isError && !isLoading) {
 		return (
 			<>
 				<div style={{display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", gap: "100px", height: "50vh"}}>
@@ -231,4 +207,5 @@ export default function Cart() {
 			</div>
 		</div>
 	);
-}
+};
+export default Cart;
