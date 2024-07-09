@@ -1,6 +1,5 @@
 import {useState, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {format, isToday, isYesterday, parseISO} from "date-fns";
 import ArticlesSkeleton from "./skeleton/ArticlesSkeleton.jsx";
 import PopularSkeleton from "./skeleton/PopularSkeleton.jsx";
 
@@ -8,6 +7,8 @@ import Rectangle1 from "../../assets/mother.jpg";
 import Ellipse from "../../assets/child.png";
 import Rectangle4 from "../../assets/mot.jpg";
 import comme from "../../assets/Ellipse 36.png";
+
+import timeFormat from "../../utils/timeFormat.js";
 
 import {
 	FacebookShareButton,
@@ -164,13 +165,7 @@ const Article = ({article}) => {
 						</div>
 					</Link>
 					<div className='info d-flex justify-content-between p-2'>
-						<p>
-							{isToday(parseISO(article?.updatedAt))
-								? "Today"
-								: isYesterday(parseISO(article?.updatedAt))
-								? "Yesterday"
-								: format(parseISO(article?.updatedAt), "yyyy-MM-dd")}
-						</p>
+						<p>{timeFormat(article?.updatedAt)}</p>
 						<ul className='icons d-flex gap-4'>
 							<li>
 								<i

@@ -4,6 +4,7 @@ import axios from "axios";
 import jir from "../../../assets/JIRAFF.png";
 import user from "../../../assets/user.jpg";
 import {ImageCoverSkeleton, SideImagesSkeleton, TitleSkeleton, DescriptionSkeleton} from "./skeleton/ShowProductSkeleton";
+import currencyFormat from "../../../utils/currencyFormat";
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 const  ShowProduct = () => {
@@ -147,7 +148,7 @@ const  ShowProduct = () => {
 											</div>
 											<p className='color'>({product.result.ratingCount} CUSTOMER REVIEWS)</p>
 										</div>
-										<h4>${product.result.price}</h4>
+										<h4>{currencyFormat(product.result.price)}</h4>
 										<p className='color text-muted'>{product.result.description}</p>
 										<div className='d-flex gap-3'>
 											<input ref={quantityRef} type='number' className='w-25' style={{outline: "none"}} />

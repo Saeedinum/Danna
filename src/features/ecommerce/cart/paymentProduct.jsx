@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import OrderSkeleton from "./orderSkeleton";
+import currencyFormat from "../../../utils/currencyFormat";
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 const PaymentProduct = () => {
@@ -149,14 +150,14 @@ const PaymentProduct = () => {
 												{item.product.title} × {item.quantity}
 											</p>
 											<small className='ms-auto text-muted'>
-												{new Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(item.product.price * item.quantity)}
+												{currencyFormat(item.product.price * item.quantity)}
 											</small>
 										</div>
 									))}
 									<div className='d-flex p-2'>
 										<p className='fw-bold'>Total</p>
 										<small className='ms-auto fw-bold'>
-											{new Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(cart.totalPrice)}
+											{currencyFormat(cart.totalPrice)}
 										</small>
 									</div>
 								</>
