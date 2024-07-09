@@ -4,6 +4,7 @@ import Lottie from "lottie-react";
 import emptyCart from "./emptyCart.json";
 
 import {useFetchCartQuery, useUpdataItemMutation} from "../../api/cartAPI.js";
+import currencyFormat from "../../../utils/currencyFormat.js";
 
 const Cart = () => {
 	const {data, isLoading, isError, refetch} = useFetchCartQuery();
@@ -98,7 +99,7 @@ const Cart = () => {
 											<div className='mt-4 fs-6' style={{fontFamily: "PT Sans"}}>
 												<ul>
 													<li>{item.product.title}</li>
-													<li>{new Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(item.product.price)}</li>
+													<li>{currencyFormat(item.product.price)}</li>
 												</ul>
 											</div>
 										</div>
@@ -124,7 +125,7 @@ const Cart = () => {
 								</div>
 							</div>
 							<div className='div2 mt-4 fs-6' style={{fontFamily: "PT Sans"}}>
-								{new Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(item.product.price * item.quantity)}
+								{currencyFormat(item.product.price * item.quantity)}
 							</div>
 						</div>
 					))}
@@ -134,7 +135,7 @@ const Cart = () => {
 				<h3>Cart Totals</h3>
 				<div className='d-flex justify-content-between border-bottom mt-3'>
 					<h5>Total</h5>
-					<h5>{new Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(cart.totalPrice)}</h5>
+					<h5>{currencyFormat(cart.totalPrice)}</h5>
 				</div>
 				<button
 					className='p-2 fs-4 mt-4 text-white'
