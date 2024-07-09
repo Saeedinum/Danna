@@ -1,46 +1,35 @@
-import {useState, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import axios from "axios";
 import Skeleton from "./Skeleton.jsx";
 import Lottie from "lottie-react";
 import emptyCart from "./emptyCart.json";
 
-const baseURL = import.meta.env.VITE_API_BASE_URL;
-export default function Cart() {
-	const navigate = useNavigate();
-	const [state, setState] = useState({
-		cart: null,
-		loading: true,
-		error: null,
-	});
+import {useFetchCartQuery, useUpdataItemMutation} from "../../api/cartAPI.js";
 
-	const fetchCart = async () => {
-		try {
-			const response = await axios.get(baseURL + "carts", {
-				headers: {
-					token: localStorage.getItem("token") ?? navigate("/login"),
-				},
-			});
-			setState({
-				cart: response.data.cart,
-				loading: false,
-				error: null,
-			});
-		} catch (err) {
-			setState({
-				cart: null,
-				loading: false,
-				error: err.message,
-			});
-		}
+const Cart = () => {
+	const {data, isLoading, isError, refetch} = useFetchCartQuery();
+	const cart = data?.cart;
+
+	const [updateItem, {isLoading: LoadingUpdate}] = useUpdataItemMutation();
+
+	const navigate = useNavigate();
+
+	const incrementItem = async (productID) => {
+		const item = cart.cartItems.find((item) => item.product._id === productID);
+		const newQuantity = item.quantity + 1;
+		updateItem({itemID: productID, newQuantity: newQuantity});
+		refetch();
 	};
 
-	useEffect(() => {
-		fetchCart();
-	});
+	const decrementItem = async (productID) => {
+		const item = cart.cartItems.find((item) => item.product._id === productID);
+		const newQuantity = item.quantity - 1;
+		updateItem({itemID: productID, newQuantity: newQuantity});
+		refetch();
+	};
 
-	const {cart, loading, error} = state;
-	if (loading || error) {
+	const removeItem = async (cartItemID) => updateItem({itemID: cartItemID, quantity: 0});
+
+	if (isLoading || isError) {
 		return (
 			<>
 				<div
@@ -54,78 +43,7 @@ export default function Cart() {
 		);
 	}
 
-	const incrementItem = async (productID) => {
-		const item = state.cart.cartItems.find((item) => item.product._id === productID);
-		const newQuantity = item.quantity + 1;
-		try {
-			axios.put(
-				baseURL + "carts/" + productID,
-				{
-					quantity: newQuantity,
-				},
-				{
-					headers: {
-						token: localStorage.getItem("token"),
-					},
-				},
-			);
-			setState((prevState) => ({
-				...prevState,
-				cart: {
-					...prevState.cart,
-					cartItems: prevState.cart.cartItems.map((item) => (item.product._id === productID ? {...item, quantity: newQuantity} : item)),
-				},
-			}));
-			await fetchCart();
-		} catch (err) {}
-	};
-
-	const decrementItem = async (productID) => {
-		const item = state.cart.cartItems.find((item) => item.product._id === productID);
-		const newQuantity = item.quantity > 1 ? item.quantity - 1 : item.quantity;
-		if (newQuantity === item.quantity) return;
-		try {
-			axios.put(
-				baseURL + "carts/" + productID,
-				{
-					quantity: newQuantity,
-				},
-				{
-					headers: {
-						token: localStorage.getItem("token"),
-					},
-				},
-			);
-			setState((prevState) => ({
-				...prevState,
-				cart: {
-					...prevState.cart,
-					cartItems: prevState.cart.cartItems.map((item) => (item.product._id === productID ? {...item, quantity: newQuantity} : item)),
-				},
-			}));
-			await fetchCart();
-		} catch (err) {}
-	};
-
-	const removeItem = async (cartItemID) => {
-		try {
-			axios.delete(baseURL + "carts/" + cartItemID, {
-				headers: {
-					token: localStorage.getItem("token"),
-				},
-			});
-			setState((prevState) => ({
-				...prevState,
-				cart: {
-					...prevState.cart,
-					cartItems: prevState.cart.cartItems.filter((item) => item._id !== cartItemID),
-				},
-			}));
-			await fetchCart();
-		} catch (err) {}
-	};
-
-	if (cart.cartItems.length === 0 && !loading && !error) {
+	if (cart.length === 0 && !isError && !isLoading) {
 		return (
 			<>
 				<div style={{display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", gap: "100px", height: "50vh"}}>
@@ -231,4 +149,6 @@ export default function Cart() {
 			</div>
 		</div>
 	);
-}
+};
+
+export default Cart;
