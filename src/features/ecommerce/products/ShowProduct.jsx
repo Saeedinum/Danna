@@ -1,101 +1,41 @@
-import {useState, useEffect, useRef} from "react";
+import {useState, useRef} from "react";
 import {useParams, useNavigate} from "react-router-dom";
 import axios from "axios";
 import jir from "../../../assets/JIRAFF.png";
 import user from "../../../assets/user.jpg";
 import {ImageCoverSkeleton, SideImagesSkeleton, TitleSkeleton, DescriptionSkeleton} from "./skeleton/ShowProductSkeleton";
 import currencyFormat from "../../../utils/currencyFormat";
+import {useGetProductQuery} from "../../api/productsAPI";
+import {useFetchFavourritesQuery, useAddToFavouritesMutation, useRemoveFavouriteMutation} from "../../api/favouritesAPI";
+import {useAddToCartMutation} from "../../api/cartAPI";
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
-const  ShowProduct = () => {
-	const navigate = useNavigate();
+
+const ShowProduct = () => {
+	const {productID} = useParams();
+
 	const [section, setSection] = useState(1);
-	const params = useParams();
-	const productId = params.productID;
-	const [product, setProduct] = useState({
-		result: {
-			imageCover: {
-				url: "",
-			},
-			images: [],
-			title: "",
-			price: 0,
-			description: "",
-			category: "",
-			stock: 0,
-			brand: "",
-			ratingAvg: 0,
-		},
-	});
 
-	const [loading, setLoading] = useState(true);
-	const [isInWishlist, setIsInWishlist] = useState(false);
+	const {data, isLoading, isError} = useGetProductQuery({productID: productID});
 
-	useEffect(() => {
-		axios
-			.get(baseURL + "products/" + productId)
-			.then((response) => {
-				setProduct(response.data);
-				setLoading(false);
-			})
-			.catch((error) => {
-				setLoading(false);
-			});
-	});
+	const {data: wishlist, isLoading: favouriteLoading} = useFetchFavourritesQuery();
+	const [isInWishlist, setIsInWishlist] = useState(wishlist?.result.some((item) => item._id === productID));
 
-	useEffect(() => {
-		try {
-			if (localStorage.getItem("token")) {
-				const response = axios.get(baseURL + "wishlist", {
-					headers: {
-						token: localStorage.getItem("token"),
-					},
-				});
-				const wishlist = response.data.result;
-				setIsInWishlist(wishlist.some((item) => item._id === productId));
-			}
-		} catch (error) {}
-	});
+	const [addToFavourites] = useAddToFavouritesMutation();
+	const [removeFavourite] = useRemoveFavouriteMutation();
 
 	const toggleFavorite = async (idProduct) => {
 		if (isInWishlist) {
-			try {
-				axios.delete(baseURL + "wishlist", {
-					headers: {
-						token: localStorage.getItem("token") ?? navigate("/login"),
-					},
-					data: {product: idProduct},
-				});
-			} catch (err) {}
+			removeFavourite({ProductID: idProduct});
 		} else {
-			try {
-				axios.patch(
-					baseURL + "wishlist",
-					{product: idProduct},
-					{
-						headers: {
-							token: localStorage.getItem("token") ?? navigate("/login"),
-						},
-					},
-				);
-			} catch (err) {}
+			addToFavourites({ProductID: idProduct});
 		}
 	};
 
 	const quantityRef = useRef(null);
-	const addToCart = async (idProduct, quantity) => {
-		try {
-			axios.post(
-				baseURL + "carts",
-				{product: idProduct, quantity: +quantity},
-				{
-					headers: {
-						token: localStorage.getItem("token") ?? navigate("/login"),
-					},
-				},
-			);
-		} catch (err) {}
-	};
+
+	const [addToCart, {isLoading: cartloading, error: ierror}] = useAddToCartMutation();
+
 	return (
 		<div
 			className='productdesplay'
@@ -110,12 +50,12 @@ const  ShowProduct = () => {
 							<div className='row'>
 								<div className='col-sm-3 '>
 									<div className='d-flex flex-column bd-highlight mb-3'>
-										{loading ? (
+										{isLoading ? (
 											<SideImagesSkeleton count={4} height={100} />
 										) : (
-											product.result?.images.map((image) => (
-												<div className='p-2 bd-highlight'>
-													<img src={image.url} className='img-thumbnail ' alt={product?.title} />
+											data.result?.images.map((image) => (
+												<div key={image._id} className='p-2 bd-highlight'>
+													<img src={image.url} className='img-thumbnail ' alt={data?.title} />
 												</div>
 											))
 										)}
@@ -123,33 +63,31 @@ const  ShowProduct = () => {
 								</div>
 								<div className='col-sm-9'>
 									<div className='card' style={{borderRadius: "16px"}}>
-										{loading ? <ImageCoverSkeleton /> : <img src={product.result?.imageCover.url} className='' alt={product?.title} />}
+										{isLoading ? <ImageCoverSkeleton /> : <img src={data.result?.imageCover.url} className='' alt={data?.title} />}
 									</div>
 								</div>
 							</div>
 						</div>
 						<div className='col-lg-6 col-md-12'>
 							<div className='card p-3 border-0'>
-								{loading ? (
+								{isLoading ? (
 									<>
 										<TitleSkeleton />
 									</>
 								) : (
 									<>
-										<h1>{product.result.title}</h1>
+										<h1>{data.result?.title}</h1>
 										<div className='d-flex gap-4 text-center'>
 											<div className='icon'>
-												{Array(Math.floor(product.result.ratingAvg)).fill(
-													<i className='bi bi-star-fill' style={{color: "rgba(255, 199, 0, 1)"}}></i>,
-												)}
-												{Array(product.result.ratingAvg % 1 >= 0.5 ? 1 : 0).fill(
+												{Array(Math.floor(data.result?.ratingAvg)).fill(<i className='bi bi-star-fill' style={{color: "rgba(255, 199, 0, 1)"}}></i>)}
+												{Array(data.result?.ratingAvg % 1 >= 0.5 ? 1 : 0).fill(
 													<i className='bi bi-star-half' style={{color: "rgba(255, 199, 0, 1)"}}></i>,
 												)}
 											</div>
-											<p className='color'>({product.result.ratingCount} CUSTOMER REVIEWS)</p>
+											<p className='color'>({data.result?.ratingCount} CUSTOMER REVIEWS)</p>
 										</div>
-										<h4>{currencyFormat(product.result.price)}</h4>
-										<p className='color text-muted'>{product.result.description}</p>
+										<h4>{currencyFormat(data.result?.price)}</h4>
+										<p className='color text-muted'>{data.result?.description}</p>
 										<div className='d-flex gap-3'>
 											<input ref={quantityRef} type='number' className='w-25' style={{outline: "none"}} />
 											<button
@@ -157,13 +95,13 @@ const  ShowProduct = () => {
 												style={{
 													backgroundColor: "rgba(50, 170, 144, 1)",
 												}}
-												onClick={() => addToCart(product.result._id, quantityRef.current.value)}
+												onClick={() => addToCart(data.result?._id, quantityRef.current.value)}
 											>
 												Add To Cart
 											</button>
 										</div>
 										<div className='d-flex gap-3 icon1'>
-											<button onClick={() => toggleFavorite(product.result._id)}>
+											<button onClick={() => toggleFavorite(data.result?._id)}>
 												<i className={`bi bi-${isInWishlist ? "heart-fill" : "heart"}`} style={{color: "rgba(50, 170, 144, 1)"}}></i>
 												<p>ADD TO WISHLIST</p>
 											</button>
@@ -179,7 +117,7 @@ const  ShowProduct = () => {
 				<br />
 				<br />
 				<div className='sec2'>
-					{loading ? (
+					{isLoading ? (
 						<div className='d-flex justify-content-center'>
 							<DescriptionSkeleton style={{}} />
 						</div>
@@ -204,7 +142,7 @@ const  ShowProduct = () => {
 												<div className='col-sm-8'>
 													<div className='card border-0'>
 														<div className='card-body'>
-															<p className='card-text'>{product.result.description}</p>
+															<p className='card-text'>{data.result?.description}</p>
 															<p className='card-text'>
 																<small className='text-muted'>
 																	Variant: Refined Polished /Oak
@@ -226,7 +164,7 @@ const  ShowProduct = () => {
 													</div>
 												</div>
 												<div className='col-sm-4'>
-													<img src={product.result.imageCover.url} alt={product.result.name} className='mt-5 p-2 border rounded' />
+													<img src={data.result?.imageCover.url} alt={data.result?.name} className='mt-5 p-2 border rounded' />
 												</div>
 											</div>
 										</div>
@@ -249,7 +187,7 @@ const  ShowProduct = () => {
 													</div>
 													<div className='d-flex border-bottom'>
 														<p>Categories</p>
-														<small className='text-muted ms-auto'>{product.result.category.name}</small>
+														<small className='text-muted ms-auto'>{data.result?.category.name}</small>
 													</div>
 													<div className='d-flex border-bottom'>
 														<p>Collection</p>
@@ -318,14 +256,13 @@ const  ShowProduct = () => {
 																			<i className='bi bi-star-half' style={{color: "rgba(255, 199, 0, 1)"}}></i>
 																		</li>
 																	</ul>
-																	{/* ❌ I can't find endpoint for this data  */}
 																	<p className='card-text mb-2'>YOUR REVIEW IS AWAITING APPROVAL</p>
 																	<small className='text-muted'>good</small>
 																</div>
 															</div>
 														</div>
 													</div>
-													<Review productID={product.result._id} />
+													<Review productID={data.result?._id} />
 												</div>
 											</div>
 										</div>
@@ -338,10 +275,11 @@ const  ShowProduct = () => {
 			</div>
 		</div>
 	);
-}
+};
 
 const Review = ({productID}) => {
 	const navigate = useNavigate();
+
 	const [review, setReview] = useState({
 		rate: 0,
 		comment: "",
@@ -349,6 +287,7 @@ const Review = ({productID}) => {
 		email: "",
 		check: false,
 	});
+
 	return (
 		<>
 			<div className=''>
@@ -464,4 +403,4 @@ const Review = ({productID}) => {
 		</>
 	);
 };
-export default ShowProduct
+export default ShowProduct;

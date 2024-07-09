@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import ArticlesSkeleton from "./skeleton/ArticlesSkeleton.jsx";
 import PopularSkeleton from "./skeleton/PopularSkeleton.jsx";

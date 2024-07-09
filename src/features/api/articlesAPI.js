@@ -13,6 +13,9 @@ export const articlesAPI = createApi({
 				},
 			}),
 		}),
+		getArticle: builder.query({
+			query: ({id}) => `articles/${id}`,
+		}),
 		sendComment: builder.mutation({
 			query: ({articleID, comment}) => ({
 				url: "article-comments",
@@ -38,4 +41,4 @@ export const articlesAPI = createApi({
 	}),
 });
 
-export const {useGetArticlesQuery, useGetPopularArticlesQuery, useSendCommentMutation, useToggleLikeMutation} = articlesAPI;
+export const {useGetArticlesQuery, useGetArticleQuery ,  useGetPopularArticlesQuery, useSendCommentMutation, useToggleLikeMutation} = articlesAPI;

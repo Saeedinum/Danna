@@ -1,52 +1,14 @@
-import {useState, useEffect} from "react";
 import {Link, useParams} from "react-router-dom";
-import axios from "axios";
 import image from "../../assets/image 55.png";
-import ArticleSkeleton  from "./skeleton/ArticleSkeleton.jsx";
-import PopularSkeleton  from "./skeleton/PopularSkeleton.jsx";
+import ArticleSkeleton from "./skeleton/ArticleSkeleton.jsx";
+import PopularSkeleton from "./skeleton/PopularSkeleton.jsx";
+import {useGetArticleQuery, useGetPopularArticlesQuery} from "../api/articlesAPI.js";
 
-const baseURL = import.meta.env.VITE_API_BASE_URL;
 const ShowArticle = () => {
 	const {id} = useParams();
-	const [article, setArticle] = useState([]);
-	const [popularArticles, setPopularArticles] = useState({
-		popularArticles: [],
-		error: "",
-		loading: true,
-	});
-
-	const fetchArticle = async () => {
-		try {
-			const response = await axios.get(baseURL + "articles/" + id);
-			setArticle(response.data.result);
-		} catch (err) {}
-	};
-
-	const fetchPopularArticles = async () => {
-		try {
-			const response = await axios.get(baseURL + "articles", {
-				params: {
-					sort: "-likes,-comments",
-				},
-			});
-			setPopularArticles({
-				popularArticles: response.data.result,
-				loading: false,
-				error: null,
-			});
-		} catch (err) {
-			setPopularArticles({
-				popularArticles: [],
-				loading: false,
-				error: err,
-			});
-		}
-	};
-
-	useEffect(() => {
-		fetchArticle();
-		fetchPopularArticles();
-	}, [id]);
+	const {data} = useGetArticleQuery({id: id});
+	const article = data?.result;
+	const {data: {result: popularArticles} = {}, error: popularArticlesError, isLoading: popularArticlesIsLoading} = useGetPopularArticlesQuery();
 
 	return (
 		<div className='articleDetails' style={{fontFamily: "Amaranth"}}>
@@ -119,10 +81,10 @@ const ShowArticle = () => {
 							<div className='card mt-5 popular shadow rounded-3 border-0 h-25' style={{background: "rgba(221, 221, 221, 0.16)"}}>
 								<h4 className='text-center fw-bold'>Most Popular</h4>
 								<div className='baby_card mt-1'>
-									{popularArticles.loading || popularArticles.error ? (
+									{popularArticlesError || popularArticlesIsLoading ? (
 										<PopularSkeleton />
 									) : (
-										popularArticles.popularArticles.map((article) => (
+										popularArticles.map((article) => (
 											<Link key={article._id} to={`/articleDetails/${article._id}`}>
 												<div className='card mb-3 shadow border-top border-3 border-warning rounded-3 border-0 bg-white p-2' style={{borderTop: ""}}>
 													<div className='row'>

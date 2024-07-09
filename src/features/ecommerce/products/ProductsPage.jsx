@@ -1,6 +1,5 @@
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
-import axios from "axios";
 
 import categ2 from "../../../assets/toy2.png";
 import seller from "../../../assets/seller.png";
@@ -15,6 +14,7 @@ import EmptyLottie from "../../../lottie/empty.json";
 
 import {useGetProductsByCategoryQuery, useGetCategoriesQuery} from "../../api/productsAPI";
 import {useAddToCartMutation} from "../../api/cartAPI";
+import {useFetchFavourritesQuery, useAddToFavouritesMutation, useRemoveFavouriteMutation} from "../../api/favouritesAPI";
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
@@ -23,30 +23,16 @@ export default function ProductPage() {
 
 	const {data: categories} = useGetCategoriesQuery();
 
-	const [addToCart, {isLoading: cartloading , error:ierror}] = useAddToCartMutation();
+	const [addToCart, {isLoading: cartloading, error: ierror}] = useAddToCartMutation();
+	const [addToFavourites] = useAddToFavouritesMutation();
+	const [removeFavourite] = useRemoveFavouriteMutation();
+	const {data: wishlist, isLoading: favouriteLoading} = useFetchFavourritesQuery();
+	const initialFavorites = wishlist?.result.reduce((acc, product) => {
+		acc[product._id] = true;
+		return acc;
+	}, {});
 
-	const [favorites, setFavorites] = useState({});
-
-	useEffect(() => {
-		if (localStorage.getItem("token")) {
-			const fetchWishlist = async () => {
-				try {
-					const response = await axios.get(baseURL + "wishlist", {
-						headers: {
-							token: localStorage.getItem("token"),
-						},
-					});
-					response.data.result.map((product) => {
-						setFavorites((prevFavorites) => ({
-							...prevFavorites,
-							[product._id]: true,
-						}));
-					});
-				} catch (err) {}
-			};
-			fetchWishlist();
-		}
-	}, []);
+	const [favorites, setFavorites] = useState(initialFavorites || {});
 
 	const toggleFavorite = async (idProduct) => {
 		const isFavorite = favorites[idProduct];
@@ -55,26 +41,9 @@ export default function ProductPage() {
 			[idProduct]: !isFavorite,
 		}));
 		if (isFavorite) {
-			try {
-				axios.delete(baseURL + "wishlist", {
-					headers: {
-						token: localStorage.getItem("token") ?? navigate("/login"),
-					},
-					data: {product: idProduct},
-				});
-			} catch (err) {}
+			removeFavourite({ProductID: idProduct});
 		} else {
-			try {
-				axios.patch(
-					baseURL + "wishlist",
-					{product: idProduct},
-					{
-						headers: {
-							token: localStorage.getItem("token") ?? navigate("/login"),
-						},
-					},
-				);
-			} catch (err) {}
+			addToFavourites({ProductID: idProduct});
 		}
 	};
 
@@ -120,11 +89,7 @@ export default function ProductPage() {
 									</div>
 								</Link>
 								<Link>
-									<button
-										onClick={() => addToCart(product.id)}
-										className='w-100 rounded-3 p-2 text-white'
-										style={{backgroundColor: "#32AA90"}}
-									>
+									<button onClick={() => addToCart(product.id)} className='w-100 rounded-3 p-2 text-white' style={{backgroundColor: "#32AA90"}}>
 										Add To Cart
 									</button>
 								</Link>
