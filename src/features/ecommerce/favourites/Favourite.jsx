@@ -1,73 +1,19 @@
-import {useState, useEffect} from "react";
-import {Link, useNavigate} from "react-router-dom";
-import axios from "axios";
-const baseURL = import.meta.env.VITE_API_BASE_URL;
-// import Skeleton from "./Skeleton.jsx";
+import {Link} from "react-router-dom";
+import Skeleton from "./Skeleton.jsx";
 import Lottie from "lottie-react";
 import empty from "./empty.json";
 
-export default function Favourite() {
-	const navigate = useNavigate();
-	const [state, setState] = useState({
-		favourite: [],
-		loading: true,
-		error: null,
-	});
+import {useAddToCartMutation} from "../../api/cartAPI.js";
+import {useRemoveFavouriteMutation, useFetchFavourritesQuery} from "../../api/favouritesAPI.js";
 
-	useEffect(() => {
-		const fetchWishlist = async () => {
-			try {
-				const response = await axios.get(baseURL + "wishlist", {
-					headers: {
-						token: localStorage.getItem("token") ?? navigate("/login"),
-					},
-				});
-				setState({
-					favourite: response.data.result,
-					loading: false,
-					error: null,
-				});
-			} catch (err) {
-				setState({
-					favourite: null,
-					loading: false,
-					error: err.message,
-				});
-			}
-		};
+const Favourite = () => {
+	const [addToCart, {isLoading: cartloading}] = useAddToCartMutation();
+	const {data, isLoading, isError} = useFetchFavourritesQuery();
+	const favourites = data?.result;
 
-		fetchWishlist();
-	});
-	const addToCart = async (idProduct) => {
-		try {
-			axios.post(
-				baseURL + "carts",
-				{product: idProduct},
-				{
-					headers: {
-						token: localStorage.getItem("token") ?? navigate("/login"),
-					},
-				},
-			);
-		} catch (err) {}
-	};
+	const [removeFavourite] = useRemoveFavouriteMutation();
 
-	const removeFromWishlist = async (idProduct) => {
-		try {
-			axios.delete(baseURL + "wishlist", {
-				headers: {
-					token: localStorage.getItem("token") ?? navigate("/login"),
-				},
-				data: {product: idProduct},
-			});
-			setState((prevState) => ({
-				...prevState,
-				favourite: prevState.favourite.filter((item) => item.id !== idProduct),
-			}));
-		} catch (err) {}
-	};
-
-	if (state.favourite.length === 0 && !state.loading && !state.error) {
+	if (favourites?.length === 0 && !isLoading && !isError) {
 		return (
 			<>
 				<div style={{display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", gap: "100px", height: "50vh"}}>
@@ -107,7 +53,7 @@ export default function Favourite() {
 			</div>
 			<div className='mt-5'>
 				<div className='row gy-4'>
-					{state?.error || state?.loading ? (
+					{isError || isLoading ? (
 						<div
 							style={{
 								display: "flex",
@@ -115,17 +61,21 @@ export default function Favourite() {
 								alignItems: "center",
 							}}
 						>
-							<ProductSkeleton />
-							<ProductSkeleton />
-							<ProductSkeleton />
-							<ProductSkeleton />
-							<ProductSkeleton />
+							<Skeleton />
+							<Skeleton />
+							<Skeleton />
+							<Skeleton />
+							<Skeleton />
 						</div>
 					) : (
-						state?.favourite?.map((item) => (
+						favourites?.map((item) => (
 							<div key={item?.id} className='col-lg-3 col-md-6 col-sm-12'>
 								<div className='card p-4 rounded-4 text-center'>
-									<div style={{cursor: "pointer"}} onClick={() => removeFromWishlist(item?.id)} className='position-absolute top-0 end-0 p-3'>
+									<div
+										style={{cursor: "pointer"}}
+										onClick={() => removeFavourite({ProductID: item?.id})}
+										className='position-absolute top-0 end-0 p-3'
+									>
 										<i className='bi bi-x-lg'></i>
 									</div>
 									<div className='text-center'>
@@ -143,7 +93,7 @@ export default function Favourite() {
 										<button
 											onClick={() => {
 												addToCart(item?.id);
-												removeFromWishlist(item?.id);
+												removeFavourite({ProductID: item?.id})
 											}}
 											className='w-100 rounded-3 p-2 text-white'
 											style={{backgroundColor: "#32AA90"}}
@@ -159,4 +109,6 @@ export default function Favourite() {
 			</div>
 		</div>
 	);
-}
+};
+
+export default Favourite;
