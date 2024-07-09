@@ -20,12 +20,25 @@ export const cartAPI = createApi({
 				headers: {
 					token: localStorage.getItem("token"),
 				},
-				data: {
-					ProductID
+				body: {
+					product: ProductID,
+				},
+			}),
+		}),
+
+		updataItem: builder.mutation({
+			query: ({itemID, newQuantity}) => ({
+				url: `carts/${itemID}`,
+				method: "PUT",
+				headers: {
+					token: localStorage.getItem("token"),
+				},
+				body: {
+					quantity: newQuantity,
 				},
 			}),
 		}),
 	}),
 });
 
-export const {useAddToCartMutation} = cartAPI;
+export const {useFetchCartQuery, useAddToCartMutation, useUpdataItemMutation} = cartAPI;
