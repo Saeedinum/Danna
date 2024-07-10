@@ -4,12 +4,14 @@ import {toast} from "react-toastify";
 import "./Signup.css";
 import logo from "../../assets/LOGO 1.png";
 import img from "../../assets/form-img 2.png";
-import axios from "axios";
 import {useFormik} from "formik";
 import * as Yup from "yup";
 
-const baseURL = import.meta.env.VITE_API_BASE_URL
+import {useRegisterUserMutation} from "../../features/api/authAPI";
+
 const Register = () => {
+	const [registerUser] = useRegisterUserMutation();
+
 	const navigate = useNavigate();
 	const [loading, setLoading] = useState(true);
 	const [showPassword, setShowPassword] = useState(true);
@@ -18,30 +20,26 @@ const Register = () => {
 		setShowPassword(!showPassword);
 	}
 
-	function sendDataToApi(values) {
+	const sendDataToApi = async (values) => {
 		setLoading(false);
-
-		axios
-			.post(baseURL + "users", values)
-			.then(({data}) => {
-				if (data.message == "success") {
-					toast.success(`${data.message}`);
-					navigate("/login");
-					setLoading(true);
-				} else {
-					toast.error(`${data.map((err) => err)}`, {
-						position: "bottom-center",
-					});
-					setLoading(true);
-				}
-			})
-			.catch((err) => {
-				setLoading(true);
-				toast.error(`${err.response.data.message}`, {
-					position: "bottom-center",
-				});
+		const {data} = registerUser({
+			fName: values.fName,
+			lName: values.lName,
+			email: values.email,
+			password: values.password,
+			role: values.role,
+		});
+		if (data.message == "success") {
+			toast.success(`${data.message}`);
+			navigate("/login");
+			setLoading(true);
+		} else {
+			toast.error(`${data.map((err) => err)}`, {
+				position: "bottom-center",
 			});
-	}
+			setLoading(true);
+		}
+	};
 	const userRoles = ["user", "doctor", "hospital"];
 
 	function validationSchema() {
