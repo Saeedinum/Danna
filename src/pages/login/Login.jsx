@@ -5,6 +5,7 @@ import logo from "../../assets/LOGO 1.png";
 import img from "../../assets/form-img 2.png";
 import {useFormik} from "formik";
 import * as Yup from "yup";
+import { setUser } from "../../store/userSlice";
 
 import {useLoginUserMutation} from "../../features/api/authAPI";
 // import "./Signup.css";
@@ -29,6 +30,7 @@ const Login = () => {
 
 		if (data.message == "success") {
 			localStorage.setItem("token", data.token);
+			setUser(data)
 			toast.success(`${data.message}`);
 			navigate("/");
 			setLoading(true);
