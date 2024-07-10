@@ -1,15 +1,16 @@
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
-import axios from "axios";
 import logo from "../../assets/LOGO 1.png";
 import img from "../../assets/form-img 2.png";
 import {useFormik} from "formik";
 import * as Yup from "yup";
+import {useLoginUserMutation} from "../../features/api/authAPI";
 // import "./Signup.css";
 
-const baseURL = import.meta.env.VITE_API_BASE_URL;
 const Login = () => {
+	const [loginUser] = useLoginUserMutation();
+
 	const navigate = useNavigate();
 	const [loading, setLoading] = useState(true);
 	const [showPassword, setShowPassword] = useState(true);
@@ -18,30 +19,26 @@ const Login = () => {
 		setShowPassword(!showPassword);
 	}
 
-	function sendDataToApi(values) {
+	const sendDataToApi = async (values) => {
 		setLoading(false);
-		axios
-			.post(baseURL + "users/login", values)
-			.then(({data}) => {
-				if (data.message == "success") {
-					localStorage.setItem("token", data.token);
-					toast.success(`${data.message}`);
-					navigate("/");
-					setLoading(true);
-				} else {
-					toast.error(`${data.map((err) => err)}`, {
-						position: "bottom-center",
-					});
-					setLoading(true);
-				}
-			})
-			.catch((err) => {
-				setLoading(true);
-				toast.error(`${err.response?.data.message}`, {
-					position: "bottom-center",
-				});
+		const {data} = await loginUser({
+			email: values.email,
+			password: values.password,
+		});
+
+		if (data.message == "success") {
+			const token = data?.token;
+			localStorage.setItem("token", token);
+			toast.success(`${data.message}`);
+			navigate("/");
+			setLoading(true);
+		} else {
+			toast.error(`${data.map((err) => err)}`, {
+				position: "bottom-center",
 			});
-	}
+			setLoading(true);
+		}
+	};
 
 	function validationSchema() {
 		const schema = new Yup.object({

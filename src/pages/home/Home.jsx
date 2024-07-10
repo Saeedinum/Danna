@@ -125,10 +125,8 @@ const Home = () => {
 									<p className='card-text mt-3'>
 										Therefore, moments will make a difference with your child. From the Danna application, you can book the nearest incubation to you
 									</p>
-									<Link to={`/Book`}>
-										<a href='#' className='btn mt-3'>
-											BOOK YOUR INCUBATION
-										</a>
+									<Link className='btn mt-3' to={`/Book`}>
+										BOOK YOUR INCUBATION
 									</Link>
 								</div>
 							</div>

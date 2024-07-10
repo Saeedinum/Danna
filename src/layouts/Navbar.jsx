@@ -1,5 +1,7 @@
 import {useEffect, useState} from "react";
 import {Link, NavLink} from "react-router-dom";
+import {logout} from "../store/userSlice";
+import {useDispatch} from "react-redux";
 
 import Logo from "../assets/LOGO 1.svg";
 import "./Navbar.css";
@@ -16,6 +18,8 @@ const throttle = (callback, delay) => {
 };
 
 const Navbar = () => {
+	const dispatch = useDispatch();
+
 	const [isScrolled, setIsScrolled] = useState(false);
 	useEffect(() => {
 		const handleScroll = throttle(() => {
@@ -27,9 +31,7 @@ const Navbar = () => {
 
 	return (
 		<>
-			<nav
-				className={`navbar navbar-expand-lg ${isScrolled ? "scrolled" : ""}`}
-			>
+			<nav className={`navbar navbar-expand-lg ${isScrolled ? "scrolled" : ""}`}>
 				<div className='container-fluid px-5'>
 					<Link className='navbar-brand' to='/'>
 						<img src={Logo} alt='' />
@@ -93,7 +95,14 @@ const Navbar = () => {
 								<span className='nav-link'>/</span>
 							</li>
 							<li className='nav-item'>
-								<NavLink className='nav-link' to='/login' onClick={() => localStorage.clear()}>
+								<NavLink
+									className='nav-link'
+									to='/home'
+									onClick={() => {
+										localStorage.clear();
+										dispatch(logout());
+									}}
+								>
 									Log Out
 								</NavLink>
 							</li>
