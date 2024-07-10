@@ -5,14 +5,11 @@ import logo from "../../assets/LOGO 1.png";
 import img from "../../assets/form-img 2.png";
 import {useFormik} from "formik";
 import * as Yup from "yup";
-import {setToken, setID} from "../../store/userSlice";
-import {useDispatch} from "react-redux";
 import {useLoginUserMutation} from "../../features/api/authAPI";
 // import "./Signup.css";
 
 const Login = () => {
 	const [loginUser] = useLoginUserMutation();
-	const dispatch = useDispatch();
 
 	const navigate = useNavigate();
 	const [loading, setLoading] = useState(true);
@@ -30,11 +27,8 @@ const Login = () => {
 		});
 
 		if (data.message == "success") {
-			localStorage.setItem("token", data.token);
-			//@ TODO: onQueryStarted
-			dispatch(setToken(data.token));
-			dispatch(setID(jwtDecode(localStorage.getItem("token"))?.userId));
-
+			const token = data?.token;
+			localStorage.setItem("token", token);
 			toast.success(`${data.message}`);
 			navigate("/");
 			setLoading(true);
