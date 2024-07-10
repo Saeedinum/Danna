@@ -36,12 +36,12 @@ export const authAPI = createApi({
 				};
 			},
 			transformResponse: (result) => result,
-			async onQueryStarted(args, {dispatch, queryFulfilled}) {
-				try {
-					const {data} = await queryFulfilled;
-					dispatch(setUser(data));
-				} catch (error) {}
-			},
+			// async onQueryStarted(args, {dispatch, queryFulfilled}) {
+			// 	try {
+			// 		const {data} = await queryFulfilled;
+			// 		dispatch(setUser(data));
+			// 	} catch (error) {}
+			// },
 		}),
 	}),
 });
