@@ -4,6 +4,8 @@ import {articlesAPI} from "../features/api/articlesAPI.js";
 import {productsAPI} from "../features/api/productsAPI.js";
 import {cartAPI} from "../features/api/cartAPI.js";
 import {favouritesAPI} from "../features/api/favouritesAPI.js";
+import {authAPI} from "../features/api/authAPI.js";
+import {userSlice} from "./userSlice.js";
 
 const store = configureStore({
 	reducer: {
@@ -11,9 +13,17 @@ const store = configureStore({
 		[productsAPI.reducerPath]: productsAPI.reducer,
 		[cartAPI.reducerPath]: cartAPI.reducer,
 		[favouritesAPI.reducerPath]: favouritesAPI.reducer,
+		[authAPI.reducerPath]: authAPI.reducer,
+		userSlice: userSlice,
 	},
 	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware().concat(articlesAPI.middleware, productsAPI.middleware, cartAPI.middleware, favouritesAPI.middleware),
+		getDefaultMiddleware().concat(
+			articlesAPI.middleware,
+			authAPI.middleware,
+			productsAPI.middleware,
+			cartAPI.middleware,
+			favouritesAPI.middleware,
+		),
 });
 
 setupListeners(store.dispatch);
