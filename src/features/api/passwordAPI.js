@@ -6,7 +6,7 @@ export const passwordAPI = createApi({
 		baseUrl: import.meta.env.VITE_API_BASE_URL,
 	}),
 	endpoints: (builder) => ({
-		sendOTP: builder.query({
+		sendOTP: builder.mutation({
 			query({email}) {
 				return {
 					url: "users/forgetPassword",
@@ -40,4 +40,4 @@ export const passwordAPI = createApi({
 	}),
 });
 
-export const {useSendOTPQuery , useVerifyForgetPasswordMutation} = passwordAPI;
+export const {useSendOTPMutation , useVerifyForgetPasswordMutation} = passwordAPI;
