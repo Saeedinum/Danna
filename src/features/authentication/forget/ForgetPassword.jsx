@@ -1,8 +1,15 @@
 import {useState} from "react";
 import forget from "../../../assets/image 7.png";
+import {useSendOTPQuery, useVerifyForgetPasswordMutation} from "../../api/passwordAPI";
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 const ForgetPassword = () => {
 	const [step, setStep] = useState(1);
+
+	const [email , setEmail] = useState("");
+	const [OTP , setOTP] = useState();
+	const [newPass , setNewPass] = useState("");
 
 	return (
 		<div className='forgetpassward' style={{background: "rgba(50, 170, 144, 1)"}}>
@@ -19,30 +26,31 @@ const ForgetPassword = () => {
 										Forgot password
 									</h4>
 									<p className='text-secondary'>Enter your email for the verification proccess,we will send 4 digits code to your email.</p>
-										<div className='p-4'>
-											<label htmlFor='exampleInputEmail1' className='form-label'>
-												E-mail
-											</label>
-											<input
-												type='email'
-												placeholder='Please Enter Email'
-												className='form-control'
-												id='exampleInputEmail1'
-												aria-describedby='emailHelp'
-											/>
-										</div>
-										<div className='d-flex justify-content-center'>
-											<button
-												onClick={() => {
-													setStep(2);
-												}}
-												className='btn text-white fs-5 w-50 rounded-pill'
-												style={{background: "rgba(50, 170, 144, 1)"}}
-												type='button'
-											>
-												Continue
-											</button>
-										</div>
+									<div className='p-4'>
+										<label htmlFor='exampleInputEmail1' className='form-label'>
+											E-mail
+										</label>
+										<input
+										onChange={(e)=> setEmail(e.target.value)}
+											type='email'
+											placeholder='Please Enter Email'
+											className='form-control'
+											id='exampleInputEmail1'
+											aria-describedby='emailHelp'
+										/>
+									</div>
+									<div className='d-flex justify-content-center'>
+										<button
+											onClick={() => {
+												setStep(2);
+											}}
+											className='btn text-white fs-5 w-50 rounded-pill'
+											style={{background: "rgba(50, 170, 144, 1)"}}
+											type='button'
+										>
+											Continue
+										</button>
+									</div>
 								</>
 							) : step === 2 ? (
 								<>
@@ -50,32 +58,32 @@ const ForgetPassword = () => {
 										OTP VERIFICATION
 									</h4>
 									<p className='text-secondary text-center'>Enter the OTP sent to - nd----6../../gmail.com</p>
-										<div className='mt-3 d-flex gap-3'>
-											<input type='text' className='form-control shadow-sm border-0' style={{background: "rgba(246, 246, 246, 1)"}} />
-											<input type='text' className='form-control shadow-sm border-0' style={{background: "rgba(246, 246, 246, 1)"}} />
-											<input type='text' className='form-control shadow-sm border-0' style={{background: "rgba(246, 246, 246, 1)"}} />
-											<input type='text' className='form-control shadow-sm border-0' style={{background: "rgba(246, 246, 246, 1)"}} />
-											<input type='text' className='form-control shadow-sm border-0' style={{background: "rgba(246, 246, 246, 1)"}} />
-											<input type='text' className='form-control shadow-sm border-0' style={{background: "rgba(246, 246, 246, 1)"}} />
-										</div>
-										<div className='mt-4'>
-											<p className='text-secondary text-center'>00.120 Sec</p>
-											<p className='text-secondary text-center'>
-												Don’t receive code ?<button className='border-0 bg-white'>Re-send</button>{" "}
-											</p>
-										</div>
-										<div className='d-flex justify-content-center'>
-											<button
-												onClick={() => {
-													setStep(3);
-												}}
-												type='button'
-												className='btn text-white fs-5 w-50 rounded-pill'
-												style={{background: "rgba(50, 170, 144, 1)"}}
-											>
-												Continue
-											</button>
-										</div>
+									<div className='mt-3 d-flex gap-3'>
+										<input type='text' className='form-control shadow-sm border-0' style={{background: "rgba(246, 246, 246, 1)"}} />
+										<input type='text' className='form-control shadow-sm border-0' style={{background: "rgba(246, 246, 246, 1)"}} />
+										<input type='text' className='form-control shadow-sm border-0' style={{background: "rgba(246, 246, 246, 1)"}} />
+										<input type='text' className='form-control shadow-sm border-0' style={{background: "rgba(246, 246, 246, 1)"}} />
+										<input type='text' className='form-control shadow-sm border-0' style={{background: "rgba(246, 246, 246, 1)"}} />
+										<input type='text' className='form-control shadow-sm border-0' style={{background: "rgba(246, 246, 246, 1)"}} />
+									</div>
+									<div className='mt-4'>
+										<p className='text-secondary text-center'>00.120 Sec</p>
+										<p className='text-secondary text-center'>
+											Don’t receive code ?<button className='border-0 bg-white'>Re-send</button>{" "}
+										</p>
+									</div>
+									<div className='d-flex justify-content-center'>
+										<button
+											onClick={() => {
+												setStep(3);
+											}}
+											type='button'
+											className='btn text-white fs-5 w-50 rounded-pill'
+											style={{background: "rgba(50, 170, 144, 1)"}}
+										>
+											Continue
+										</button>
+									</div>
 								</>
 							) : (
 								<>
@@ -83,23 +91,23 @@ const ForgetPassword = () => {
 										New Password
 									</h4>
 									<p className='text-secondary'>Set the new password for your account so you can login and access all featuress.</p>
-										<div className='p-3'>
-											<label htmlFor='exampleInputEmail1' className='form-label'>
-												Enter new password
-											</label>
-											<input type='password' className='form-control' />
-										</div>
-										<div className='p-3'>
-											<label htmlFor='exampleInputEmail1' className='form-label'>
-												Confirm password
-											</label>
-											<input type='password' className='form-control' />
-										</div>
-										<div className='d-flex justify-content-center'>
-											<button type='submit' className='btn text-white fs-5 w-50 rounded-pill' style={{background: "rgba(50, 170, 144, 1)"}}>
-												submit
-											</button>
-										</div>
+									<div className='p-3'>
+										<label htmlFor='exampleInputEmail1' className='form-label'>
+											Enter new password
+										</label>
+										<input type='password' className='form-control' />
+									</div>
+									<div className='p-3'>
+										<label htmlFor='exampleInputEmail1' className='form-label'>
+											Confirm password
+										</label>
+										<input type='password' className='form-control' />
+									</div>
+									<div className='d-flex justify-content-center'>
+										<button type='submit' className='btn text-white fs-5 w-50 rounded-pill' style={{background: "rgba(50, 170, 144, 1)"}}>
+											submit
+										</button>
+									</div>
 								</>
 							)}
 						</div>
