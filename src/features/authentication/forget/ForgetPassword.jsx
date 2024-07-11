@@ -1,17 +1,23 @@
-import {useState, useRef} from "react";
+import {useState, useRef, useEffect} from "react";
 import forget from "../../../assets/image 7.png";
-import {useSendOTPQuery, useVerifyForgetPasswordMutation} from "../../api/passwordAPI";
-import {useDispatch, useSelector} from "react-redux";
+import {useSendOTPMutation, useVerifyForgetPasswordMutation} from "../../api/passwordAPI";
+import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
+import {logout} from "../../../store/userSlice";
 
 const ForgetPassword = () => {
-	const [step, setStep] = useState(2);
-
+	console.log(" !! Render !!");
+	const [step, setStep] = useState(1);
 	const [email, setEmail] = useState("");
 	const [OTP, setOTP] = useState(new Array(6).fill(""));
 	const [newPass, setNewPass] = useState("");
 
 	const inputsRef = useRef([]);
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	const [sendOTP] = useSendOTPMutation();
+	const [verifyForgetPassword] = useVerifyForgetPasswordMutation();
 
 	const handleChange = (element, index) => {
 		const value = element.target.value;
@@ -61,6 +67,7 @@ const ForgetPassword = () => {
 									<div className='d-flex justify-content-center'>
 										<button
 											onClick={() => {
+												sendOTP({email: email});
 												setStep(2);
 											}}
 											className='btn text-white fs-5 w-50 rounded-pill'
@@ -94,10 +101,7 @@ const ForgetPassword = () => {
 										))}
 									</div>
 									<div className='mt-4'>
-										<p className='text-secondary text-center'>00:120 Sec</p>
-										<p className='text-secondary text-center'>
-											Didn’t receive code? <button className='border-0 bg-white'>Re-send</button>{" "}
-										</p>
+										<Timer />
 									</div>
 									<div className='d-flex justify-content-center'>
 										<button
@@ -122,7 +126,7 @@ const ForgetPassword = () => {
 										<label htmlFor='exampleInputEmail1' className='form-label'>
 											Enter new password
 										</label>
-										<input type='password' className='form-control' />
+										<input onChange={(e) => setNewPass(e.target.value)} type='password' className='form-control' />
 									</div>
 									<div className='p-3'>
 										<label htmlFor='exampleInputEmail1' className='form-label'>
@@ -131,7 +135,21 @@ const ForgetPassword = () => {
 										<input type='password' className='form-control' />
 									</div>
 									<div className='d-flex justify-content-center'>
-										<button type='submit' className='btn text-white fs-5 w-50 rounded-pill' style={{background: "rgba(50, 170, 144, 1)"}}>
+										<button
+											onClick={() => {
+												verifyForgetPassword({
+													email: email,
+													newPassword: newPass,
+													otpCode: OTP,
+												});
+												localStorage.clear();
+												dispatch(logout());
+												navigate("/home");
+											}}
+											type='submit'
+											className='btn text-white fs-5 w-50 rounded-pill'
+											style={{background: "rgba(50, 170, 144, 1)"}}
+										>
 											submit
 										</button>
 									</div>
@@ -142,6 +160,35 @@ const ForgetPassword = () => {
 				</div>
 			</div>
 		</div>
+	);
+};
+
+const Timer = () => {
+	console.log("timer run");
+	const initialTime = 120;
+	const [timer, setTimer] = useState(initialTime);
+
+	useEffect(() => {
+		const intervalId = setInterval(() => {
+			setTimer((prevTimer) => (prevTimer > 0 ? prevTimer - 1 : 0));
+		}, 1000);
+		return () => clearInterval(intervalId);
+	}, []);
+
+	return (
+		<>
+			<p className='text-secondary text-center'>{timer}</p>
+			{timer == 0 ? (
+				<p className='text-secondary text-center'>
+					Didn’t receive code?{" "}
+					<button onClick={() => {}} className='border-0 bg-white'>
+						Re-send
+					</button>{" "}
+				</p>
+			) : (
+				""
+			)}
+		</>
 	);
 };
 
