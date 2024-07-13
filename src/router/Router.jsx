@@ -1,42 +1,42 @@
 import {RouterProvider, createBrowserRouter} from "react-router-dom";
 
-import Home from "./pages/home/Home.jsx";
-import Login from "./pages/login/Login.jsx";
-import Register from "./pages/signup/Signup.jsx";
-import AboutUs from "./pages/AboutUs";
-import ContactUs from "./pages/ContactUs";
-import ChatBot from "./pages/ChatBot";
-import Notfound from "./pages/error/Notfound.jsx";
-import Payment from "./pages/Payment.jsx";
-import Questions from "./pages/questions/Questions.jsx";
-import QuestionDet from "./pages/questions/QuestionDetails.jsx";
+import Home from "../pages/home/Home.jsx";
+import Login from "../pages/login/Login.jsx";
+import Register from "../pages/signup/Signup.jsx";
+import AboutUs from "../pages/AboutUs";
+import ContactUs from "../pages/ContactUs";
+import ChatBot from "../pages/ChatBot";
+import Notfound from "../pages/error/Notfound.jsx";
+import Payment from "../pages/Payment.jsx";
+import Questions from "../pages/Questions/Questions.jsx";
+import QuestionDet from "../pages/Questions/QuestionDetails.jsx";
 
-import Articles from "./features/articles/Articles.jsx";
-import ShowArticle from "./features/articles/ShowArticle.jsx";
+import Articles from "../features/articles/Articles.jsx";
+import ShowArticle from "../features/articles/ShowArticle.jsx";
 
-import Doctors from "./features/doctors/Doctors.jsx";
-import DetailsDoctors from "./features/doctors/DetailsDoctor.jsx";
+import Doctors from "../features/doctors/Doctors.jsx";
+import DetailsDoctors from "../features/doctors/DetailsDoctor.jsx";
 
-import ShowProduct from "./features/ecommerce/products/ShowProduct.jsx";
-import ProductsPage from "./features/ecommerce/products/ProductsPage.jsx";
-import Cart from "./features/ecommerce/cart/Cart.jsx";
-import Favourite from "./features/ecommerce/favourites/Favourite.jsx";
-import PaymentProduct from "./features/ecommerce/cart/paymentProduct.jsx";
+import ShowProduct from "../features/ecommerce/products/ShowProduct.jsx";
+import ProductsPage from "../features/ecommerce/products/ProductsPage.jsx";
+import Cart from "../features/ecommerce/cart/Cart.jsx";
+import Favourite from "../features/ecommerce/favourites/Favourite.jsx";
+import PaymentProduct from "../features/ecommerce/cart/paymentProduct.jsx";
 
-import ProtectedRoutes from "./features/authentication/ProtectedRoutes.jsx";
-import UpdateProfile from "./features/authentication/UpdateProfile.jsx";
-import ForgetPassword from "./features/authentication/forget/ForgetPassword.jsx";
+import ProtectedRoutes from "../features/authentication/ProtectedRoutes.jsx";
+import UpdateProfile from "../features/authentication/UpdateProfile.jsx";
+import ForgetPassword from "../features/authentication/forget/ForgetPassword.jsx";
 
-import ProfileDoctor from "./features/doctors/ProfileDr.jsx";
-import Videos from "./features/videos/Videos.jsx";
+import ProfileDoctor from "../features/doctors/ProfileDr.jsx";
+import Videos from "../features/videos/Videos.jsx";
 
-import Book from "./features/booking/Book.jsx";
-import BookDet from "./features/booking/BookDetail.jsx";
+import Book from "../features/booking/Book.jsx";
+import BookDet from "../features/booking/BookDetail.jsx";
 
-import Celendar1 from "./components/calendar/Celendar.jsx";
+import Celendar1 from "../components/calendar/Celendar.jsx";
 
-import MainLayout from "./layouts/MainLayout.jsx";
-import AuthLayout from "./layouts/AuthLayout.jsx";
+import MainLayout from "../layouts/MainLayout.jsx";
+import AuthLayout from "../layouts/AuthLayout.jsx";
 
 const Router = () => {
 	return (
